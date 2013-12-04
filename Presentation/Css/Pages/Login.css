@@ -1,0 +1,16 @@
+﻿body 
+{
+    background-color:#CED8F6;
+}
+
+#LoginContent{
+    border: solid 1px black;
+    width: 350px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -175px;
+    margin-top: -200px;
+    background-color:Silver;
+}
