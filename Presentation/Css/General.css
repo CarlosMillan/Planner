@@ -17,6 +17,31 @@ select
 	margin-top:5px;
 }
 
+table
+{
+    border:solid 5px rgb(101, 126, 157);; 
+    width:100%;   
+    font-size:small;
+}
+
+table thead th
+{
+    background-color:rgb(55, 96, 145);  
+    color:White; 
+}
+
+table tr
+{
+    height:40px;
+}
+
+table tbody
+{
+    color:rgb(0, 32, 96);
+    text-align:center;    
+}
+
+
 /* 
  *
  *   CLASSES
@@ -99,17 +124,63 @@ div.headerTitle /*Overiden*/
     float:left;    
 }
 
+.pair
+{
+    background-color:rgb(184, 204, 228);
+}
+
+.odd
+{
+    background-color:rgb(219, 229, 241);
+}
+
+table.hidden
+{
+    border:0;
+}
+
+table tbody td.selected
+{
+    background-color:Yellow;
+}
+
+
+table.nested
+{
+    border:0;    
+}
+
+table tbody td.highlight
+{
+    font-weight:bolder;
+    font-size:20px;
+}
+
+table tbody td.badhighlight
+{
+    font-weight:bolder;
+    font-size:20px;
+    color:rgb(192, 0, 0);    
+}
+
+
 /*
  *
  * ID's
  *
 */
 
+#MainContent
+{
+    width:99%;
+    height:100%;
+    position:absolute;
+}
+
 #DvHeader
 {    
     width: 99%;
-    height: 80px;
-    position: absolute;    
+    height: 80px;    
 }
 
 #DvMainTitle.headerpanel
@@ -126,4 +197,17 @@ div.headerTitle /*Overiden*/
 #DvSubTitle.headerpanel
 {    
     width:20%;
+}
+
+#DvBody
+{    
+    width:100%;
+    height:auto;
+    margin-top:25px;    
+}
+
+table#TbData thead th, table#TbData tbody td
+{
+    padding-left:4px;    
+    padding-right:4px;
 }

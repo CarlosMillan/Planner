@@ -3,6 +3,11 @@
 <!-- Css -->
 <link href="Css/Pages/Login.css" rel="stylesheet" type="text/css" />
 </asp:Content>
+
+<asp:Content ID="ContenTitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
+    <div class="headerTitle">BIENVENIDO AL PLANEADOR DE SERVICIO</div>
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
     <div id="DvLoginContainer">
         <div id="DvLoginContent">

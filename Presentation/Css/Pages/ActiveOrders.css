@@ -1,0 +1,30 @@
+﻿/* 
+ *
+ *   CLASSES
+ *
+ */  
+
+div.headerTitle
+{
+    margin-top:10px;
+}
+
+
+
+/* 
+ *
+ *  ID´s 
+ *
+ */
+ 
+#DvSubTitle div.headerTitle
+{
+    font-size:18px;
+    margin-top:25px;
+    float:right;
+}
+
+#DvMainTitle div.headerTitle.pages
+{
+    font-size:16px;
+}
