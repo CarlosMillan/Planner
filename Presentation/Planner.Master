@@ -14,14 +14,21 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <img class="logo" src="Css/Images/Logo.png" alt="Logo" width="100" height="80" />
-    <div id="DvTitle">        
-        <label class="headerTitle">BIENVENIDO AL PLANEADOR DE SERVICIO</label>
+    <div id="DvHeader">
+        <div id="DvLogo" class="headerpanel">
+            <img class="logo" src="Css/Images/Logo.png" alt="Logo" width="100" height="80" />
+        </div>
+        <div id="DvMainTitle" class="headerpanel">
+            <div class="headerTitle">BIENVENIDO AL PLANEADOR DE SERVICIO</div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderPagination" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div id="DvSubTitle" class="headerpanel">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderPageTitle" runat="server"></asp:ContentPlaceHolder>
+        </div>
     </div>
 
     <form id="LoginForm" runat="server">    
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">        
         </asp:ContentPlaceHolder>    
     </form>
 </body>

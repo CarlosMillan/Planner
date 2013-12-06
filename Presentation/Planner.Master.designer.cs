@@ -22,6 +22,24 @@ namespace Planner {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
+        /// ContentPlaceHolderPagination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderPagination;
+        
+        /// <summary>
+        /// ContentPlaceHolderPageTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderPageTitle;
+        
+        /// <summary>
         /// LoginForm control.
         /// </summary>
         /// <remarks>
@@ -31,12 +49,12 @@ namespace Planner {
         protected global::System.Web.UI.HtmlControls.HtmlForm LoginForm;
         
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// ContentPlaceHolderBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderBody;
     }
 }

@@ -50,6 +50,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActiveOrders.aspx" />
     <Content Include="Css\General.css" />
     <Content Include="Css\Images\Logo.png" />
     <Content Include="Css\Pages\Login.css" />
@@ -66,6 +67,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveOrders.aspx.cs">
+      <DependentUpon>ActiveOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActiveOrders.aspx.designer.cs">
+      <DependentUpon>ActiveOrders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
