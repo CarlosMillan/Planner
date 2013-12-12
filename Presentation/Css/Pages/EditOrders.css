@@ -1,42 +1,36 @@
-﻿div#DvHeader
-{
-   background-color :rgb(69, 129, 189);
-   width:100%;
-   height: 40px;   
-   color:White;
-}   
-
-div#DvMenu
-{
-    background-color:rgb(93, 93, 93);
-    height:100%;    
-    float:left;
-    width:70px;    
-    text-align:center;
-    font-size:14px;
-}
-
-
-div#DvTitle
-{    
-    height:100%;    
-    float:left;
-    width:auto;
-}
-
-div#DvMenu div, div#DvTitle div
-{
-    margin-top: 10px;
-}
-
-div#DvTitle div
-{
-    margin-left:20px;   
-}
-
-
-
-div.editbody
+﻿div.editbody
 {
     margin-top:30px;
+    margin-left:90px;
+}
+
+div.row
+{    
+    width:500px;
+    height:26px;
+    padding:7px 0px 7px 0px;
+}
+
+div.inputdescription
+{    
+    width:40%;     
+    float:left;    
+    margin-top:3px;
+    color:White;    
+}
+
+div.input
+{    
+    width:60%;    
+    float:left;        
+}
+
+div.input input[type="text"]
+{
+    width:200px;
+}
+
+div.editbody
+{    
+    margin-left:90px;
 }

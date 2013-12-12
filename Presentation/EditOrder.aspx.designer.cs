@@ -10,6 +10,6 @@
 namespace PlannerWeb {
     
     
-    public partial class EditOrders {
+    public partial class EditOrder {
     }
 }
