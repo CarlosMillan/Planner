@@ -32,7 +32,7 @@ table thead th
 
 table tr
 {
-    height:40px;
+    height:20px;
 }
 
 table tbody
@@ -126,12 +126,12 @@ div.headerTitle /*Overiden*/
 
 .pair
 {
-    background-color:rgb(184, 204, 228);
+    background-color:rgb(219, 229, 241);
 }
 
 .odd
 {
-    background-color:rgb(219, 229, 241);
+    background-color:rgb(184, 204, 228);    
 }
 
 table.hidden
@@ -163,6 +163,79 @@ table tbody td.badhighlight
     color:rgb(192, 0, 0);    
 }
 
+div.subtitle
+{
+    color:rgb(147,205,221);
+    font-weight:bolder;        
+    font-size:18px;    
+    float:left;
+    margin-top:25px;
+    margin-bottom:15px;
+    width:100%;
+}
+
+div.headerTitle.subtitle
+{
+    float:right;
+}
+
+div.summarypanel
+{    
+    width:70%;
+    height:300px;
+    float:left;    
+    margin-left:15%;    
+}
+
+div.summarypanel table.medium
+{
+    width:60%;
+}
+
+div.summarypanel table.small
+{
+    width:35%;
+}
+
+div.summarypanel table
+{
+    border:0;
+}
+
+div.summarypanel table thead, div.summarypanel table tbody
+{
+    color:White;
+}
+
+div.summarypanel table tbody tr
+{
+    height:auto;        
+}
+
+div.summarypanel table tbody td.rowtitle
+{    
+    text-align:left;
+}
+
+div.summarypanel table tr.odd
+{
+    background-color:rgb(41, 72, 109);
+}
+
+div.summarypanel table th.odd
+{
+    background-color:rgb(41, 72, 109);
+}
+
+div.summarypanel table th.odd.underline
+{
+    border-bottom: solid 1px red;
+}
+
+div.summarypanel table tr.pair
+{
+    background-color:rgb(34, 60, 92);
+}
 
 /*
  *
@@ -172,9 +245,10 @@ table tbody td.badhighlight
 
 #MainContent
 {
-    width:99%;
+    width:97%;
     height:100%;
     position:absolute;
+    padding:10px;
 }
 
 #DvHeader

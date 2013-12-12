@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Edit.master.cs" Inherits="PlannerWeb.Edit" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <!-- Css -->    
+    <link href="Css/General.css" rel="stylesheet" type="text/css" />
+    <link href="Css/Pages/EditOrders.css" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="MainContent">    
+        <div id="DvHeader">
+            <div id="DvMenu">
+                <div>Menú</div>
+            </div>
+            <div id="DvTitle">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderEditTitle" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+        <form id="EditForm" runat="server">        
+        <div class="editbody">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>        
+        </div>
+        </form>
+    </div>
+</body>
+</html>

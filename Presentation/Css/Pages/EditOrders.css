@@ -1,0 +1,42 @@
+﻿div#DvHeader
+{
+   background-color :rgb(69, 129, 189);
+   width:100%;
+   height: 40px;   
+   color:White;
+}   
+
+div#DvMenu
+{
+    background-color:rgb(93, 93, 93);
+    height:100%;    
+    float:left;
+    width:70px;    
+    text-align:center;
+    font-size:14px;
+}
+
+
+div#DvTitle
+{    
+    height:100%;    
+    float:left;
+    width:auto;
+}
+
+div#DvMenu div, div#DvTitle div
+{
+    margin-top: 10px;
+}
+
+div#DvTitle div
+{
+    margin-left:20px;   
+}
+
+
+
+div.editbody
+{
+    margin-top:30px;
+}
