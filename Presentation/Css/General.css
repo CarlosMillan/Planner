@@ -63,6 +63,11 @@ div.button /*Overriden*/
     margin-top:20px;
 }
 
+div.button.cancel
+{
+    background-color:rgb(255, 83, 83);
+}
+
 div.button.active
 {
     opacity:1;    

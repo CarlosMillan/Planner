@@ -57,6 +57,7 @@
     <Content Include="Css\Pages\ActiveOrders.css" />
     <Content Include="Css\Pages\EditOrders.css" />
     <Content Include="Css\Pages\Login.css" />
+    <Content Include="Css\Pages\Orders.css" />
     <Content Include="Css\Pages\StoppedOrders.css" />
     <Content Include="EditOrder.aspx" />
     <Content Include="Login.aspx" />

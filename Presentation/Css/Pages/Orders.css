@@ -1,4 +1,4 @@
-﻿input[type="text"]
+﻿input[type="text"], textarea
 {
     color:rgb(165, 165, 165);
     background-color:rgb(242, 242, 242);

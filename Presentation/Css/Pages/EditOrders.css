@@ -1,4 +1,9 @@
-﻿div.editbody
+﻿textarea
+{
+    float:left;
+}
+
+div.editbody
 {
     margin-top:30px;
     margin-left:90px;
@@ -13,7 +18,7 @@ div.row
 
 div.inputdescription
 {    
-    width:40%;     
+    width:200px;
     float:left;    
     margin-top:3px;
     color:White;    
@@ -33,4 +38,35 @@ div.input input[type="text"]
 div.editbody
 {    
     margin-left:90px;
+}
+
+
+div.row.actions
+{    
+    width:100%;
+    height:46px;        
+}
+
+div.row.smsbox
+{
+    height:73px;
+    width:100%;
+}
+
+div.row.smsbox div.button
+{
+    margin-left:5px;
+    margin-top:2px;
+}
+
+div.row.smsbox div.input
+{
+    width:533px;
+}
+
+div.button
+{
+    margin-top:0;
+    float:right;
+    margin-left:30px;
 }

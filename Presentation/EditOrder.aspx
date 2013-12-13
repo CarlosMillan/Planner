@@ -124,12 +124,18 @@
         </div>
     </div>
 
-    <div class="row" style="height:73px;">
+    <div class="row smsbox">
         <div class="inputdescription">
             <label>Mensaje SMS:</label>
         </div>
         <div class="input">            
             <textarea id="TxtSms" name="Sms" cols="50" rows="4"></textarea>
+            <div class="button active" id="Div2"><div>ENVIAR</div></div>
         </div>
+    </div>
+
+    <div class="row actions">
+        <div class="button active" id="BtnLogIn"><div>GUARDAR</div></div>
+        <div class="button active cancel" id="BtnCancel"><div>CANCELAR</div></div>
     </div>
 </asp:Content>
