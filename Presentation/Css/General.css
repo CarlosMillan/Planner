@@ -276,6 +276,7 @@ div.summarypanel table tr.pair
 #DvSubTitle.headerpanel
 {    
     width:20%;
+    text-align: right;
 }
 
 #DvBody
