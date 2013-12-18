@@ -12,9 +12,7 @@ namespace PlannerWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Title = "Login";
-            DataBaseManager db = new DataBaseManager();
-            db.GetTable("Users");
+            Title = "Login";            
         }
     }
 }
