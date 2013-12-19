@@ -291,3 +291,13 @@ table#TbData thead th, table#TbData tbody td
     padding-left:4px;    
     padding-right:4px;
 }
+
+div#DvMessages
+{
+    background-color:Red;
+    border-style:solid;
+    border-width:1px;
+    padding:5px;
+    border-color:red;
+    background-color:#FFBFBF;
+}

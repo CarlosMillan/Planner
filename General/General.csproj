@@ -44,7 +44,8 @@
     <Compile Include="Bases\OrdersBase.cs" />
     <Compile Include="DTOs\Classes\ActiveOrders.cs" />
     <Compile Include="DTOs\Classes\StoppedOrders.cs" />
-    <Compile Include="General\Order.cs" />
+    <Compile Include="Enums\OrderType.cs" />
+    <Compile Include="DTOs\Classes\Order.cs" />
     <Compile Include="DTOs\Structs\LoggedUser.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

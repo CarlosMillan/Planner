@@ -9,23 +9,18 @@ namespace Business.Bases
         where OrderType: OrdersBase
     {
         #region Fields
-        private List<OrderType> _orders;
+        protected OrderType _orders;
         #endregion
 
         #region Properties
-        public List<OrderType> Orders 
+        public OrderType LoadedOrders 
         {
             get { return _orders; }
         }
         #endregion
 
         #region Public Methods
-        public OrdersControllerBase() { }
-
-        public void LoadOrders() 
-        {
-            _orders = new OrdersData<OrderType>().GetOrders();
-        }
+        public OrdersControllerBase() { }        
 
         public void GetSummary()
         { 

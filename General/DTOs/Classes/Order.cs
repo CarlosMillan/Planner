@@ -1,14 +1,14 @@
 ﻿using System;
 using General.Enums;
 
-namespace General.General
+namespace General.DTOs.Classes
 {
     public class Order
     {
         #region Propierties
         public string OrderType { get; set; }
         public string OrderNumber { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime EntryDate { get; set; }
         public string Client { get; set; }
         public string Vehicle { get; set; }
         public string Plates { get; set; }
@@ -16,5 +16,7 @@ namespace General.General
         public OrderStatus Status { get; set; }
         public int DeliveryDays { get; set; }
         #endregion
+
+        public Order(){ }
     }
 }

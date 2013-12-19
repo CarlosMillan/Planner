@@ -9,20 +9,24 @@
 </asp:Content>
 
 <asp:Content ID="ContentPageTitle" ContentPlaceHolderID="ContentPlaceHolderPageTitle" runat="server">
-    <div class="headerTitle subtitle">ÓRDENES ACTIVAS 105</div>
+    <div class="headerTitle subtitle">ÓRDENES ACTIVAS 105</div>    
 </asp:Content>
 
 <asp:Content ID="ContentPagination" ContentPlaceHolderID="ContentPlaceHolderPagination" runat="server">
     <div class="headerTitle pages">1/8</div>
+    
+    <%if(!String.IsNullOrEmpty(Errors)){ %>
+        <div id="DvMessages"><%=Errors %></div>
+    <%} %>
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
-<%--<table cellspacing="0" id="TbData">
+<table cellspacing="0" id="TbData">
     <thead>
         <tr>
             <th>Tipo de Orden</th>
             <th>No. de Orden</th>
-            <th>Fecha</th>
+            <th>Ingreso</th>
             <th>Cliente</th>
             <th>Vehículo</th>
             <th>Placas</th>
@@ -47,96 +51,35 @@
     </thead>
 
     <tbody>
-        <tr class="odd">
-            <td>JRA </td>
-            <td>367463</td>
-            <td>03-JUL-13</td>
-            <td>DESENTIS ASESORES CO</td>
-            <td>POLICE INTERCEPTOR</td>
-            <td>234FET2</td>
-            <td class="highlight">10</td>
-            <td>PRUEBAS DE CALIDAD</td>
-            <td class="badhighlight">-2</td>
+    <%
+        bool OddClass = false;
+        foreach (General.DTOs.Classes.Order O in C.LoadedOrders.Orders)
+        {          
+          OddClass = !OddClass;
+    %>    
+         <tr class="<%=OddClass ? "odd": "pair" %>">
+            <td><%=O.OrderType%></td>
+            <td><%=O.OrderNumber%></td>
+            <td><%=O.EntryDate.ToShortDateString()%></td>
+            <td><%=O.Client%></td>
+            <td><%=O.Vehicle%></td>
+            <td><%=O.Plates%></td>
+            <td class="highlight"><%=O.StayDays %></td>
+            <td><%=O.Status%></td>
+            <td class="<%=O.DeliveryDays < 0 ? "badhighlight" :  "highlight"%>"><%=O.DeliveryDays%></td>
             <td class="selected"></td>
             <td></td>
             <td></td>
             <td class="selected"></td>
             <td></td>
-        </tr>
-
-        <tr class="pair">
-            <td>celda1</td>
-            <td>celda2</td>
-            <td>celda3</td>
-            <td>celda4</td>
-            <td>celda5</td>
-            <td>celda6</td>
-            <td>celda7</td>
-            <td>celda8</td>
-            <td>celda9</td>
-            <td></td>
-            <td class="selected"></td>
-            <td></td>
-            <td class="selected"></td>
-            <td></td>
-        </tr>
-
-        <tr class="odd">
-            <td>celda1</td>
-            <td>celda2</td>
-            <td>celda3</td>
-            <td>celda4</td>
-            <td>celda5</td>
-            <td>celda6</td>
-            <td>celda7</td>
-            <td>celda8</td>
-            <td>celda9</td>
-            <td></td>
-            <td></td>
-            <td class="selected"></td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        <tr class="pair">
-            <td>celda1</td>
-            <td>celda2</td>
-            <td>celda3</td>
-            <td>celda4</td>
-            <td>celda5</td>
-            <td>celda6</td>
-            <td>celda7</td>
-            <td>celda8</td>
-            <td>celda9</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="selected"></td>
-        </tr>
-
-        <tr class="odd">
-            <td>celda1</td>
-            <td>celda2</td>
-            <td>celda3</td>
-            <td>celda4</td>
-            <td>celda5</td>
-            <td>celda6</td>
-            <td>celda7</td>
-            <td>celda8</td>
-            <td>celda9</td>
-            <td class="selected"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+         </tr>
+    <%} %>    
     </tbody>
 
     <tfoot>
     </tfoot>
 </table>
---%>
+
 
 <%--<div class="summarypanel">
 <div class="subtitle">RESUMEN POR ESTATUS Y DÍAS PARA ENTREGA DE UNIDADES</div>
@@ -358,9 +301,9 @@
         </tfoot>
     </table>
 </div>
---%>
 
-<div class="summarypanel">
+
+<%--<div class="summarypanel">
 <div class="subtitle">RESUMEN POR ESTATUS Y POR ASESOR</div>
 
     <table cellspacing="0" class="medium">
@@ -487,5 +430,5 @@
         <tfoot>
         </tfoot>
     </table>
-</div>
+</div>--%>
 </asp:Content>

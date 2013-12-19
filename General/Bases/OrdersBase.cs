@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using General.General;
+using General.DTOs.Classes;
 
 namespace General.Bases
 {
     public abstract class OrdersBase
     {
-        public List<Order> Orders;
+        public List<Order> Orders;        
 
         public OrdersBase()
         {
