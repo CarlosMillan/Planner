@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <!-- Css -->
 <link href="Css/Pages/Login.css" rel="stylesheet" type="text/css" />
+
+<!-- Script -->
+<script src="Scripts/Pages/Login.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="ContenTitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -17,18 +20,10 @@
                     <label class="title">Ingresa tu cuenta registrada.</label>
                 </div>
                 <div class="row">
-                    <label>Nombre:</label><input type="text" id="TxtName"/>
+                    <label>Nombre:</label><input type="text" id="TxtName" runat="server"/>
                 </div>
                 <div class="row">
-                    <label>Contraseña:</label><input type="password" id="TxtPassword"/>
-                </div>
-                <div class="row">
-                    <label>Centro de costos:</label>
-                    <select id="SlcCostCenter">
-                        <option>-- Seleccione un centro de costos --</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    <label>Contraseña:</label><input type="password" id="TxtPassword" runat="server"/>
                 </div>
                 <div class="row">
                     <input type="checkbox" id="ChkRemember" />
@@ -37,7 +32,7 @@
             </div>
             <div id="DvButtons" class="panel">
                 <div class="row">
-                    <div class="button active" id="BtnLogIn"><div>INGRESAR</div></div>
+                    <div class="button active" id="BtnLogIn"><div>INGRESAR</div></div>                    
                 </div>
             </div>
         </div>

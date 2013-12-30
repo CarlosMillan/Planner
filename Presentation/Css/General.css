@@ -68,6 +68,11 @@ div.button.cancel
     background-color:rgb(255, 83, 83);
 }
 
+div.button.waiting
+{
+    background-color:rgb(240, 152, 152);
+}
+
 div.button.active
 {
     opacity:1;    

@@ -11,7 +11,7 @@ namespace PlannerWeb
 {
 
 
-    public partial class ActiveOrders
+    public partial class ActiveOrdersPage
     {
     }
 }

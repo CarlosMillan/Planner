@@ -12,22 +12,27 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div id="MainContent">    
-        <div id="DvHeader">
-            <div id="DvMenu">
-                <div>Menú</div>
-            </div>
-            <div id="DvTitle">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolderEditTitle" runat="server"></asp:ContentPlaceHolder>
-            </div>
+    <form id="EditForm" runat="server">   
+    <input type="hidden" name="Action" id="Action" />
+        <div id="MainContent">    
+            <div id="DvHeader">
+                <div id="DvMenu">
+                    <div>Menú</div>
+                </div>
+                <div id="DvTitle">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderEditTitle" runat="server"></asp:ContentPlaceHolder>                
+                </div>
+                <div id="DvLogOut">                    
+                    <asp:Button ID="BtnLogOut" runat="server" Text="Salir" 
+                        onclick="BtnLogOut_Click" />  
+                </div>
+                <a href="Default.aspx" title="Volver">Filtrar</a>
+            </div>             
+            <div class="editbody">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                </asp:ContentPlaceHolder>        
+            </div>        
         </div>
-
-        <form id="EditForm" runat="server">        
-        <div class="editbody">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
-            </asp:ContentPlaceHolder>        
-        </div>
-        </form>
-    </div>
+    </form>
 </body>
 </html>

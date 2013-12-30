@@ -42,7 +42,20 @@ namespace General.Utils
             catch { throw; }
         }
 
-      
+        public static object GetValue(string query)
+        {
+            try
+            {
+                object Result;
+                SqlConnection Connection = null;
+                OpenConnection(out Connection);
+                SqlCommand Command = new SqlCommand(query, Connection);
+                Result = Command.ExecuteScalar();
+                CloseConnection(Connection);
+                return Result;
+            }
+            catch { throw; }
+        }
         #endregion
 
         #region Private Static Methods

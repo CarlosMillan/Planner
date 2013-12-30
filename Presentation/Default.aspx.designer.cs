@@ -10,24 +10,15 @@
 namespace PlannerWeb {
     
     
-    public partial class Login {
+    public partial class Default {
         
         /// <summary>
-        /// TxtName control.
+        /// BtnLogOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TxtName;
-        
-        /// <summary>
-        /// TxtPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TxtPassword;
+        protected global::System.Web.UI.WebControls.Button BtnLogOut;
     }
 }

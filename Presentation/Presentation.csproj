@@ -59,10 +59,17 @@
     <Content Include="Css\Pages\Login.css" />
     <Content Include="Css\Pages\Orders.css" />
     <Content Include="Css\Pages\StoppedOrders.css" />
+    <Content Include="Default.aspx" />
     <Content Include="EditOrder.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Orders.aspx" />
+    <Content Include="Scripts\General\Ajax.js" />
+    <Content Include="Scripts\General\Functions.js" />
     <Content Include="Scripts\JQuery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\Pages\ActiveOrders.js" />
+    <Content Include="Scripts\Pages\Default.js" />
+    <Content Include="Scripts\Pages\Login.js" />
+    <Content Include="Scripts\Pages\PlannerMasterPage.js" />
     <Content Include="StoppedOrders.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -81,6 +88,17 @@
     </Compile>
     <Compile Include="ActiveOrders.aspx.designer.cs">
       <DependentUpon>ActiveOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Base\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\PageInfo.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Edit.Master.cs">
       <DependentUpon>Edit.Master</DependentUpon>

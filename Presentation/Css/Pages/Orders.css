@@ -41,6 +41,18 @@ div#DvTitle div
     margin-left:20px;   
 }
 
+div#DvLogOut
+{
+    height:100%;    
+    float:right;
+    width:auto;    
+}
+
+div#DvLogOut div
+{
+    margin-top:10px;
+    margin-right:10px;        
+}
 
 
 div.editbody

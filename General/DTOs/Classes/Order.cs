@@ -14,7 +14,7 @@ namespace General.DTOs.Classes
         public string Plates { get; set; }
         public int StayDays { get; set; }
         public OrderStatus Status { get; set; }
-        public int DeliveryDays { get; set; }
+        public int DeliveryDays { get; set; }        
         #endregion
 
         public Order(){ }

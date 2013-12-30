@@ -20,9 +20,10 @@ namespace DataAccess.Bases
             OrdersType Result = new OrdersType();
 
             try
-            {                
-                DataTable Orders = DataBaseManager.GetTable(query);
-
+            {
+                DataTable Orders = DataBaseManager.GetTable(query);                
+                Result.TotalOrders = (int)DataBaseManager.GetValue(QueriesCatalog.GetTotalOrdres);                
+                
                 foreach (DataRow O in Orders.Rows)
                 {
                     Order NewOrder = new Order();

@@ -1,7 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Planner.Master" AutoEventWireup="true" CodeBehind="ActiveOrders.aspx.cs" Inherits="PlannerWeb.ActiveOrders" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Planner.Master" AutoEventWireup="true" CodeBehind="ActiveOrdersPage .aspx.cs" Inherits="PlannerWeb.ActiveOrdersPage " %>
 <asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
     <!-- Css -->
     <link href="Css/Pages/ActiveOrders.css" rel="stylesheet" type="text/css" />
+
+    <!-- Scripts -->
+    <script src="Scripts/Pages/ActiveOrders.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="ContenTitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -9,19 +12,18 @@
 </asp:Content>
 
 <asp:Content ID="ContentPageTitle" ContentPlaceHolderID="ContentPlaceHolderPageTitle" runat="server">
-    <div class="headerTitle subtitle">ÓRDENES ACTIVAS 105</div>    
+    <div class="headerTitle subtitle">ÓRDENES ACTIVAS <span></span></div>
+    <a href="Default.aspx" title="Volver">Filtrar</a>
 </asp:Content>
 
 <asp:Content ID="ContentPagination" ContentPlaceHolderID="ContentPlaceHolderPagination" runat="server">
-    <div class="headerTitle pages">1/8</div>
-    
-    <%if(!String.IsNullOrEmpty(Errors)){ %>
-        <div id="DvMessages"><%=Errors %></div>
-    <%} %>
+    <div class="headerTitle pages"></div>        
+    <!--<div id="DvMessages"></div>-->
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
-<table cellspacing="0" id="TbData">
+<div id="DvTable">
+    <table cellspacing="0" id="TbData">
     <thead>
         <tr>
             <th>Tipo de Orden</th>
@@ -51,35 +53,13 @@
     </thead>
 
     <tbody>
-    <%
-        bool OddClass = false;
-        foreach (General.DTOs.Classes.Order O in C.LoadedOrders.Orders)
-        {          
-          OddClass = !OddClass;
-    %>    
-         <tr class="<%=OddClass ? "odd": "pair" %>">
-            <td><%=O.OrderType%></td>
-            <td><%=O.OrderNumber%></td>
-            <td><%=O.EntryDate.ToShortDateString()%></td>
-            <td><%=O.Client%></td>
-            <td><%=O.Vehicle%></td>
-            <td><%=O.Plates%></td>
-            <td class="highlight"><%=O.StayDays %></td>
-            <td><%=O.Status%></td>
-            <td class="<%=O.DeliveryDays < 0 ? "badhighlight" :  "highlight"%>"><%=O.DeliveryDays%></td>
-            <td class="selected"></td>
-            <td></td>
-            <td></td>
-            <td class="selected"></td>
-            <td></td>
-         </tr>
-    <%} %>    
+
     </tbody>
 
     <tfoot>
     </tfoot>
 </table>
-
+</div>
 
 <%--<div class="summarypanel">
 <div class="subtitle">RESUMEN POR ESTATUS Y DÍAS PARA ENTREGA DE UNIDADES</div>
@@ -431,4 +411,5 @@
         </tfoot>
     </table>
 </div>--%>
+<div class="button active cancel" id="BtnStop"><div>DETENER</div></div>
 </asp:Content>

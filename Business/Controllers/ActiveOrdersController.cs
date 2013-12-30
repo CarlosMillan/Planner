@@ -1,20 +1,18 @@
 ﻿using System;
-using Business.Bases;
 using General.DTOs.Classes;
 using DataAccess.General;
 using DataAccess;
+using System.Configuration;
 
 namespace Business.Controllers
 {
-    public class ActiveOrdersController : OrdersControllerBase<ActiveOrders>
-    {
-        public ActiveOrdersController()
+    public class ActiveOrdersController
+    {        
+        public ActiveOrdersController(){  }
+
+        public static ActiveOrders GetActiveOrdersPage(int pagenumber, int pagination)
         {
-            try
-            {
-                _orders = new ActiveOrdersData().GetOrders();
-            }
-            catch { throw; }
+            return new ActiveOrdersData().GetOrdersPage(pagenumber, pagination);
         }
     }
 }

@@ -10,7 +10,7 @@
 {
     border: 0;
     width: 350px;
-    height: 435px;
+    height: 371px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -22,13 +22,13 @@
 #DvLoginContent
 {    
     width: 346px;
-    height: 433px;
+    height: 371px;
     margin: 2px;        
 }
 
 #DvInputs.panel
 {    
-    height:295px;
+    height:232px;
     margin-top:35px;
 }
 

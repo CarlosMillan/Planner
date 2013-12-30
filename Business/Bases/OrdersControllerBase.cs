@@ -9,7 +9,8 @@ namespace Business.Bases
         where OrderType: OrdersBase
     {
         #region Fields
-        protected OrderType _orders;
+        protected OrderType _orders;        
+        protected int _totalpages;        
         #endregion
 
         #region Properties
@@ -17,15 +18,20 @@ namespace Business.Bases
         {
             get { return _orders; }
         }
-        #endregion
 
-        #region Public Methods
-        public OrdersControllerBase() { }        
+        public int Pagination { get; set; }
 
-        public void GetSummary()
-        { 
-            //TODO
+        public int TotalOrders
+        {
+            get { return _orders.Orders.Count; }
+        }
+
+        public int TotalPages
+        {
+            get { return (int)Math.Ceiling((double)_orders.Orders.Count / (double)Pagination); }
         }
         #endregion
+        
+        public OrdersControllerBase() { }
     }
 }
