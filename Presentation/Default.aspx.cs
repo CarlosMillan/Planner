@@ -13,7 +13,7 @@ namespace PlannerWeb
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            if(Session["Name"] != null) BtnLogOut.Text = Session["Name"] + ", salir";
+            if(Session["Name"] != null) BtnLogOut.Text = Session["Name"] + ", Salir";
         }
 
         protected void Page_Load(object sender, EventArgs e)

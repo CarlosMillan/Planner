@@ -10,17 +10,14 @@ namespace PlannerWeb
 {
     public partial class Edit : System.Web.UI.MasterPage
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            //if (Session["Name"] != null) BtnLogOut.Text = Session["Name"] + ", Salir";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void BtnLogOut_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.Abandon();
-            FormsAuthentication.SignOut();
-            FormsAuthentication.RedirectToLoginPage();
         }
     }
 }

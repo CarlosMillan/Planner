@@ -4,6 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <!-- SCRIPT -->
+    <script src="Scripts/JQuery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="Scripts/Pages/PlannerMasterPage.js" type="text/javascript"></script>
+    <script src="Scripts/Pages/EditMaster.js" type="text/javascript"></script>
+    <script src="Scripts/General/Functions.js" type="text/javascript"></script>
+
     <!-- Css -->    
     <link href="Css/General.css" rel="stylesheet" type="text/css" />
     <link href="Css/Pages/Orders.css" rel="stylesheet" type="text/css" />
@@ -12,8 +18,22 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="EditForm" runat="server">   
+    <form id="EditForm" method="post" action="EditOrder.aspx" runat="server">
     <input type="hidden" name="Action" id="Action" />
+    <input type="hidden" name="OrderType" id="OrderType" />
+    <input type="hidden" name="OrderNum" id="OrderNum" />
+    <input type="hidden" name="AdmissionDate" id="AdmissionDate" />
+    <input type="hidden" name="PrimiseDate" id="PrimiseDate" />
+    <input type="hidden" name="PrimiseDate2" id="PrimiseDate2" />
+    <input type="hidden" name="Client" id="Client" />
+    <input type="hidden" name="Vehicle" id="Vehicle" />
+    <input type="hidden" name="Plates" id="Plates" />
+    <input type="hidden" name="StayDays" id="StayDays" />
+    <input type="hidden" name="Status" id="Status" />
+    <input type="hidden" name="DeliveryDate" id="DeliveryDate" />
+    <input type="hidden" name="Asessor" id="Asessor" />
+    <input type="hidden" name="Cellphone" id="Cellphone" />
+
         <div id="MainContent">    
             <div id="DvHeader">
                 <div id="DvMenu">
@@ -22,11 +42,12 @@
                 <div id="DvTitle">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderEditTitle" runat="server"></asp:ContentPlaceHolder>                
                 </div>
-                <div id="DvLogOut">                    
-                    <asp:Button ID="BtnLogOut" runat="server" Text="Salir" 
-                        onclick="BtnLogOut_Click" />  
-                </div>
-                <a href="Default.aspx" title="Volver">Filtrar</a>
+                <div id="DvLogOut">                   
+                    <a href="Default.aspx" title="Volver">Filtrar</a> 
+                    <input type="submit" value="Salir" id="BtnLogOut" />
+<%--                    <asp:Button ID="BtnLogOut" runat="server" Text="Salir" 
+                        onclick="BtnLogOut_Click" />                      --%>
+                </div>                
             </div>             
             <div class="editbody">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">

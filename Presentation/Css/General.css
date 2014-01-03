@@ -41,6 +41,20 @@ table tbody
     text-align:center;    
 }
 
+a
+{
+    color:White;    
+}
+
+input[type="submit"]
+{
+    background:none;
+    text-decoration:underline;
+    border: 0;
+    color:White;
+    cursor:pointer;
+}
+
 
 /* 
  *

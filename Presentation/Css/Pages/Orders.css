@@ -46,6 +46,7 @@ div#DvLogOut
     height:100%;    
     float:right;
     width:auto;    
+    margin-top:10px;
 }
 
 div#DvLogOut div
@@ -59,4 +60,13 @@ div.editbody
 {
     margin-top:30px;
     margin-left:70px;
+}
+
+input[type="button"]
+{
+    color:blue;
+    background:none;
+    border:0;
+    text-decoration:underline;
+    cursor:pointer;
 }
