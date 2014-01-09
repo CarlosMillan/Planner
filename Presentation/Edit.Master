@@ -18,13 +18,13 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="EditForm" method="post" action="EditOrder.aspx" runat="server">
+    <form id="EditForm" method="post" action="EditOrder.aspx">
     <input type="hidden" name="Action" id="Action" />
     <input type="hidden" name="OrderType" id="OrderType" />
     <input type="hidden" name="OrderNum" id="OrderNum" />
-    <input type="hidden" name="AdmissionDate" id="AdmissionDate" />
-    <input type="hidden" name="PrimiseDate" id="PrimiseDate" />
-    <input type="hidden" name="PrimiseDate2" id="PrimiseDate2" />
+    <input type="hidden" name="EntryDate" id="EntryDate" />
+    <input type="hidden" name="PromiseDate" id="PromiseDate" />
+    <input type="hidden" name="PromiseDate2" id="PromiseDate2" />
     <input type="hidden" name="Client" id="Client" />
     <input type="hidden" name="Vehicle" id="Vehicle" />
     <input type="hidden" name="Plates" id="Plates" />
@@ -45,8 +45,6 @@
                 <div id="DvLogOut">                   
                     <a href="Default.aspx" title="Volver">Filtrar</a> 
                     <input type="submit" value="Salir" id="BtnLogOut" />
-<%--                    <asp:Button ID="BtnLogOut" runat="server" Text="Salir" 
-                        onclick="BtnLogOut_Click" />                      --%>
                 </div>                
             </div>             
             <div class="editbody">

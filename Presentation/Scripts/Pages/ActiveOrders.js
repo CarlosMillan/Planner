@@ -20,7 +20,7 @@
             setTimeout(ActiveOrders.GetPage, Master.TimePagination);
         });
 
-        setTimeout(ActiveOrders.GetPage, 500);
+        ActiveOrders.GetPage();
     },
     GetPage: function () {
         Ajax.Call('ActiveOrders', 'GetPage', '{stop:' + ActiveOrders.StopAnimation + '}', function (response) {

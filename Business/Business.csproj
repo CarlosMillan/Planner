@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Bases\OrdersControllerBase.cs" />
     <Compile Include="Controllers\ActiveOrdersController.cs" />
+    <Compile Include="Controllers\EditOrderController.cs" />
+    <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

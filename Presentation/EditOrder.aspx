@@ -1,18 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Edit.Master" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" Inherits="PlannerWeb.EditOrder" %>
 <asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
-<!-- Css -->
-<link href="Css/Pages/EditOrders.css" rel="stylesheet" type="text/css" />
+    <!-- Script -->
+    <script src="Scripts/Pages/EditOrder.js" type="text/javascript"></script>
+    <!-- Css -->
+    <link href="Css/Pages/EditOrders.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="ContentEditTitle" ContentPlaceHolderID="ContentPlaceHolderEditTitle" runat="server">
  <div>Editar Ordenes</div>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">    
+<input type="hidden" id="ReturnUrl" name="ReturnUrl"  value="<%=ReturnUrl %>"/>
     <div class="row">
         <div class="inputdescription">
             <label>Tipo de orden:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtOrderType" name="OrderType" />
+            <input type="text" id="TxtOrderType" name="OrderType"  value="<%=C.OrderToSave.OrderType %>"/>
         </div>
     </div>
 
@@ -21,7 +24,7 @@
             <label>No. de orden:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtNoOrder" name="NoOrder" />
+            <input type="text" id="TxtOrderNum" name="OrderNum" value="<%=C.OrderToSave.OrderNumber %>" />
         </div>
     </div>
 
@@ -30,7 +33,7 @@
             <label>Fecha de ingreso:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtInDate" name="InDate" />
+            <input type="text" id="TxtEntryDate" name="EntryDate" value="<%=C.OrderToSave.EntryDate.ToShortDateString() %>" />
         </div>
     </div>
 
@@ -39,7 +42,7 @@
             <label>Fecha promesa:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPromiseDate" name="PromiseDate" />
+            <input type="text" id="TxtPromiseDate" name="PromiseDate" value="<%=C.OrderToSave.PromiseDate.ToShortDateString() %>" />
         </div>
     </div>
 
@@ -48,7 +51,7 @@
             <label>Fecha promesa 2:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPromise2Date" name="Promise2Date" />
+            <input type="text" id="TxtPromiseDate2" name="PromiseDate2" value="<%=C.OrderToSave.PromiseDate2.ToShortDateString() %>" />
         </div>
     </div>
 
@@ -57,7 +60,7 @@
             <label>Cliente:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtClient" name="Client" />
+            <input type="text" id="TxtClient" name="Client" value="<%=C.OrderToSave.Client %>" />
         </div>
     </div>
 
@@ -66,7 +69,7 @@
             <label>Vehículo:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtVehicle" name="Vehicle" />
+            <input type="text" id="TxtVehicle" name="Vehicle" value="<%=C.OrderToSave.Vehicle %>" />
         </div>
     </div>
 
@@ -75,7 +78,7 @@
             <label>Placas:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPlates" name="Plates" />
+            <input type="text" id="TxtPlates" name="Plates" value="<%=C.OrderToSave.Plates %>" />
         </div>
     </div>
 
@@ -84,7 +87,7 @@
             <label>Días de estancia:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtStayDay" name="StayDay" />
+            <input type="text" id="TxtStayDay" name="StayDays" value="<%=C.OrderToSave.StayDays %>" />
         </div>
     </div>
 
@@ -93,7 +96,7 @@
             <label>Estatus:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtStatus" name="Status" />
+            <input type="text" id="TxtStatus" name="Status" value="<%=C.OrderToSave.Status %>" />
         </div>
     </div>
 
@@ -102,7 +105,7 @@
             <label>Días para entrega:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtDeliverDay" name="DeliverDay" />
+            <input type="text" id="TxtDeliverDay" name="DeliverDay" value="<%=C.OrderToSave.DeliveryDays %>" />
         </div>
     </div>
 
@@ -111,7 +114,7 @@
             <label>Asesor:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtAdviser" name="Adviser" />
+            <input type="text" id="TxtAsessor" name="Asessor" value="<%=C.OrderToSave.Asessor %>" />
         </div>
     </div>
 
@@ -120,7 +123,7 @@
             <label>Teléfono celular:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPhone" name="Phone" />
+            <input type="text" id="TxtPhone" name="Phone" value="<%=C.OrderToSave.CellPhone  %>" />
         </div>
     </div>
 
@@ -130,12 +133,12 @@
         </div>
         <div class="input">            
             <textarea id="TxtSms" name="Sms" cols="50" rows="4"></textarea>
-            <div class="button active" id="Div2"><div>ENVIAR</div></div>
+            <div class="button active" id="BtnSendMessage"><div>ENVIAR</div></div>
         </div>
     </div>
 
     <div class="row actions">
-        <div class="button active" id="BtnLogIn"><div>GUARDAR</div></div>
+        <div class="button active" id="BtnSaveOrder"><div>GUARDAR</div></div>
         <div class="button active cancel" id="BtnCancel"><div>CANCELAR</div></div>
     </div>
 </asp:Content>

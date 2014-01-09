@@ -6,6 +6,7 @@
 <div>Órdenes</div>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+<input type="hidden" name="ReturnUrl" id="ReturnUrl" />
 <table cellspacing="0" id="TbData">
     <thead>
         <tr>

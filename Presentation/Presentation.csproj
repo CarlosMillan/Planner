@@ -55,6 +55,7 @@
     <Content Include="Css\General.css" />
     <Content Include="Css\Images\Logo.png" />
     <Content Include="Css\Pages\ActiveOrders.css" />
+    <Content Include="Css\Pages\Default.css" />
     <Content Include="Css\Pages\EditOrders.css" />
     <Content Include="Css\Pages\Login.css" />
     <Content Include="Css\Pages\Orders.css" />
@@ -69,6 +70,7 @@
     <Content Include="Scripts\Pages\ActiveOrders.js" />
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\EditMaster.js" />
+    <Content Include="Scripts\Pages\EditOrder.js" />
     <Content Include="Scripts\Pages\Login.js" />
     <Content Include="Scripts\Pages\Orders.js" />
     <Content Include="Scripts\Pages\PlannerMasterPage.js" />

@@ -21,7 +21,7 @@ namespace PlannerWeb
         protected void Page_Init(object seder, EventArgs e)
         {            
             if(Request["Acc"] == null || Request["Ord"] == null || Request["Svc"] == null)
-               Response.Redirect("Default.aspx", true);
+               Response.Redirect("Default.aspx");
         }
             
         protected void Page_Load(object sender, EventArgs e)

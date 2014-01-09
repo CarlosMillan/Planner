@@ -2,6 +2,7 @@
 <asp:Content ID="DefaultContentHead" ContentPlaceHolderID="head" runat="server">
     <link href="Css/Pages/Login.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/Pages/Default.js" type="text/javascript"></script>
+    <link href="Css/Pages/Default.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="DefaultContentTitle" ContentPlaceHolderID="ContentPlaceHolderPageTitle" runat="server">
     <%if (Session["Name"] != null)
@@ -22,38 +23,49 @@
                     <div class="row">
                         <label class="title">Seleciona los filtros.</label>
                     </div>
+
                     <div class="row">
                         <label>Seleccione el taller de servicio:</label>
                         <select id="SlcService">
                             <option value="0">-- Seleccione un taller --</option>
-                            <option value="1">Matriz</option>
-                            <option value="2">Sucursal 1</option>
-                            <option value="3">Sucursal 2</option>
-                            <option value="4">Body Shop</option>
+                            <%=HtmlWorkShops %>
                         </select>
                     </div>
+
                     <div class="row">
                         <label>Entrar como:</label>
                         <select id="SlcAccess">
                             <option value="0">-- Seleccione el tipo de acceso --</option>
-                            <option value="1">Taller</option>
-                            <option value="2">Asesor</option>
-                            <option value="3">Estatus o situación</option>
-                            <option value="4">Orden de servicio Nombre de Cliente o Placas</option>
+                            <%=HtmlAccessAs %>
                         </select>
                     </div>
+
                     <div class="row">
                         <label>Tipo de orden:</label>
                         <select id="SlcOrder">
                             <option value="0">-- Seleccione un tipo de orden --</option>
-                            <option value="1">Público</option>
-                            <option value="2">Garantías</option>
-                            <option value="3">Seguros</option>
-                            <option value="4">Previas</option>
-                            <option value="5">Internas</option>
-                            <option value="6">Público y Garantías</option>
-                            <option value="7">Público y Seguros</option>
+                            <%=HtmlOrderType %>
                         </select>
+                    </div>
+
+                    <div class="row">
+                        <label>Estado:</label>
+                        <select id="SlcStatus">
+                            <option value="0">-- Seleccione un estado --</option>
+                            <%=HtmlSituations %>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <label>Asesores:</label>
+                        <select id="SlcAsesors">
+                            <option value="0">-- Seleccione un asesor --</option>
+                            <%=HtmlAsesors%>
+                        </select>
+                    </div>
+
+                    <div class="row">                        
+                        <input type="text" id="TxtOrder_Client_Plates" />                        
                     </div>
                 </div>
                 <div id="DvButtons" class="panel">

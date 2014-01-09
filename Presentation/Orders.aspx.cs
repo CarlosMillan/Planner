@@ -17,6 +17,12 @@ namespace PlannerWeb
         OrdersController C;
         public string HtmlTable;
 
+        protected void Page_Init(object sender, EventArgs e) 
+        {
+            if (Request["Acc"] == null || Request["Ord"] == null || Request["Svc"] == null)
+                Response.Redirect("Default.aspx");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             HtmlTable = string.Empty;

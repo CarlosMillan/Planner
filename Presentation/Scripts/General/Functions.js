@@ -1,5 +1,5 @@
 ﻿Functions = {
-    GetHost: function() {
+    GetHost: function () {
         var VirtualPath = '';
         var UrlElements = window.location.pathname.split('/');
 
@@ -9,5 +9,8 @@
         });
 
         return window.location.protocol + '//' + window.location.host + VirtualPath;
+    },
+    GetFullPath: function () {
+        return window.location.href;
     }
 }
