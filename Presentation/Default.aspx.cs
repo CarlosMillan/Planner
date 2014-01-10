@@ -19,7 +19,7 @@ namespace PlannerWeb
         public StringBuilder HtmlAccessAs;
         public StringBuilder HtmlOrderType;
         public StringBuilder HtmlSituations;
-        public StringBuilder HtmlAsesors;
+        public StringBuilder HtmlAsesors;        
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -64,9 +64,8 @@ namespace PlannerWeb
         }
 
         public void Search()
-        {
-            if (Session["Name"] != null) Response.Redirect("Orders.aspx?Svc=1&Acc=3&Ord=6");
-            else Response.Redirect("ActiveOrders.aspx?Svc=1&Acc=3&Ord=6");
+        {            
+            Response.Redirect(CreateURL());
         }
 
         protected void BtnLogOut_Click(object sender, EventArgs e)
@@ -75,6 +74,23 @@ namespace PlannerWeb
             Session.Abandon();
             FormsAuthentication.SignOut();            
             FormsAuthentication.RedirectToLoginPage();
+        }
+
+        private string CreateURL() 
+        {
+            StringBuilder SearchingUrl = new StringBuilder();
+
+            if (Session["Name"] != null) SearchingUrl.Append("Orders.aspx");
+            else SearchingUrl.Append("ActiveOrders.aspx");
+
+            SearchingUrl.AppendFormat("?Svc={0}&Acc={1}", Request["SlcService"], Request["SlcAccess"]);
+
+            if (Int32.Parse(Request["SlcOrder"]) != 0) SearchingUrl.AppendFormat("&Ord={0}", Request["SlcOrder"]);
+            else if (Int32.Parse(Request["SlcStatus"]) != 0) SearchingUrl.AppendFormat("&Sts={0}", Request["SlcStatus"]);
+            else if (Int32.Parse(Request["SlcAsesors"]) != 0) SearchingUrl.AppendFormat("&Asr={0}", Request["SlcAsesors"]);
+            else if (Request["TxtOrder_Client_Plates"] != String.Empty) SearchingUrl.AppendFormat("&Ocp={0}", Request["TxtOrder_Client_Plates"]);
+
+            return SearchingUrl.ToString();
         }
     }
 }

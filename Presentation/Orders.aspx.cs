@@ -16,11 +16,19 @@ namespace PlannerWeb
     {
         OrdersController C;
         public string HtmlTable;
+        private static Filters F;
+        private string ThirdParameter;
 
         protected void Page_Init(object sender, EventArgs e) 
         {
-            if (Request["Acc"] == null || Request["Ord"] == null || Request["Svc"] == null)
-                Response.Redirect("Default.aspx");
+            if (Request["Action"] == null)
+            {
+                if (Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
+                    Response.Redirect("Default.aspx");
+
+                F = new Filters();
+                SelectFilters();
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -80,5 +88,72 @@ namespace PlannerWeb
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }
+
+        #region Private
+        private bool ThirdParameterIsValid()
+        {
+            int counter = 0;
+
+            if (Request["Ord"] != null)
+            {
+                counter++;
+                ThirdParameter = "Ord";
+            }
+
+            if (Request["Sts"] != null)
+            {
+                counter++;
+                ThirdParameter = "Sts";
+            }
+
+            if (Request["Asr"] != null)
+            {
+                counter++;
+                ThirdParameter = "Asr";
+            }
+
+            if (Request["Ocp"] != null)
+            {
+                counter++;
+                ThirdParameter = "Ocp";
+            }
+
+            if (counter != 1) return false;
+
+            return true;
+        }
+
+        private void SelectFilters()
+        {
+            try
+            {
+                F.Workshops.Find(svc => svc.WorkSopId == Int32.Parse(Request["Svc"])).IsSelected = true;
+                F.AccessAs.Find(Acc => Acc.AccessId == Int32.Parse(Request["Acc"])).IsSelected = true;
+
+                switch (ThirdParameter)
+                {
+                    case "Ord":
+                        F.OrdersType.Find(Ord => Ord.OrderTypeId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Sts":
+                        F.Situations.Find(Sts => Sts.StatusId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Asr":
+                        F.Asesors.Find(Asr => Asr.AsesorId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Ocp":
+                        F.OrderClientPlates = Request[ThirdParameter];
+                        break;
+                }
+            }
+            catch
+            {
+                Response.Redirect("Default.aspx");
+            }
+        }
+        #endregion
     }
 }

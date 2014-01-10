@@ -10,7 +10,7 @@ namespace DataAccess
     {
         public ActiveOrdersData(){}
 
-        public ActiveOrders GetOrdersPage(int pagenumber, int pagination)
+        public ActiveOrders GetOrdersPage(int pagenumber, int pagination, Filters filters)
         {
             try
             {

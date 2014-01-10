@@ -26,7 +26,7 @@
 
                     <div class="row">
                         <label>Seleccione el taller de servicio:</label>
-                        <select id="SlcService">
+                        <select id="SlcService" name="SlcService">
                             <option value="0">-- Seleccione un taller --</option>
                             <%=HtmlWorkShops %>
                         </select>
@@ -34,7 +34,7 @@
 
                     <div class="row">
                         <label>Entrar como:</label>
-                        <select id="SlcAccess">
+                        <select id="SlcAccess" name="SlcAccess">
                             <option value="0">-- Seleccione el tipo de acceso --</option>
                             <%=HtmlAccessAs %>
                         </select>
@@ -42,7 +42,7 @@
 
                     <div class="row">
                         <label>Tipo de orden:</label>
-                        <select id="SlcOrder">
+                        <select id="SlcOrder" name="SlcOrder">
                             <option value="0">-- Seleccione un tipo de orden --</option>
                             <%=HtmlOrderType %>
                         </select>
@@ -50,7 +50,7 @@
 
                     <div class="row">
                         <label>Estado:</label>
-                        <select id="SlcStatus">
+                        <select id="SlcStatus" name="SlcStatus">
                             <option value="0">-- Seleccione un estado --</option>
                             <%=HtmlSituations %>
                         </select>
@@ -58,14 +58,14 @@
 
                     <div class="row">
                         <label>Asesores:</label>
-                        <select id="SlcAsesors">
+                        <select id="SlcAsesors" name="SlcAsesors">
                             <option value="0">-- Seleccione un asesor --</option>
                             <%=HtmlAsesors%>
                         </select>
                     </div>
 
                     <div class="row">                        
-                        <input type="text" id="TxtOrder_Client_Plates" />                        
+                        <input type="text" id="TxtOrder_Client_Plates" name="TxtOrder_Client_Plates" />                        
                     </div>
                 </div>
                 <div id="DvButtons" class="panel">

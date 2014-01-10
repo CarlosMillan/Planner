@@ -25,10 +25,6 @@
                 <div class="row">
                     <label>Contraseña:</label><input type="password" id="TxtPassword" runat="server"/>
                 </div>
-                <div class="row">
-                    <input type="checkbox" id="ChkRemember" />
-                    <label class="check">Recordar mi contraseña</label>
-                </div>
             </div>
             <div id="DvButtons" class="panel">
                 <div class="row">

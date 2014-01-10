@@ -17,16 +17,21 @@ namespace PlannerWeb
     public partial class ActiveOrdersPage : System.Web.UI.Page
     {        
         private static int CurrentPage;
+        private static Filters F;
+        private string ThirdParameter;
 
         protected void Page_Init(object seder, EventArgs e)
         {            
-            if(Request["Acc"] == null || Request["Ord"] == null || Request["Svc"] == null)
+            if(Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
                Response.Redirect("Default.aspx");
+
+            F = new Filters();
+            SelectFilters();
         }
             
         protected void Page_Load(object sender, EventArgs e)
         {
-            CurrentPage = 1;
+            CurrentPage = 1;            
         }
 
         #region WebMethod
@@ -34,10 +39,12 @@ namespace PlannerWeb
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string GetPage(bool stop)
         {
-            JavaScriptSerializer Json = new JavaScriptSerializer();
-            ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]));            
+            JavaScriptSerializer Json = new JavaScriptSerializer();             
+
+            ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
             PageInfo Info = new PageInfo(CurrentPageData.TotalPages, CurrentPage, CurrentPageData.TotalOrders, GetHtmlTable(CurrentPageData));
             GetValidPage(CurrentPageData.TotalPages, stop);
+           
             return Json.Serialize(Info);
         }
         #endregion
@@ -87,6 +94,71 @@ namespace PlannerWeb
             {
                 if (CurrentPage >= boundarypage) CurrentPage = 1;
                 else CurrentPage++;
+            }
+        }
+
+        private bool ThirdParameterIsValid()
+        {
+            int counter = 0;
+
+            if (Request["Ord"] != null)
+            { 
+                counter++;
+                ThirdParameter = "Ord";
+            }
+
+            if (Request["Sts"] != null)
+            { 
+                counter++;
+                ThirdParameter = "Sts";
+            }
+
+            if (Request["Asr"] != null)
+            {
+                counter++;
+                ThirdParameter = "Asr";
+            }
+
+            if (Request["Ocp"] != null)
+            {
+                counter++;
+                ThirdParameter = "Ocp";
+            }
+
+            if(counter != 1) return false;
+                            
+            return true;
+        }
+
+        private void SelectFilters()
+        {
+            try
+            {
+                F.Workshops.Find(svc => svc.WorkSopId == Int32.Parse(Request["Svc"])).IsSelected = true;
+                F.AccessAs.Find(Acc => Acc.AccessId == Int32.Parse(Request["Acc"])).IsSelected = true;
+
+                switch (ThirdParameter)
+                { 
+                    case "Ord":
+                        F.OrdersType.Find(Ord => Ord.OrderTypeId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Sts":
+                        F.Situations.Find(Sts => Sts.StatusId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Asr":
+                        F.Asesors.Find(Asr => Asr.AsesorId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        break;
+
+                    case "Ocp":
+                        F.OrderClientPlates = Request[ThirdParameter];
+                        break;
+                }
+            }
+            catch 
+            {
+                Response.Redirect("Default.aspx");
             }
         }
         #endregion

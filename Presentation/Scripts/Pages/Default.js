@@ -43,6 +43,9 @@
                     Default.HideAccessElements();
                     break;
             }
+
+            $('select:not(:visible)').val(0);
+            $('input[type="text"]').val('');
         });
     },
     Validations: function () {
@@ -60,7 +63,7 @@
                 Valid = false;
             }
         });
-        
+
         return Valid;
     },
     HideServiceElements: function () {

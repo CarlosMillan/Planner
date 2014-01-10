@@ -46,7 +46,8 @@ a
     color:White;    
 }
 
-input[type="submit"]
+
+input[type="submit"], input[type="button"].normal
 {
     background:none;
     text-decoration:underline;

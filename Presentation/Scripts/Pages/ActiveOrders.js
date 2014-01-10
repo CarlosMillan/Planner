@@ -1,6 +1,7 @@
 ﻿ActiveOrders = {
     StopAnimation: false,
     FirstTime: true,
+    TotalOrders: 0,
     Initialize: function () {
         $('#BtnStop').click(function () {
             if (!ActiveOrders.StopAnimation) {
@@ -12,12 +13,13 @@
             else {
                 ActiveOrders.StopAnimation = false;
                 $('#BtnStop').addClass('cancel');
-                $('#BtnStop div').text('DETENER');                
+                $('#BtnStop div').text('DETENER');
             }
         });
 
         $(document).ajaxComplete(function (event, request, settings) {
-            setTimeout(ActiveOrders.GetPage, Master.TimePagination);
+            if (ActiveOrders.TotalOrders == 0) window.location('Default.aspx');
+            else setTimeout(ActiveOrders.GetPage, Master.TimePagination);
         });
 
         ActiveOrders.GetPage();
@@ -41,6 +43,8 @@
                     $('div.pages').text(Result.CurrentPage + '/' + Result.TotalPages);
                     $('div.subtitle span').text(Result.TotalOrders);
                 }
+
+                ActiveOrders.TotalOrders = Result.TotalOrders;
             }
         });
     }

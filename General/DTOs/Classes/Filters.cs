@@ -10,6 +10,7 @@ namespace General.DTOs.Classes
         public List<OrderType> OrdersType;
         public List<Status> Situations;
         public List<Asesor> Asesors;
+        public string OrderClientPlates;
 
         public Filters()
         {
@@ -18,6 +19,7 @@ namespace General.DTOs.Classes
             OrdersType = new List<OrderType>();
             Situations = new List<Status>();
             Asesors = new List<Asesor>();
+            OrderClientPlates = string.Empty;
 
             #region Workshops
             Workshops.Add(new WorkShop() { 
@@ -180,29 +182,34 @@ namespace General.DTOs.Classes
     {
         public int WorkSopId {get; set;}
         public string Name {get; set;}
+        public bool IsSelected { get; set; }
     }
 
     public class Access
     {
         public int AccessId { get; set; }
         public string Name { get; set; }
+        public bool IsSelected { get; set; }
     }
 
     public class OrderType
     {
         public int OrderTypeId {get; set;}
         public string Name {get; set;}
+        public bool IsSelected { get; set; }
     }
 
     public class Status
     {
         public int StatusId { get; set; }
         public string Name { get; set; }
+        public bool IsSelected { get; set; }
     }
 
     public class Asesor
     {
         public int AsesorId { get; set; }
         public string Name { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

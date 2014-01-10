@@ -44,8 +44,8 @@
                 </div>
                 <div id="DvLogOut">                   
                     <a href="Default.aspx" title="Volver">Filtrar</a> 
-                    <input type="submit" value="Salir" id="BtnLogOut" />
-                </div>                
+                    <input type="button" value="Salir" id="BtnLogOut" class="normal" />
+                </div>
             </div>             
             <div class="editbody">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">

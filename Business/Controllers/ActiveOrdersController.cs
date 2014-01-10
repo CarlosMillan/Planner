@@ -7,11 +7,11 @@ namespace Business.Controllers
 {
     public class ActiveOrdersController
     {        
-        public ActiveOrdersController(){  }
+        public ActiveOrdersController() {}
 
-        public static ActiveOrders GetActiveOrdersPage(int pagenumber, int pagination)
+        public static ActiveOrders GetActiveOrdersPage(int pagenumber, int pagination, Filters filters)
         {
-            return new ActiveOrdersData().GetOrdersPage(pagenumber, pagination);
+            return new ActiveOrdersData().GetOrdersPage(pagenumber, pagination, filters);
         }
     }
 }
