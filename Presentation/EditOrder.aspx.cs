@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business.Controllers;
 using General.Enums;
+using System.Configuration;
 
 namespace PlannerWeb
 {
@@ -16,7 +17,8 @@ namespace PlannerWeb
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (Request["ReturnUrl"] == null) Response.Redirect("Default.aspx");           
+            if (Request["ReturnUrl"] == null) Response.Redirect("Default.aspx");
+            else ReturnUrl = Request["ReturnUrl"];
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -35,7 +37,8 @@ namespace PlannerWeb
             C.OrderToSave.Status = OrderStatus.QualityTesting; // Request["Status"];
             C.OrderToSave.DeliveryDays = Int32.Parse(Request["DeliveryDays"] == null ? "0" : Request["DeliveryDays"]);
             C.OrderToSave.Asessor = Request["Asessor"];
-            C.OrderToSave.CellPhone = Request["Cellphone"];            
+            C.OrderToSave.CellPhone = Request["Cellphone"];
+            C.OrderToSave.Sms = ConfigurationManager.AppSettings["SmsTxt"];
         }
     }
 }

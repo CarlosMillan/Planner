@@ -15,7 +15,7 @@
             <label>Tipo de orden:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtOrderType" name="OrderType"  value="<%=C.OrderToSave.OrderType %>"/>
+            <input type="text" id="TxtOrderType" value="<%=C.OrderToSave.OrderType %>" disabled="disabled" />
         </div>
     </div>
 
@@ -24,7 +24,7 @@
             <label>No. de orden:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtOrderNum" name="OrderNum" value="<%=C.OrderToSave.OrderNumber %>" />
+            <input type="text" id="TxtOrderNum" value="<%=C.OrderToSave.OrderNumber %>" disabled="disabled" />
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             <label>Fecha de ingreso:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtEntryDate" name="EntryDate" value="<%=C.OrderToSave.EntryDate.ToShortDateString() %>" />
+            <input type="text" id="TxtEntryDate" name="EntryDate" value="<%=C.OrderToSave.EntryDate.ToShortDateString() %>" disabled="disabled" />
         </div>
     </div>
 
@@ -42,7 +42,7 @@
             <label>Fecha promesa:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPromiseDate" name="PromiseDate" value="<%=C.OrderToSave.PromiseDate.ToShortDateString() %>" />
+            <input type="text" id="TxtPromiseDate" name="PromiseDate" value="<%=C.OrderToSave.PromiseDate.ToShortDateString() %>" disabled="disabled"/>
         </div>
     </div>
 
@@ -51,7 +51,7 @@
             <label>Fecha promesa 2:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPromiseDate2" name="PromiseDate2" value="<%=C.OrderToSave.PromiseDate2.ToShortDateString() %>" />
+            <input type="text" id="TxtPromiseDate2" name="PromiseDate2" value="<%=C.OrderToSave.PromiseDate2.ToShortDateString() %>" disabled="disabled"/>
         </div>
     </div>
 
@@ -60,7 +60,7 @@
             <label>Cliente:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtClient" name="Client" value="<%=C.OrderToSave.Client %>" />
+            <input type="text" id="TxtClient" value="<%=C.OrderToSave.Client %>" disabled="disabled" />
         </div>
     </div>
 
@@ -69,7 +69,7 @@
             <label>Vehículo:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtVehicle" name="Vehicle" value="<%=C.OrderToSave.Vehicle %>" />
+            <input type="text" id="TxtVehicle" value="<%=C.OrderToSave.Vehicle %>" disabled="disabled" />
         </div>
     </div>
 
@@ -78,7 +78,7 @@
             <label>Placas:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtPlates" name="Plates" value="<%=C.OrderToSave.Plates %>" />
+            <input type="text" id="TxtPlates" value="<%=C.OrderToSave.Plates %>" disabled="disabled"/>
         </div>
     </div>
 
@@ -87,7 +87,7 @@
             <label>Días de estancia:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtStayDay" name="StayDays" value="<%=C.OrderToSave.StayDays %>" />
+            <input type="text" id="TxtStayDay" value="<%=C.OrderToSave.StayDays %>" disabled="disabled" />
         </div>
     </div>
 
@@ -96,7 +96,11 @@
             <label>Estatus:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtStatus" name="Status" value="<%=C.OrderToSave.Status %>" />
+            <select id="SlcStatus" disabled="disabled">
+                <option value="1">Calidad</option>
+                <option value="2">Otros</option>
+                <option value="3">Simón</option>
+            </select>            
         </div>
     </div>
 
@@ -105,7 +109,7 @@
             <label>Días para entrega:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtDeliverDay" name="DeliverDay" value="<%=C.OrderToSave.DeliveryDays %>" />
+            <input type="text" id="TxtDeliverDay" value="<%=C.OrderToSave.DeliveryDays %>" disabled="disabled" />
         </div>
     </div>
 
@@ -114,7 +118,7 @@
             <label>Asesor:</label>
         </div>
         <div class="input">
-            <input type="text" id="TxtAsessor" name="Asessor" value="<%=C.OrderToSave.Asessor %>" />
+            <input type="text" id="TxtAsessor" name="Asessor" value="<%=C.OrderToSave.Asessor %>" disabled="disabled" />
         </div>
     </div>
 
@@ -132,13 +136,13 @@
             <label>Mensaje SMS:</label>
         </div>
         <div class="input">            
-            <textarea id="TxtSms" name="Sms" cols="50" rows="4"></textarea>
+            <textarea id="TxtSms" name="Sms" cols="50" rows="4"><%=C.OrderToSave.Sms %></textarea>
             <div class="button active" id="BtnSendMessage"><div>ENVIAR</div></div>
         </div>
     </div>
 
     <div class="row actions">
-        <div class="button active" id="BtnSaveOrder"><div>GUARDAR</div></div>
+        <%--<div class="button active" id="BtnSaveOrder"><div>GUARDAR</div></div>--%>
         <div class="button active cancel" id="BtnCancel"><div>CANCELAR</div></div>
     </div>
 </asp:Content>

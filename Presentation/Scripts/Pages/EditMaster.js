@@ -1,4 +1,4 @@
-﻿EditMaster = {
+﻿EditMaster = {    
     Initializer: function () {
         $('#BtnLogOut').click(function () {
             Master.PreparePage('Orders');

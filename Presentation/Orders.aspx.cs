@@ -59,7 +59,7 @@ namespace PlannerWeb
                                         <td class='{11}'>{12}</td>
                                         <td>{13}</td>
                                         <td>{14}</td>            
-                                        <td><input type='button' value='Editar' /></td>
+                                        <td><input type='button' value='SMS' /></td>
                                     </tr>",
                                      from.Orders.IndexOf(O) % 2 == 0 ? "pair" : "odd",
                                      O.OrderType,

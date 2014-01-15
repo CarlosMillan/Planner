@@ -19,6 +19,7 @@ namespace General.DTOs.Classes
         public DateTime PromiseDate2 { get; set; }
         public string CellPhone { get; set; }
         public string Asessor { get; set; }
+        public string Sms { get; set;}
         #endregion
 
         public Order(){ }

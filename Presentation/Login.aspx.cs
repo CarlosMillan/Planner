@@ -22,7 +22,7 @@ namespace PlannerWeb
             if (FormsAuthentication.Authenticate(TxtName.Value, TxtPassword.Value))
             {
                Session["Name"] = TxtName.Value;
-               FormsAuthentication.SetAuthCookie(TxtName.Value, true);
+               FormsAuthentication.SetAuthCookie(TxtName.Value, true);               
                Response.Redirect("Default.aspx", true); 
             }            
         }
