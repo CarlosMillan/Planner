@@ -48,7 +48,7 @@
                 </div>
             </div>             
             <div class="editbody">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">                    
                 </asp:ContentPlaceHolder>        
             </div>        
         </div>

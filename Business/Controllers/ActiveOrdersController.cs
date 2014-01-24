@@ -13,5 +13,10 @@ namespace Business.Controllers
         {
             return new ActiveOrdersData().GetOrdersPage(pagenumber, pagination, filters);
         }
+
+        public static SummaryOrders GetSummaryOrders(bool first)
+        {
+            return new ActiveOrdersData().GetSummaryPage(first);
+        }
     }
 }

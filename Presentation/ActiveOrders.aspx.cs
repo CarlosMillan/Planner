@@ -17,21 +17,27 @@ namespace PlannerWeb
     public partial class ActiveOrdersPage : System.Web.UI.Page
     {        
         private static int CurrentPage;
+        private static int TotalPages;
+        private static int TotalOrders;
         private static Filters F;
         private string ThirdParameter;
+        private static bool IsFirstSummary;
+        public int Pagination;
 
         protected void Page_Init(object seder, EventArgs e)
         {            
             if(Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
                Response.Redirect("Default.aspx");
 
+            Pagination = Int32.Parse(ConfigurationManager.AppSettings["Pagination"]);
             F = new Filters();
             SelectFilters();
+            CurrentPage = 0;
+            IsFirstSummary = true;
         }
             
         protected void Page_Load(object sender, EventArgs e)
         {
-            CurrentPage = 1;            
         }
 
         #region WebMethod
@@ -39,12 +45,27 @@ namespace PlannerWeb
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string GetPage(bool stop)
         {
-            JavaScriptSerializer Json = new JavaScriptSerializer();             
-
+            JavaScriptSerializer Json = new JavaScriptSerializer();
+            GetValidPage(stop);            
             ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
-            PageInfo Info = new PageInfo(CurrentPageData.TotalPages, CurrentPage, CurrentPageData.TotalOrders, GetHtmlTable(CurrentPageData));
-            GetValidPage(CurrentPageData.TotalPages, stop);
-           
+            TotalPages = CurrentPageData.TotalPages + 2; // Por las dos páginas de resumen
+            TotalOrders = CurrentPageData.TotalOrders;
+            PageInfo Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));                       
+            return Json.Serialize(Info);
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string GetSummary(bool stop)
+        {
+            JavaScriptSerializer Json = new JavaScriptSerializer();
+            string HtmlSummary1;
+            string HtmlSummary2;
+            GetValidPage(stop);
+            SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
+            GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
+            PageInfo Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
+            IsFirstSummary = !IsFirstSummary;
             return Json.Serialize(Info);
         }
         #endregion
@@ -88,13 +109,153 @@ namespace PlannerWeb
             return Table.ToString();
         }
 
-        private static void GetValidPage(int boundarypage, bool stop)
+        private static void GetHtmlTable(SummaryOrders from, out string s1, out string s2, bool isfirstsummary)
+        {
+            StringBuilder Table = new StringBuilder();
+            s1 = null;
+            s2 = null;
+
+            if (isfirstsummary)
+            {
+                if (from.Sd != null)
+                {
+                    foreach (var S in from.Sd)
+                    {
+                        Table.AppendFormat(@"<tr class='{0}'>
+                                                <td class='rowtitle'>{1}</td>
+                                                <td>{2}</td>
+                                                <td>{3}</td>
+                                                <td>{4}</td>
+                                                <td>{5}</td>
+                                                <td>{6}</td>
+                                                <td>{7}</td>
+                                                <td>{8}</td>
+                                                <td>{9}</td>
+                                                <td>{10}</td>
+                                                <td>{11}</td>            
+                                            </tr>",
+                                            from.Sd.IndexOf(S) % 2 == 0 ? "pair" : "odd",
+                                            S.Status,
+                                            S.Range1,
+                                            S.Range2,
+                                            S.Range3,
+                                            S.Range4,
+                                            S.Range5,
+                                            S.Range6,
+                                            S.Range7,
+                                            S.Range8,
+                                            S.Range9,
+                                            S.Total);
+                    }
+
+                    s1 = Table.ToString();
+                }
+
+                Table.Clear();
+
+                if (from.Ad != null)
+                {
+                    foreach (var S in from.Ad)
+                    {
+                        Table.AppendFormat(@"<tr class='{0}'>
+                                                <td class='rowtitle'>{1}</td>
+                                                <td>{2}</td>
+                                                <td>{3}</td>
+                                                <td>{4}</td>
+                                                <td>{5}</td>
+                                                <td>{6}</td>
+                                                <td>{7}</td>
+                                                <td>{8}</td>
+                                                <td>{9}</td>
+                                                <td>{10}</td>
+                                                <td>{11}</td>            
+                                            </tr>",
+                                                from.Ad.IndexOf(S) % 2 == 0 ? "pair" : "odd",
+                                                S.Assesor,
+                                                S.Range1,
+                                                S.Range2,
+                                                S.Range3,
+                                                S.Range4,
+                                                S.Range5,
+                                                S.Range6,
+                                                S.Range7,
+                                                S.Range8,
+                                                S.Range9,
+                                                S.Total);
+                    }
+
+                    s2 = Table.ToString();
+                }
+
+            }
+            else
+            {
+                if (from.As != null)
+                {
+                    foreach (var S in from.As)
+                    {
+                        Table.AppendFormat(@"<tr class='{0}'>
+                                                <td class'rowtitle'>{1}</td>
+                                                <td>{2}</td>
+                                                <td>{3}</td>
+                                                <td>{4}</td>
+                                                <td>{5}</td>
+                                                <td>{6}</td>
+                                                <td>{7}</td>
+                                            </tr>",
+                                            from.As.IndexOf(S) % 2 == 0 ? "pair" : "odd",
+                                            S.Status,
+                                            S.AssesorName1,
+                                            S.AssesorName2,
+                                            S.AssesorName3,
+                                            S.AssesorName4,
+                                            S.AssesorName5,
+                                            "34");
+                    }
+
+                    s1 = Table.ToString();
+                }
+
+                Table.Clear();
+
+                if (from.So != null)
+                {
+                    foreach (var S in from.So)
+                    {
+                        Table.AppendFormat(@"<tr class='{0}'>
+                                                <td class='rowtitle'>{1}</td>
+                                                <td>{2}</td>
+                                            </tr>",
+                                            from.So.IndexOf(S) % 2 == 0 ? "pair" : "odd",
+                                            S.Status,
+                                            S.OrderName1);
+                    }
+
+                    s2 = Table.ToString();
+                }
+            }
+        }
+
+        private static void GetValidPage(bool stop)
         {
             if (!stop)
-            {
-                if (CurrentPage >= boundarypage) CurrentPage = 1;
-                else CurrentPage++;
+            {        
+                CurrentPage++;
+
+                if (CurrentPage > TotalPages) CurrentPage = 1;
             }
+        }
+
+        private static bool IsNextPageSummary(bool stop)
+        {
+            bool Response = false;
+
+            if (!stop)
+            {
+                if(CurrentPage >= (TotalPages - 2) && CurrentPage < TotalPages) Response = true;               
+            }
+
+            return Response;
         }
 
         private bool ThirdParameterIsValid()

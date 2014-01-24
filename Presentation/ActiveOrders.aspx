@@ -5,6 +5,10 @@
 
     <!-- Scripts -->
     <script src="Scripts/Pages/ActiveOrders.js" type="text/javascript"></script>
+
+    <script language="javascript" type="text/javascript">
+        ActiveOrders.Pagination = <%=Pagination %>;
+    </script>
 </asp:Content>
 
 <asp:Content ID="ContenTitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
@@ -52,364 +56,105 @@
         </tr>
     </thead>
 
-    <tbody>
-
-    </tbody>
-
-    <tfoot>
-    </tfoot>
-</table>
-</div>
-
-<%--<div class="summarypanel">
-<div class="subtitle">RESUMEN POR ESTATUS Y DÍAS PARA ENTREGA DE UNIDADES</div>
-
-    <table cellspacing="0">
-        <thead>
-            <tr>
-                <th class="odd">ESTATUS</th>
-                <th class="odd underline">MENOR A -6 DÍAS</th>
-                <th class="odd underline">DE -5 A -3 DÍAS</th>
-                <th class="odd underline">DE -2 A -1 DÍAS</th>
-                <th class="odd">por st c5</th>
-                <th class="odd">por st c6</th>
-                <th class="odd">por st c7</th>
-                <th class="odd">por st c8</th>
-                <th class="odd">por st c9</th>
-                <th class="odd">por st c10</th>
-                <th class="odd">TOTAL</th>            
-            </tr>
-        </thead>
-
         <tbody>
-            <tr class="pair">
-                <td class="rowtitle">ASIGNADA</td>
-                <td>3</td>
-                <td>5</td>
-                <td>7</td>
-                <td>99</td>
-                <td>55</td>
-                <td>32</td>
-                <td>2</td>
-                <td>6</td>
-                <td>8</td>
-                <td>89</td>            
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">DIAGNOSTICO</td>
-                <td>5</td>
-                <td>7</td>
-                <td>8</td>
-                <td>2</td>
-                <td>33</td>
-                <td>4</td>
-                <td>2</td>
-                <td>4</td>
-                <td>45</td>
-                <td>54</td>            
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">REPARACIÓN</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-            <tr class="odd">
-                <td class="rowtitle">ASIGNADA</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">PRUEBAS DE CALIDAD</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">TOTAL</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
         </tbody>
 
         <tfoot>
         </tfoot>
     </table>
+
+    <div class="summarypanel">
+        <div class="subtitle" id="TitleSummary1">RESUMEN POR ESTATUS Y DÍAS PARA ENTREGA DE UNIDADES</div>
+        <table cellspacing="0" id="TableSummary1">
+            <thead>
+                <tr>
+                    <th class="odd">ESTATUS</th>
+                    <th class="odd underline">MENOR A -6 DÍAS</th>
+                    <th class="odd underline">DE -5 A -3 DÍAS</th>
+                    <th class="odd underline">DE -2 A -1 DÍAS</th>
+                    <th class="odd">por st c5</th>
+                    <th class="odd">por st c6</th>
+                    <th class="odd">por st c7</th>
+                    <th class="odd">por st c8</th>
+                    <th class="odd">por st c9</th>
+                    <th class="odd">por st c10</th>
+                    <th class="odd">TOTAL</th>            
+                </tr>
+            </thead>
+
+            <tbody>            
+            </tbody>
+
+            <tfoot>
+            </tfoot>
+        </table>
+
+        <div class="subtitle" id="TitleSummary2">RESUMEN POR ASESOR Y DÍAS PARA ENTREGA DE UNIDADES</div>
+        <table cellspacing="0" id="TableSummary2">
+            <thead>
+                <tr>
+                    <th class="odd">ASESOR</th>
+                    <th class="odd underline">Por asc c2</th>
+                    <th class="odd underline">Por asc c3</th>
+                    <th class="odd underline">Por asc c4</th>
+                    <th class="odd">Por asc c5</th>
+                    <th class="odd">Por asc c6</th>
+                    <th class="odd">Por asc c7</th>
+                    <th class="odd">Por asc c8</th>
+                    <th class="odd">Por asc c9</th>
+                    <th class="odd">Por asc c10</th>
+                    <th class="odd">TOTAL</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+            <tfoot>
+            </tfoot>
+          </table>
+
+        <div class="subtitle" id="TitleSummary3">RESUMEN POR ESTATUS Y POR ASESOR</div>
+        <table cellspacing="0" class="medium" id="TableSummary3">
+            <thead>
+                <tr>
+                    <th class="odd">ESTATUS</th>
+                    <th class="odd">ASDF</th>
+                    <th class="odd">FHFH</th>
+                    <th class="odd">FGDFG</th>
+                    <th class="odd">DGDFGH</th>
+                    <th class="odd">FGSFG</th>
+                    <th class="odd">TOTAL</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+            <tfoot>
+            </tfoot>
+        </table>
+
+
+        <div class="subtitle" id="TitleSummary4">RESUMEN POR ESTATUS Y TIPO DE ORDEN</div>
+        <table cellspacing="0" class="small" id="TableSummary4">
+            <thead>
+                <tr>
+                    <th class="odd">ESTATUS</th>
+                    <th class="odd">ASDF</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
 </div>
-
-<div class="summarypanel">
-<div class="subtitle">RESUMEN POR ASESOR Y DÍAS PARA ENTREGA DE UNIDADES</div>
-
-    <table cellspacing="0">
-        <thead>
-            <tr>
-                <th class="odd">ASESOR</th>
-                <th class="odd underline">Por asc c2</th>
-                <th class="odd underline">Por asc c3</th>
-                <th class="odd underline">Por asc c4</th>
-                <th class="odd">Por asc c5</th>
-                <th class="odd">Por asc c6</th>
-                <th class="odd">Por asc c7</th>
-                <th class="odd">Por asc c8</th>
-                <th class="odd">Por asc c9</th>
-                <th class="odd">Por asc c10</th>
-                <th class="odd">TOTAL</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="pair">
-                <td class="rowtitle">DRTYRY</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>4</td>
-                <td>33</td>
-                <td>55</td>
-                <td>64</td>
-                <td>34</td>            
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">DFGSG</td>
-                <td>34</td>
-                <td>5</td>
-                <td>76</td>
-                <td>98</td>
-                <td>12</td>
-                <td>34</td>
-                <td>6</td>
-                <td>38</td>
-                <td>3</td>
-                <td>2</td>            
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">FGHJDFGH</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">GJGJH</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">ASDFASDF</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">TOTAL</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>            
-            </tr>
-        </tbody>
-
-        <tfoot>
-        </tfoot>
-    </table>
-</div>
-
-
-<%--<div class="summarypanel">
-<div class="subtitle">RESUMEN POR ESTATUS Y POR ASESOR</div>
-
-    <table cellspacing="0" class="medium">
-        <thead>
-            <tr>
-                <th class="odd">ESTATUS</th>
-                <th class="odd">ASDF</th>
-                <th class="odd">FHFH</th>
-                <th class="odd">FGDFG</th>
-                <th class="odd">DGDFGH</th>
-                <th class="odd">FGSFG</th>
-                <th class="odd">TOTAL</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="pair">
-                <td class="rowtitle">ASIGANDA</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>92</td>
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">DIAGNOSTICO</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>92</td>
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">REPARACIÓN</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>92</td>          
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">PRUEAS DE CALIDAD</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>92</td>          
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">TOTAL</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-                <td>7</td>
-                <td>9</td>
-                <td>92</td>
-            </tr>
-        </tbody>
-
-        <tfoot>
-        </tfoot>
-    </table>
-</div>
-
-
-<div class="summarypanel">
-<div class="subtitle">RESUMEN POR ESTATUS Y TIPO DE ORDEN</div>
-
-    <table cellspacing="0" class="small">
-        <thead>
-            <tr>
-                <th class="odd">ESTATUS</th>
-                <th class="odd">ASDF</th>
-                <th class="odd">FHFH</th>
-                <th class="odd">TOTAL</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="pair">
-                <td class="rowtitle">ASIGANDA</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">DIAGNOSTICO</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">REPARACIÓN</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-            </tr>
-
-            <tr class="odd">
-                <td class="rowtitle">PRUEAS DE CALIDAD</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-            </tr>
-
-            <tr class="pair">
-                <td class="rowtitle">TOTAL</td>
-                <td>12</td>
-                <td>34</td>
-                <td>5</td>
-            </tr>
-        </tbody>
-
-        <tfoot>
-        </tfoot>
-    </table>
-</div>--%>
 <div class="button active cancel" id="BtnStop"><div>DETENER</div></div>
 </asp:Content>

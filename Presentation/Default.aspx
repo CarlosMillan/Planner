@@ -23,7 +23,6 @@
                     <div class="row">
                         <label class="title">Seleciona los filtros.</label>
                     </div>
-
                     <div class="row">
                         <label>Seleccione el taller de servicio:</label>
                         <select id="SlcService" name="SlcService">

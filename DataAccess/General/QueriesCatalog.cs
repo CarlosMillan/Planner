@@ -23,6 +23,26 @@ namespace DataAccess.General
         {
             get { return "SELECT * FROM ORDERS"; }
         }
+
+        public static string GetSummaryStatusDays
+        {
+            get { return "select *, '30' Total from Summary1_1"; }
+        }
+
+        public static string GetSummaryAssesorDay
+        {
+            get { return "SELECT *, '333' Total FROM Summary1_2"; }
+        }
+
+        public static string GetSummaryAssesorStatus
+        {
+            get { return "SELECT *, '11' TOTAL FROM  Summary2_1"; }
+        }
+
+        public static string GetSummaryStatusOrder
+        {
+            get { return "SELECT *, '12' TOTAL FROM  Summary2_2"; }
+        }
         #endregion
     }
 }
