@@ -15,10 +15,8 @@ namespace DataAccess
         public ActiveOrders GetOrdersPage(int pagenumber, int pagination, Filters filters)
         {
             try
-            {                
-                StringBuilder FullQuery = new StringBuilder();
-                FullQuery.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination);
-                ActiveOrders Current = base.GetOrders(FullQuery.ToString());
+            {
+                ActiveOrders Current = base.GetOrders(BuildQuery(pagenumber, pagination, filters));
                 Current.TotalPages = (int)Math.Ceiling((decimal)Current.TotalOrders / (decimal)pagination);
                 return Current;
             }
@@ -106,6 +104,13 @@ namespace DataAccess
             }
 
             return Summary;
+        }
+ 
+        public string BuildQuery(int pagenumber, int pagination, Filters tobuild)
+        {
+            StringBuilder Query = new StringBuilder();
+            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination);
+            return Query.ToString();
         }
     }
 }

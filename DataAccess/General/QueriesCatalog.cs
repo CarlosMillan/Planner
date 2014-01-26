@@ -11,12 +11,38 @@ namespace DataAccess.General
             get { return "SELECT COUNT(*) FROM ORDERS"; }
         }
 
+//        public static string GetActiveOrdersPage
+//        {
+//            get { return @"SELECT * 
+//                           FROM (SELECT ROW_NUMBER() OVER (ORDER BY P.Client DESC) AS rownum,P.* 
+//                                 FROM dbo.ORDERS AS P) OrderPage 
+//                           WHERE OrderPage.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})"; }
+//        }
+
         public static string GetActiveOrdersPage
         {
-            get { return @"SELECT * 
-                           FROM (SELECT ROW_NUMBER() OVER (ORDER BY P.Client DESC) AS rownum,P.* 
-                                 FROM dbo.ORDERS AS P) OrderPage 
-                           WHERE OrderPage.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})"; }
+            get {
+                return @"select *
+                         FROM (SELECT ROW_NUMBER() OVER (ORDER BY v.FechaEmision asc) AS rownum, v.[MovID] ORDERNUMBER
+                                                                                                ,ar.Descripcion1 VEHICLE
+                                                                                                ,c.Nombre CLIENT
+                                                                                                ,v.[FechaEmision]
+                                                                                                ,v.[Situacion] CELLPHONE
+                                                                                                ,v.[Estatus] 
+                                                                                                ,v.[FechaRequerida] PROMISEDATE
+                                                                                                ,v.[ServicioSerie]
+                                                                                                ,v.[ServicioIdentificador]
+                                                                                                ,v.[ServicioPlacas] PLATES
+                                                                                                ,v.[ServicioTipoOrden] ORDERTYPE
+                                                                                                ,v.[ServicioTipoOperacion] ASESSOR
+                             FROM Venta v, Art ar, Cte c
+	                         WHERE Mov = 'Servicio' 
+	                         AND (v.Estatus = 'Pendiente' OR v.Estatus = 'Sinafectar') 
+	                         and v.ServicioArticulo = ar.Articulo
+	                         and C.Cliente = v.Cliente) OrderPage
+                             {3} 
+                        WHERE OrderPage.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})";
+            }
         }
 
         public static string GetOrders

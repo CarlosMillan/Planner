@@ -38,7 +38,7 @@ namespace DataAccess.Bases
                     NewOrder.DeliveryDays = Convert.ToDateTime(Convert.ToDateTime(O["PROMISEDATE"].ToString()).ToShortDateString()).Subtract(Convert.ToDateTime(DateTime.Now.ToShortDateString())).Days;
                     NewOrder.CellPhone = O["CELLPHONE"].ToString();
                     NewOrder.PromiseDate = Convert.ToDateTime(O["PROMISEDATE"].ToString());
-                    NewOrder.PromiseDate2 = Convert.ToDateTime(O["PROMISEDATE2"].ToString());
+                    NewOrder.PromiseDate2 = Convert.ToDateTime(O["PROMISEDATE"].ToString());
                     NewOrder.Asessor = O["ASESSOR"].ToString();
                     Result.Orders.Add(NewOrder);
                 }
