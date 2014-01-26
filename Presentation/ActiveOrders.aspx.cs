@@ -295,7 +295,7 @@ namespace PlannerWeb
         {
             try
             {
-                F.Workshops.Find(svc => svc.WorkSopId == Int32.Parse(Request["Svc"])).IsSelected = true;
+                F.WorkShops.Find(svc => svc.WorkShopId == Int32.Parse(Request["Svc"])).IsSelected = true;
                 F.AccessAs.Find(Acc => Acc.AccessId == Int32.Parse(Request["Acc"])).IsSelected = true;
 
                 switch (ThirdParameter)
@@ -305,11 +305,11 @@ namespace PlannerWeb
                         break;
 
                     case "Sts":
-                        F.Situations.Find(Sts => Sts.StatusId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        F.Situations.Find(Sts => Sts.Name.Equals(Request[ThirdParameter])).IsSelected = true;
                         break;
 
                     case "Asr":
-                        F.Asesors.Find(Asr => Asr.AsesorId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        F.Asesors.Find(Asr => Asr.AsesorId.Equals(Request[ThirdParameter])).IsSelected = true;
                         break;
 
                     case "Ocp":

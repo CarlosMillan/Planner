@@ -1,8 +1,11 @@
 ﻿Default = {
     Delay: 500,
+    AssesorsMatrix: null,
     Initialize: function () {
         Default.HideServiceElements();
         $('#DvMessages').hide();
+        Default.AssesorsMatrix = $('#SlcAsesors option[value!="0"]');
+        $('#SlcAsesors option[value!="0"]').remove();
 
         $('#BtnSearch').click(function () {
             Master.PreparePage('Default');        // Page name e.g. Login.aspx -> Login
@@ -13,8 +16,9 @@
         });
 
         $('#SlcService').change(function () {
-            if (this.value != 0) $('#SlcAccess').closest('div.row').show(Default.Delay);
-            else Default.HideServiceElements();
+            if ($('#SlcAccess').is(':visible')) Default.HideServiceElements();
+
+            $('#SlcAccess').closest('div.row').show(Default.Delay);
         });
 
         $('#SlcAccess').change(function () {
@@ -25,6 +29,8 @@
                     break;
 
                 case 2:
+                    if ($('#SlcService').val() == 1) $('#SlcAsesors').append(Default.AssesorsMatrix);
+
                     $('#SlcAsesors').closest('div.row').show(Default.Delay);
                     Default.HideAccessElements('SlcAsesors');
                     break;
@@ -70,8 +76,13 @@
         $('#SlcAccess').closest('div.row').hide();
         $('#SlcOrder').closest('div.row').hide();
         $('#SlcStatus').closest('div.row').hide();
-        $('#TxtOrder_Client_Plates').closest('div.row').hide();
         $('#SlcAsesors').closest('div.row').hide();
+        $('#TxtOrder_Client_Plates').closest('div.row').hide();
+        $('#SlcAccess').val('0');
+        $('#SlcOrder').val('0');
+        $('#SlcStatus').val('0');
+        $('#SlcAsesors').val('0');
+        $('#TxtOrder_Client_Plates').val('');
     },
     HideAccessElements: function (nothide) {
         switch (nothide) {
@@ -79,18 +90,21 @@
                 $('#SlcStatus').closest('div.row').hide();
                 $('#TxtOrder_Client_Plates').closest('div.row').hide();
                 $('#SlcAsesors').closest('div.row').hide();
+                $('#SlcAsesors option[value!="0"]').remove();
                 break;
 
             case 'SlcStatus':
                 $('#SlcOrder').closest('div.row').hide();
                 $('#TxtOrder_Client_Plates').closest('div.row').hide();
                 $('#SlcAsesors').closest('div.row').hide();
+                $('#SlcAsesors option[value!="0"]').remove();
                 break;
 
             case 'TxtOrder_Client_Plates':
                 $('#SlcOrder').closest('div.row').hide();
                 $('#SlcStatus').closest('div.row').hide();
                 $('#SlcAsesors').closest('div.row').hide();
+                $('#SlcAsesors option[value!="0"]').remove();
                 break;
 
             case 'SlcAsesors':

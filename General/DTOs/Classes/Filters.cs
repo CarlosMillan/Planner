@@ -5,16 +5,25 @@ namespace General.DTOs.Classes
 {
     public class Filters
     {
-        public List<WorkShop> Workshops;
+        public List<WorkShop> WorkShops;
         public List<Access> AccessAs;
         public List<OrderType> OrdersType;
         public List<Status> Situations;
         public List<Asesor> Asesors;
         public string OrderClientPlates;
 
+        public WorkShop SeletedWorkShop
+        {
+            get
+            {
+                //TODO
+                return new WorkShop();
+            }
+        }
+
         public Filters()
         {
-            Workshops = new List<WorkShop>();
+            WorkShops = new List<WorkShop>();
             AccessAs = new List<Access>();
             OrdersType = new List<OrderType>();
             Situations = new List<Status>();
@@ -22,27 +31,21 @@ namespace General.DTOs.Classes
             OrderClientPlates = string.Empty;
 
             #region Workshops
-            Workshops.Add(new WorkShop() { 
-                WorkSopId = 1,
+            WorkShops.Add(new WorkShop() { 
+                WorkShopId = 1,
                 Name = "Matriz"
             });
 
-            Workshops.Add(new WorkShop()
+            WorkShops.Add(new WorkShop()
             {
-                WorkSopId = 2,
-                Name = "Sucursal 1"
+                WorkShopId = 2,
+                Name = "Servicio Cholula"
             });
 
-            Workshops.Add(new WorkShop()
+            WorkShops.Add(new WorkShop()
             {
-                WorkSopId = 3,
-                Name = "Sucursal 2"
-            });
-
-            Workshops.Add(new WorkShop()
-            {
-                WorkSopId = 4,
-                Name = "Body Shop"
+                WorkShopId = 5,
+                Name = "Servicio Body Shop"
             });
             #endregion
 
@@ -115,64 +118,114 @@ namespace General.DTOs.Classes
             #endregion
 
             #region Status
-            Situations.Add(new Status() { 
-                StatusId = 1,
-                Name = "Pendiente"
+            Situations.Add(new Status() {                 
+                Name = "Orden Abierta"
             });
 
             Situations.Add(new Status()
-            {
-                StatusId = 2,
-                Name = "Lavado"
+            {                
+                Name = "En Proceso"
             });
 
             Situations.Add(new Status()
-            {
-                StatusId = 3,
-                Name = "Reparación"
+            {                
+                Name = "Pendiente Autorizacion"
             });
 
             Situations.Add(new Status()
-            {
-                StatusId = 4,
-                Name = "Espera"
+            {                
+                Name = "Parada X Refacc"
             });
 
             Situations.Add(new Status()
-            {
-                StatusId = 5,
-                Name = "Otro"
+            {                
+                Name = "U Circulando"
             });
 
             Situations.Add(new Status()
-            {
-                StatusId = 6,
-                Name = "Quien sabe!"
+            {                
+                Name = "Pzas Surtidas"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "U En HyPB"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Trabajo Fuera"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "U a Prueba"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Reproceso"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Espera Lavado"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "En Lavado"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Lavado Terminado"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Orden Cerrada"
+            });
+
+            Situations.Add(new Status()
+            {                
+                Name = "Unidad Salio"
             });
             #endregion
 
             #region Asesors
             Asesors.Add(new Asesor() { 
-                AsesorId = 1,
-                Name = "xxx"
+                AsesorId = "AMH",
+                Name = "ARTURO MARTINEZ HERRERA",
+                WorkShop = 1
             });
 
             Asesors.Add(new Asesor()
             {
-                AsesorId = 2,
-                Name = "yyy"
+                AsesorId = "EJAR",
+                Name = "EMMANUEL DE JESUS AVENDAÑO REY",
+                WorkShop = 1
             });
 
             Asesors.Add(new Asesor()
             {
-                AsesorId = 3,
-                Name = "aaa"
+                AsesorId = "NAB",
+                Name = "NESTOR RAFAEL ALTARMIRANO BOLAÑOS",
+                WorkShop = 1
             });
 
             Asesors.Add(new Asesor()
             {
-                AsesorId = 4,
-                Name = "hhh"
+                AsesorId = "FMLM",
+                Name = "FRANCISCO MAURICIO LOPEZ MENDOZA",
+                WorkShop = 1
+            });
+
+            Asesors.Add(new Asesor()
+            {
+                AsesorId = "SMC",
+                Name = "SHARAI MENDEZ CARREÑO",
+                WorkShop = 1
             });
             #endregion
         }
@@ -180,7 +233,7 @@ namespace General.DTOs.Classes
 
     public class WorkShop
     {
-        public int WorkSopId {get; set;}
+        public int WorkShopId {get; set;}
         public string Name {get; set;}
         public bool IsSelected { get; set; }
     }
@@ -200,16 +253,16 @@ namespace General.DTOs.Classes
     }
 
     public class Status
-    {
-        public int StatusId { get; set; }
+    {        
         public string Name { get; set; }
         public bool IsSelected { get; set; }
     }
 
     public class Asesor
     {
-        public int AsesorId { get; set; }
+        public string AsesorId { get; set; }
         public string Name { get; set; }
         public bool IsSelected { get; set; }
+        public int WorkShop { get; set; }
     }
 }

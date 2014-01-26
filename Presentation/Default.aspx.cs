@@ -35,9 +35,9 @@ namespace PlannerWeb
             HtmlSituations = new StringBuilder();
             HtmlAsesors = new StringBuilder();
 
-            foreach(WorkShop W in C.F.Workshops)
+            foreach(WorkShop W in C.F.WorkShops)
             {
-                HtmlWorkShops.AppendFormat("<option value='{0}'>{1}</option>", W.WorkSopId, W.Name);
+                HtmlWorkShops.AppendFormat("<option value='{0}'>{1}</option>", W.WorkShopId, W.Name);
             }
 
             foreach(Access A in C.F.AccessAs)
@@ -52,11 +52,11 @@ namespace PlannerWeb
 
             foreach (Status S in C.F.Situations)
             {
-                HtmlSituations.AppendFormat("<option value='{0}'>{1}</option>", S.StatusId, S.Name);
+                HtmlSituations.AppendFormat("<option value='{0}'>{0}</option>", S.Name);
             }
 
             foreach (Asesor Asr in C.F.Asesors)
-            {
+            {                
                 HtmlAsesors.AppendFormat("<option value='{0}'>{1}</option>", Asr.AsesorId, Asr.Name);
             }
 
@@ -65,7 +65,7 @@ namespace PlannerWeb
 
         public void Search()
         {            
-            Response.Redirect(CreateURL());
+            Response.Redirect(CreateURL());            
         }
 
         protected void BtnLogOut_Click(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace PlannerWeb
 
         private string CreateURL() 
         {
-            StringBuilder SearchingUrl = new StringBuilder();
+            StringBuilder SearchingUrl = new StringBuilder();            
 
             if (Session["Name"] != null) SearchingUrl.Append("Orders.aspx");
             else SearchingUrl.Append("ActiveOrders.aspx");
@@ -86,8 +86,8 @@ namespace PlannerWeb
             SearchingUrl.AppendFormat("?Svc={0}&Acc={1}", Request["SlcService"], Request["SlcAccess"]);
 
             if (Int32.Parse(Request["SlcOrder"]) != 0) SearchingUrl.AppendFormat("&Ord={0}", Request["SlcOrder"]);
-            else if (Int32.Parse(Request["SlcStatus"]) != 0) SearchingUrl.AppendFormat("&Sts={0}", Request["SlcStatus"]);
-            else if (Int32.Parse(Request["SlcAsesors"]) != 0) SearchingUrl.AppendFormat("&Asr={0}", Request["SlcAsesors"]);
+            else if (!Request["SlcStatus"].Equals("0")) SearchingUrl.AppendFormat("&Sts={0}", HttpContext.Current.Server.UrlEncode(Request["SlcStatus"]));
+            else if (!Request["SlcAsesors"].Equals("0")) SearchingUrl.AppendFormat("&Asr={0}", Request["SlcAsesors"]);
             else if (Request["TxtOrder_Client_Plates"] != String.Empty) SearchingUrl.AppendFormat("&Ocp={0}", Request["TxtOrder_Client_Plates"]);
 
             return SearchingUrl.ToString();

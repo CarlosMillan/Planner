@@ -15,7 +15,7 @@ namespace DataAccess
         public ActiveOrders GetOrdersPage(int pagenumber, int pagination, Filters filters)
         {
             try
-            {
+            {                
                 StringBuilder FullQuery = new StringBuilder();
                 FullQuery.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination);
                 ActiveOrders Current = base.GetOrders(FullQuery.ToString());
