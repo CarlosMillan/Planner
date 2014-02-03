@@ -34,7 +34,7 @@ namespace DataAccess.Bases
                     NewOrder.Vehicle = O["VEHICLE"].ToString();
                     NewOrder.Plates = O["PLATES"].ToString();
                     NewOrder.StayDays = DateTime.Now.Subtract(NewOrder.EntryDate).Days;
-                    NewOrder.Status = OrderStatus.QualityTesting;
+                    NewOrder.Status = O["SITUATION"].ToString();
                     NewOrder.DeliveryDays = Convert.ToDateTime(Convert.ToDateTime(O["PROMISEDATE"].ToString()).ToShortDateString()).Subtract(Convert.ToDateTime(DateTime.Now.ToShortDateString())).Days;
                     NewOrder.CellPhone = O["CELLPHONE"].ToString();
                     NewOrder.PromiseDate = Convert.ToDateTime(O["PROMISEDATE"].ToString());

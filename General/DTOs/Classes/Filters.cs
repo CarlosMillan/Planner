@@ -9,16 +9,52 @@ namespace General.DTOs.Classes
         public List<Access> AccessAs;
         public List<OrderType> OrdersType;
         public List<Status> Situations;
-        public List<Asesor> Asesors;
+        public List<Asesor> Assesors;
         public string OrderClientPlates;
 
         public WorkShop SeletedWorkShop
         {
             get
             {
-                //TODO
-                return new WorkShop();
+                return WorkShops.Find(w => w.IsSelected == true);                
             }
+        }
+
+        public Access SelectedAccess
+        {
+            get 
+            {
+                return AccessAs.Find(A => A.IsSelected == true);
+            }
+        }
+
+        public OrderType SelectedOrdersType
+        {
+            get 
+            {
+                return OrdersType.Find(O => O.IsSelected == true);
+            }
+        }
+
+        public Status SelectedSituation
+        {
+            get
+            {
+                return Situations.Find(S => S.IsSelected == true);
+            }
+        }
+
+        public Asesor SelectedAssesor
+        {
+            get
+            {
+                return Assesors.Find(A => A.IsSelected == true);
+            }
+        }
+
+        public string SelectedOrderClientPlates
+        {
+            get { return OrderClientPlates; }
         }
 
         public Filters()
@@ -27,7 +63,7 @@ namespace General.DTOs.Classes
             AccessAs = new List<Access>();
             OrdersType = new List<OrderType>();
             Situations = new List<Status>();
-            Asesors = new List<Asesor>();
+            Assesors = new List<Asesor>();
             OrderClientPlates = string.Empty;
 
             #region Workshops
@@ -194,34 +230,34 @@ namespace General.DTOs.Classes
             #endregion
 
             #region Asesors
-            Asesors.Add(new Asesor() { 
+            Assesors.Add(new Asesor() { 
                 AsesorId = "AMH",
                 Name = "ARTURO MARTINEZ HERRERA",
                 WorkShop = 1
             });
 
-            Asesors.Add(new Asesor()
+            Assesors.Add(new Asesor()
             {
                 AsesorId = "EJAR",
                 Name = "EMMANUEL DE JESUS AVENDAÑO REY",
                 WorkShop = 1
             });
 
-            Asesors.Add(new Asesor()
+            Assesors.Add(new Asesor()
             {
                 AsesorId = "NAB",
                 Name = "NESTOR RAFAEL ALTARMIRANO BOLAÑOS",
                 WorkShop = 1
             });
 
-            Asesors.Add(new Asesor()
+            Assesors.Add(new Asesor()
             {
                 AsesorId = "FMLM",
                 Name = "FRANCISCO MAURICIO LOPEZ MENDOZA",
                 WorkShop = 1
             });
 
-            Asesors.Add(new Asesor()
+            Assesors.Add(new Asesor()
             {
                 AsesorId = "SMC",
                 Name = "SHARAI MENDEZ CARREÑO",

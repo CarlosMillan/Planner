@@ -141,7 +141,7 @@ namespace PlannerWeb
                         break;
 
                     case "Asr":
-                        F.Asesors.Find(Asr => Asr.AsesorId.Equals(Request[ThirdParameter])).IsSelected = true;
+                        F.Assesors.Find(Asr => Asr.AsesorId.Equals(Request[ThirdParameter])).IsSelected = true;
                         break;
 
                     case "Ocp":

@@ -13,7 +13,7 @@ namespace General.DTOs.Classes
         public string Vehicle { get; set; }
         public string Plates { get; set; }
         public int StayDays { get; set; }
-        public OrderStatus Status { get; set; }
+        public string Status { get; set; }
         public int DeliveryDays { get; set; }
         public DateTime PromiseDate { get; set; }
         public DateTime PromiseDate2 { get; set; }

@@ -55,7 +55,7 @@ namespace PlannerWeb
                 HtmlSituations.AppendFormat("<option value='{0}'>{0}</option>", S.Name);
             }
 
-            foreach (Asesor Asr in C.F.Asesors)
+            foreach (Asesor Asr in C.F.Assesors)
             {                
                 HtmlAsesors.AppendFormat("<option value='{0}'>{1}</option>", Asr.AsesorId, Asr.Name);
             }

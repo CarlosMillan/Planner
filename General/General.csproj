@@ -49,7 +49,6 @@
     <Compile Include="Enums\OrderType.cs" />
     <Compile Include="DTOs\Classes\Order.cs" />
     <Compile Include="DTOs\Structs\LoggedUser.cs" />
-    <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DataBaseManager.cs" />
     <Compile Include="Utils\Messaging.cs" />

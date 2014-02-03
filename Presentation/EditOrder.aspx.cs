@@ -34,7 +34,7 @@ namespace PlannerWeb
             C.OrderToSave.Client = Request["Client"];
             C.OrderToSave.Plates = Request["Plates"];
             C.OrderToSave.StayDays = Int32.Parse(Request["StayDays"] == null ? "0" : Request["StayDays"]);
-            C.OrderToSave.Status = OrderStatus.QualityTesting; // Request["Status"];
+            C.OrderToSave.Status = Request["Status"];
             C.OrderToSave.DeliveryDays = Int32.Parse(Request["DeliveryDays"] == null ? "0" : Request["DeliveryDays"]);
             C.OrderToSave.Asessor = Request["Asessor"];
             C.OrderToSave.CellPhone = Request["Cellphone"];

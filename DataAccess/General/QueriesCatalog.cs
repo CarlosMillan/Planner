@@ -8,40 +8,39 @@ namespace DataAccess.General
         #region Propierties        
         public static string GetTotalOrdres
         {
-            get { return "SELECT COUNT(*) FROM ORDERS"; }
+            get
+            {
+                return @"SELECT COUNT(*)FROM Venta v, Art ar, Cte c
+                             WHERE Mov = 'Servicio'
+                             AND (v.Estatus = 'Pendiente' OR v.Estatus = 'Sinafectar')
+                             and v.ServicioArticulo = ar.Articulo
+                             and C.Cliente = v.Cliente";
+            }
         }
-
-//        public static string GetActiveOrdersPage
-//        {
-//            get { return @"SELECT * 
-//                           FROM (SELECT ROW_NUMBER() OVER (ORDER BY P.Client DESC) AS rownum,P.* 
-//                                 FROM dbo.ORDERS AS P) OrderPage 
-//                           WHERE OrderPage.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})"; }
-//        }
 
         public static string GetActiveOrdersPage
         {
             get {
-                return @"select *
-                         FROM (SELECT ROW_NUMBER() OVER (ORDER BY v.FechaEmision asc) AS rownum, v.[MovID] ORDERNUMBER
-                                                                                                ,ar.Descripcion1 VEHICLE
-                                                                                                ,c.Nombre CLIENT
-                                                                                                ,v.[FechaEmision]
-                                                                                                ,v.[Situacion] CELLPHONE
-                                                                                                ,v.[Estatus] 
-                                                                                                ,v.[FechaRequerida] PROMISEDATE
-                                                                                                ,v.[ServicioSerie]
-                                                                                                ,v.[ServicioIdentificador]
-                                                                                                ,v.[ServicioPlacas] PLATES
-                                                                                                ,v.[ServicioTipoOrden] ORDERTYPE
-                                                                                                ,v.[ServicioTipoOperacion] ASESSOR
-                             FROM Venta v, Art ar, Cte c
-	                         WHERE Mov = 'Servicio' 
-	                         AND (v.Estatus = 'Pendiente' OR v.Estatus = 'Sinafectar') 
-	                         and v.ServicioArticulo = ar.Articulo
-	                         and C.Cliente = v.Cliente) OrderPage
-                             {3} 
-                        WHERE OrderPage.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})";
+                return @"SELECT *
+                         FROM (SELECT ROW_NUMBER() OVER (ORDER BY V.FECHAEMISION ASC) AS ROWNUM, V.[MOVID] ORDERNUMBER
+                                                                                                ,AR.DESCRIPCION1 VEHICLE
+                                                                                                ,C.NOMBRE CLIENT
+                                                                                                ,V.[FECHAEMISION]
+                                                                                                ,V.[SITUACION] CELLPHONE
+                                                                                                ,V.[ESTATUS] 
+                                                                                                ,V.[FECHAREQUERIDA] PROMISEDATE
+                                                                                                ,V.[SERVICIOSERIE]
+                                                                                                ,V.[SERVICIOIDENTIFICADOR]
+                                                                                                ,V.[SERVICIOPLACAS] PLATES
+                                                                                                ,V.[SERVICIOTIPOORDEN] ORDERTYPE
+                                                                                                ,V.[SERVICIOTIPOOPERACION] ASESSOR
+                             FROM VENTA V, ART AR, CTE C
+	                         WHERE MOV = 'SERVICIO' 
+	                         AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR') 
+	                         AND V.SERVICIOARTICULO = AR.ARTICULO
+	                         AND C.CLIENTE = V.CLIENTE
+                             {2}) ORDERPAGE
+                        WHERE ORDERPAGE.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})";
             }
         }
 

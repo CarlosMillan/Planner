@@ -109,7 +109,15 @@ namespace DataAccess
         public string BuildQuery(int pagenumber, int pagination, Filters tobuild)
         {
             StringBuilder Query = new StringBuilder();
-            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination);
+            StringBuilder FiltersString = new StringBuilder();
+            FiltersString.AppendFormat(@"AND SUCURSAL = '{0}'{1}{2}{3}{4}",
+                                         tobuild.SeletedWorkShop.WorkShopId,
+                               /*Taller*/tobuild.SelectedAccess.AccessId == 1 ? String.Concat("AND SERVICIOTIPOORDEN = '", tobuild.SelectedOrdersType.Name, "'") : string.Empty,
+                               /*Asesor*/tobuild.SelectedAccess.AccessId == 2 ? String.Concat("AND AGENTE = '", tobuild.SelectedAssesor.AsesorId, "'") : string.Empty,
+                            /*Situación*/tobuild.SelectedAccess.AccessId == 3 ? String.Concat("AND SITUACION = '", tobuild.SelectedSituation.Name, "'") : string.Empty,
+                /*Orden,Nombre,Placas*/tobuild.SelectedAccess.AccessId == 4 ? String.Concat("AND (SERVICIOTIPOORDEN LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR AGENTE LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR SERVICIOPLACAS LIKE '%", tobuild.SelectedOrderClientPlates, "%')") : string.Empty
+            );                               
+            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, FiltersString.ToString());
             return Query.ToString();
         }
     }
