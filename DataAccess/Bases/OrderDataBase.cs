@@ -7,6 +7,7 @@ using DataAccess.General;
 using System.Data;
 using General.DTOs.Classes;
 using General.Enums;
+using System.Text;
 
 namespace DataAccess.Bases
 {
@@ -15,14 +16,14 @@ namespace DataAccess.Bases
     {
         public OrderDataBase() { }
 
-        public OrdersType GetOrders(string query)
+        public OrdersType GetOrders(string query, string filters)
         {
             OrdersType Result = new OrdersType();
 
             try
             {
-                DataTable Orders = DataBaseManager.GetTable(query);                
-                Result.TotalOrders = (int)DataBaseManager.GetValue(QueriesCatalog.GetTotalOrdres);                
+                DataTable Orders = DataBaseManager.GetTable(query);
+                Result.TotalOrders = (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalOrdres, filters).ToString());
                 
                 foreach (DataRow O in Orders.Rows)
                 {

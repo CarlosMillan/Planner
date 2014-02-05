@@ -16,7 +16,7 @@ namespace DataAccess
         {
             try
             {
-                ActiveOrders Current = base.GetOrders(BuildQuery(pagenumber, pagination, filters));
+                ActiveOrders Current = base.GetOrders(BuildQuery(pagenumber, pagination, filters), GetFilterQuery(filters));
                 Current.TotalPages = (int)Math.Ceiling((decimal)Current.TotalOrders / (decimal)pagination);
                 return Current;
             }
@@ -106,19 +106,73 @@ namespace DataAccess
             return Summary;
         }
  
-        public string BuildQuery(int pagenumber, int pagination, Filters tobuild)
+        private string BuildQuery(int pagenumber, int pagination, Filters tobuild)
         {
             StringBuilder Query = new StringBuilder();
+            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, GetFilterQuery(tobuild), GetServiceTypeQuery(tobuild.SelectedOrdersType.OrderTypeId));
+            return Query.ToString();
+        }
+
+        private string GetFilterQuery(Filters tobuild)
+        { 
             StringBuilder FiltersString = new StringBuilder();
             FiltersString.AppendFormat(@"AND SUCURSAL = '{0}'{1}{2}{3}{4}",
                                          tobuild.SeletedWorkShop.WorkShopId,
-                               /*Taller*/tobuild.SelectedAccess.AccessId == 1 ? String.Concat("AND SERVICIOTIPOORDEN = '", tobuild.SelectedOrdersType.Name, "'") : string.Empty,
-                               /*Asesor*/tobuild.SelectedAccess.AccessId == 2 ? String.Concat("AND AGENTE = '", tobuild.SelectedAssesor.AsesorId, "'") : string.Empty,
-                            /*Situación*/tobuild.SelectedAccess.AccessId == 3 ? String.Concat("AND SITUACION = '", tobuild.SelectedSituation.Name, "'") : string.Empty,
-                /*Orden,Nombre,Placas*/tobuild.SelectedAccess.AccessId == 4 ? String.Concat("AND (SERVICIOTIPOORDEN LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR AGENTE LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR SERVICIOPLACAS LIKE '%", tobuild.SelectedOrderClientPlates, "%')") : string.Empty
-            );                               
-            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, FiltersString.ToString());
-            return Query.ToString();
+                /*Taller*/tobuild.SelectedAccess.AccessId == 1 ? GetOrderType(tobuild.SelectedOrdersType.OrderTypeId) : string.Empty,
+                /*Asesor*/tobuild.SelectedAccess.AccessId == 2 ? String.Concat("AND V.AGENTE = '", tobuild.SelectedAssesor.AsesorId, "'") : string.Empty,
+                /*Situación*/tobuild.SelectedAccess.AccessId == 3 ? String.Concat("AND V.SITUACION = '", tobuild.SelectedSituation.Name, "'") : string.Empty,
+                /*Orden,Nombre,Placas*/tobuild.SelectedAccess.AccessId == 4 ? String.Concat("AND (V.MOVID LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR C.NOMBRE LIKE '%", tobuild.SelectedOrderClientPlates, "%' OR V.SERVICIOPLACAS LIKE '%", tobuild.SelectedOrderClientPlates, "%')") : string.Empty);
+
+            return FiltersString.ToString();
+        }
+
+        private string GetOrderType(string selectedorders)
+        {            
+            string[] SplitFromOrder = selectedorders.Split('_');
+            StringBuilder OrderFilter = new StringBuilder();
+
+            if (SplitFromOrder.Length > 1)
+            {
+                if (SplitFromOrder[1].Equals("Garantias"))
+                {
+                    OrderFilter.AppendFormat("AND V.SERVICIOTIPOORDEN = '{0}'", SplitFromOrder[0]);
+                }
+                else
+                {
+                    OrderFilter.AppendFormat("AND (V.SERVICIOTIPOORDEN = '{0}' OR V.SERVICIOTIPOORDEN = '{1}')", SplitFromOrder[0], SplitFromOrder[1]);
+                }
+            }
+            else if (!selectedorders.Equals("Garantias"))
+            {
+                OrderFilter.AppendFormat("AND V.SERVICIOTIPOORDEN = '{0}'", SplitFromOrder[0]);
+            }
+
+            return OrderFilter.ToString();
+        }
+
+        private string GetServiceTypeQuery(string selectedorder)
+        {
+            string[] SplitFromOrder = selectedorder.Split('_');
+            StringBuilder OrderFilter = new StringBuilder();
+
+            if (SplitFromOrder.Length > 1)
+            {
+                if (SplitFromOrder[1].Equals("Garantias"))
+                {
+                    OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantias'");
+                }
+                else
+                {
+                    OrderFilter.Append("MOV = 'Servicio'");
+                }
+            }
+            else if (!selectedorder.Equals("Garantias"))
+            {
+                OrderFilter.Append("MOV = 'Servicio'");
+            }
+            else OrderFilter.Append("MOV = 'Servicio Garantias'");
+
+            return OrderFilter.ToString();
         }
     }
 }

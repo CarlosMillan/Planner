@@ -14,6 +14,7 @@ namespace PlannerWeb
     {
         public string ReturnUrl;
         public EditOrderController C;
+        public string SmsLength;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -24,6 +25,7 @@ namespace PlannerWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             C = new EditOrderController();
+            SmsLength = ConfigurationManager.AppSettings["SmsLength"];
 
             C.OrderToSave.OrderType = Request["OrderType"];
             C.OrderToSave.OrderNumber = Request["OrderNum"];

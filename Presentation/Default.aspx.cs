@@ -85,7 +85,7 @@ namespace PlannerWeb
 
             SearchingUrl.AppendFormat("?Svc={0}&Acc={1}", Request["SlcService"], Request["SlcAccess"]);
 
-            if (Int32.Parse(Request["SlcOrder"]) != 0) SearchingUrl.AppendFormat("&Ord={0}", Request["SlcOrder"]);
+            if (!Request["SlcOrder"].Equals("0")) SearchingUrl.AppendFormat("&Ord={0}", Request["SlcOrder"]);
             else if (!Request["SlcStatus"].Equals("0")) SearchingUrl.AppendFormat("&Sts={0}", HttpContext.Current.Server.UrlEncode(Request["SlcStatus"]));
             else if (!Request["SlcAsesors"].Equals("0")) SearchingUrl.AppendFormat("&Asr={0}", Request["SlcAsesors"]);
             else if (Request["TxtOrder_Client_Plates"] != String.Empty) SearchingUrl.AppendFormat("&Ocp={0}", Request["TxtOrder_Client_Plates"]);

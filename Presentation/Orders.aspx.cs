@@ -36,7 +36,7 @@ namespace PlannerWeb
             HtmlTable = string.Empty;
             ExecuteAction<OrdersWeb>(this);
             C = new OrdersController();
-            HtmlTable = GetHtmlTable(C.GetOrders());
+            HtmlTable = GetHtmlTable(C.GetOrders(F));
         }
         
         private static string GetHtmlTable(General.DTOs.Classes.Orders from)
@@ -133,7 +133,7 @@ namespace PlannerWeb
                 switch (ThirdParameter)
                 {
                     case "Ord":
-                        F.OrdersType.Find(Ord => Ord.OrderTypeId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
                         break;
 
                     case "Sts":

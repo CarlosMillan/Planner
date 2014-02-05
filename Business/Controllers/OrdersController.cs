@@ -9,9 +9,9 @@ namespace Business.Controllers
     {
         public OrdersController() { }
 
-        public Orders GetOrders()
+        public Orders GetOrders(Filters filters)
         {
-            return new OrdersData().GetOrders();
+            return new OrdersData().GetOrders(filters);
         }
     }
 }

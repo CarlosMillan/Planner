@@ -10,11 +10,12 @@ namespace DataAccess.General
         {
             get
             {
-                return @"SELECT COUNT(*)FROM Venta v, Art ar, Cte c
-                             WHERE Mov = 'Servicio'
-                             AND (v.Estatus = 'Pendiente' OR v.Estatus = 'Sinafectar')
-                             and v.ServicioArticulo = ar.Articulo
-                             and C.Cliente = v.Cliente";
+                return @"SELECT COUNT(*) FROM VENTA V, ART AR, CTE C
+                             WHERE MOV = 'SERVICIO'
+                             AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR')
+                             AND V.SERVICIOARTICULO = AR.ARTICULO
+                             AND C.CLIENTE = V.CLIENTE
+                             {0}";
             }
         }
 
@@ -22,20 +23,21 @@ namespace DataAccess.General
         {
             get {
                 return @"SELECT *
-                         FROM (SELECT ROW_NUMBER() OVER (ORDER BY V.FECHAEMISION ASC) AS ROWNUM, V.[MOVID] ORDERNUMBER
-                                                                                                ,AR.DESCRIPCION1 VEHICLE
-                                                                                                ,C.NOMBRE CLIENT
-                                                                                                ,V.[FECHAEMISION]
-                                                                                                ,V.[SITUACION] CELLPHONE
-                                                                                                ,V.[ESTATUS] 
-                                                                                                ,V.[FECHAREQUERIDA] PROMISEDATE
-                                                                                                ,V.[SERVICIOSERIE]
-                                                                                                ,V.[SERVICIOIDENTIFICADOR]
-                                                                                                ,V.[SERVICIOPLACAS] PLATES
-                                                                                                ,V.[SERVICIOTIPOORDEN] ORDERTYPE
-                                                                                                ,V.[SERVICIOTIPOOPERACION] ASESSOR
+                         FROM (SELECT ROW_NUMBER() OVER (ORDER BY V.FECHAEMISION ASC) AS ROWNUM, v.[MovID] ORDERNUMBER
+																								,ar.Descripcion1 VEHICLE
+																								,v.Agente ASESSOR
+                                                                                                ,c.Nombre CLIENT
+																								,c.PersonalTelefonoMovil CELLPHONE
+                                                                                                ,v.[FechaEmision] ORDERDATE
+                                                                                                ,v.[Situacion] SITUATION
+                                                                                                ,v.[FechaRequerida] PROMISEDATE
+                                                                                                ,v.[ServicioSerie]
+                                                                                                ,v.[ServicioIdentificador]
+                                                                                                ,v.[ServicioPlacas] PLATES
+                                                                                                ,v.[ServicioTipoOrden] ORDERTYPE
+                                                                                                ,v.[ServicioTipoOperacion] 
                              FROM VENTA V, ART AR, CTE C
-	                         WHERE MOV = 'SERVICIO' 
+	                         WHERE {3} 
 	                         AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR') 
 	                         AND V.SERVICIOARTICULO = AR.ARTICULO
 	                         AND C.CLIENTE = V.CLIENTE
@@ -46,7 +48,27 @@ namespace DataAccess.General
 
         public static string GetOrders
         {
-            get { return "SELECT * FROM ORDERS"; }
+            get {
+                return @"SELECT v.[MovID] ORDERNUMBER
+								,ar.Descripcion1 VEHICLE
+								,v.Agente ASESSOR
+                                ,c.Nombre CLIENT
+								,c.PersonalTelefonoMovil CELLPHONE
+                                ,v.[FechaEmision] ORDERDATE
+                                ,v.[Situacion] SITUATION
+                                ,v.[FechaRequerida] PROMISEDATE
+                                ,v.[ServicioSerie]
+                                ,v.[ServicioIdentificador]
+                                ,v.[ServicioPlacas] PLATES
+                                ,v.[ServicioTipoOrden] ORDERTYPE
+                                ,v.[ServicioTipoOperacion] 
+                             FROM VENTA V, ART AR, CTE C
+	                         WHERE MOV = 'SERVICIO' 
+	                         AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR') 
+	                         AND V.SERVICIOARTICULO = AR.ARTICULO
+	                         AND C.CLIENTE = V.CLIENTE
+                            {0}"; 
+            }
         }
 
         public static string GetSummaryStatusDays

@@ -111,44 +111,44 @@ namespace General.DTOs.Classes
             #endregion
 
             #region Orders type
-            OrdersType.Add(new OrderType() { 
-                OrderTypeId = 1,
+            OrdersType.Add(new OrderType() {
+                OrderTypeId = "Publico",
                 Name = "Público"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 2,
+                OrderTypeId = "Garantias",
                 Name = "Garantías"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 3,
+                OrderTypeId = "Seguros",
                 Name = "Seguros"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 4,
+                OrderTypeId = "Previas",
                 Name = "Previas"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 5,
+                OrderTypeId = "Internas",
                 Name = "Internas"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 6,
+                OrderTypeId = "Publico_Garantias",
                 Name = "Público y Garantías"
             });
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = 7,
+                OrderTypeId = "Publico_Seguros",
                 Name = "Público y Seguros"
             });
             #endregion
@@ -283,7 +283,7 @@ namespace General.DTOs.Classes
 
     public class OrderType
     {
-        public int OrderTypeId {get; set;}
+        public string OrderTypeId {get; set;}
         public string Name {get; set;}
         public bool IsSelected { get; set; }
     }

@@ -136,7 +136,7 @@
             <label>Mensaje SMS:</label>
         </div>
         <div class="input">            
-            <textarea id="TxtSms" name="Sms" cols="50" rows="4"><%=C.OrderToSave.Sms %></textarea>
+            <textarea id="TxtSms" name="Sms" cols="50" rows="4" maxlength="<%=SmsLength %>"><%=C.OrderToSave.Sms %></textarea>
             <div class="button active" id="BtnSendMessage"><div>ENVIAR</div></div>
         </div>
     </div>

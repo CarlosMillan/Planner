@@ -46,11 +46,17 @@ namespace PlannerWeb
         public static string GetPage(bool stop)
         {
             JavaScriptSerializer Json = new JavaScriptSerializer();
-            GetValidPage(stop);            
-            ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
-            TotalPages = CurrentPageData.TotalPages + 2; // Por las dos páginas de resumen
-            TotalOrders = CurrentPageData.TotalOrders;
-            PageInfo Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));                       
+            PageInfo Info;
+
+            if (!stop)
+            {
+                GetValidPage(stop);
+                ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
+                TotalPages = CurrentPageData.TotalPages + 2; // Por las dos páginas de resumen
+                TotalOrders = CurrentPageData.TotalOrders;
+                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));
+            }
+            else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, IsNextPageSummary(stop)); 
             return Json.Serialize(Info);
         }
 
@@ -59,13 +65,20 @@ namespace PlannerWeb
         public static string GetSummary(bool stop)
         {
             JavaScriptSerializer Json = new JavaScriptSerializer();
-            string HtmlSummary1;
-            string HtmlSummary2;
-            GetValidPage(stop);
-            SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
-            GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
-            PageInfo Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
-            IsFirstSummary = !IsFirstSummary;
+            PageInfo Info;
+
+            if (!stop)
+            {
+                string HtmlSummary1;
+                string HtmlSummary2;
+                GetValidPage(stop);
+                SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
+                GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
+                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
+                IsFirstSummary = !IsFirstSummary;
+            }
+            else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, null, IsNextPageSummary(stop)); 
+
             return Json.Serialize(Info);
         }
         #endregion
@@ -301,7 +314,7 @@ namespace PlannerWeb
                 switch (ThirdParameter)
                 { 
                     case "Ord":
-                        F.OrdersType.Find(Ord => Ord.OrderTypeId == Int32.Parse(Request[ThirdParameter])).IsSelected = true;
+                        F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
                         break;
 
                     case "Sts":
