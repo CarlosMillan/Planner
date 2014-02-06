@@ -109,7 +109,7 @@ namespace DataAccess
         private string BuildQuery(int pagenumber, int pagination, Filters tobuild)
         {
             StringBuilder Query = new StringBuilder();
-            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, GetFilterQuery(tobuild), GetServiceTypeQuery(tobuild.SelectedOrdersType.OrderTypeId));
+            Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, GetFilterQuery(tobuild), GetServiceTypeQuery(tobuild));
             return Query.ToString();
         }
 
@@ -150,27 +150,31 @@ namespace DataAccess
             return OrderFilter.ToString();
         }
 
-        private string GetServiceTypeQuery(string selectedorder)
+        private string GetServiceTypeQuery(Filters tobuild)
         {
-            string[] SplitFromOrder = selectedorder.Split('_');
             StringBuilder OrderFilter = new StringBuilder();
 
-            if (SplitFromOrder.Length > 1)
+            if (tobuild.SelectedOrdersType != null)
             {
-                if (SplitFromOrder[1].Equals("Garantias"))
+                string[] SplitFromOrder = tobuild.SelectedOrdersType.OrderTypeId.Split('_');
+
+                if (SplitFromOrder.Length > 1)
                 {
-                    OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantias'");
+                    if (!SplitFromOrder[1].Equals("Garantia"))
+                    {
+                        OrderFilter.Append("MOV = 'Servicio'");
+                    }
+                    else
+                    {
+                        OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantia'");
+                    }
                 }
-                else
+                else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Garantia"))
                 {
-                    OrderFilter.Append("MOV = 'Servicio'");
+                    OrderFilter.Append("MOV = 'Servicio Garantia'");
                 }
             }
-            else if (!selectedorder.Equals("Garantias"))
-            {
-                OrderFilter.Append("MOV = 'Servicio'");
-            }
-            else OrderFilter.Append("MOV = 'Servicio Garantias'");
+            else OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantia'");
 
             return OrderFilter.ToString();
         }

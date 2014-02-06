@@ -118,14 +118,20 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Garantias",
-                Name = "Garantías"
+                OrderTypeId = "Garantia",
+                Name = "Garantía"
             });
 
             OrdersType.Add(new OrderType()
             {
                 OrderTypeId = "Seguros",
                 Name = "Seguros"
+            });
+
+            OrdersType.Add(new OrderType()
+            {
+                OrderTypeId = "Flotilla",
+                Name = "Flotilla"
             });
 
             OrdersType.Add(new OrderType()
@@ -142,14 +148,20 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Publico_Garantias",
-                Name = "Público y Garantías"
+                OrderTypeId = "Publico_Garantia",
+                Name = "Público y Garantía"
             });
 
             OrdersType.Add(new OrderType()
             {
                 OrderTypeId = "Publico_Seguros",
                 Name = "Público y Seguros"
+            });
+
+            OrdersType.Add(new OrderType()
+            {
+                OrderTypeId = "Publico_Flotilla",
+                Name = "Público y Flotilla"
             });
             #endregion
 

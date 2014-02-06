@@ -38,7 +38,7 @@ namespace DataAccess.General
                                                                                                 ,v.[ServicioTipoOperacion] 
                              FROM VENTA V, ART AR, CTE C
 	                         WHERE {3} 
-	                         AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR') 
+	                         AND V.ESTATUS = 'PENDIENTE' 
 	                         AND V.SERVICIOARTICULO = AR.ARTICULO
 	                         AND C.CLIENTE = V.CLIENTE
                              {2}) ORDERPAGE
