@@ -166,15 +166,16 @@ namespace DataAccess
                     }
                     else
                     {
-                        OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantia'");
+                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
                     }
                 }
                 else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Garantia"))
                 {
                     OrderFilter.Append("MOV = 'Servicio Garantia'");
                 }
+                else OrderFilter.Append("MOV = 'Servicio'");
             }
-            else OrderFilter.Append("MOV = 'Servicio' OR MOV = 'Servicio Garantia'");
+            else OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
 
             return OrderFilter.ToString();
         }
