@@ -5,6 +5,7 @@ using DataAccess.General;
 using System.Text;
 using System.Data;
 using General.Utils;
+using System.Linq;
 
 namespace DataAccess
 {
@@ -16,7 +17,7 @@ namespace DataAccess
         {
             try
             {
-                ActiveOrders Current = base.GetOrders(BuildQuery(pagenumber, pagination, filters), GetFilterQuery(filters));
+                ActiveOrders Current = base.GetOrders(BuildQuery(pagenumber, pagination, filters), GetFilterQuery(filters), GetServiceTypeQuery(filters));
                 Current.TotalPages = (int)Math.Ceiling((decimal)Current.TotalOrders / (decimal)pagination);
                 return Current;
             }
@@ -116,7 +117,7 @@ namespace DataAccess
         private string GetFilterQuery(Filters tobuild)
         { 
             StringBuilder FiltersString = new StringBuilder();
-            FiltersString.AppendFormat(@"AND SUCURSAL = '{0}'{1}{2}{3}{4}",
+            FiltersString.AppendFormat(@"AND SUCURSAL = '{0}' {1} {2} {3} {4}",
                                          tobuild.SeletedWorkShop.WorkShopId,
                 /*Taller*/tobuild.SelectedAccess.AccessId == 1 ? GetOrderType(tobuild.SelectedOrdersType.OrderTypeId) : string.Empty,
                 /*Asesor*/tobuild.SelectedAccess.AccessId == 2 ? String.Concat("AND V.AGENTE = '", tobuild.SelectedAssesor.AsesorId, "'") : string.Empty,
@@ -133,14 +134,14 @@ namespace DataAccess
 
             if (SplitFromOrder.Length > 1)
             {
-                if (SplitFromOrder[1].Equals("Garantias"))
+                OrderFilter.Append("AND (");
+
+                foreach (string f in SplitFromOrder)
                 {
-                    OrderFilter.AppendFormat("AND V.SERVICIOTIPOORDEN = '{0}'", SplitFromOrder[0]);
+                    OrderFilter.AppendFormat("V.SERVICIOTIPOORDEN = '{0}' OR ", f);
                 }
-                else
-                {
-                    OrderFilter.AppendFormat("AND (V.SERVICIOTIPOORDEN = '{0}' OR V.SERVICIOTIPOORDEN = '{1}')", SplitFromOrder[0], SplitFromOrder[1]);
-                }
+                
+                OrderFilter.Append(")").Replace("OR )",")");
             }
             else if (!selectedorders.Equals("Garantias"))
             {
@@ -160,7 +161,7 @@ namespace DataAccess
 
                 if (SplitFromOrder.Length > 1)
                 {
-                    if (!SplitFromOrder[1].Equals("Garantia"))
+                    if (!SplitFromOrder.Contains("Garantia"))
                     {
                         OrderFilter.Append("MOV = 'Servicio'");
                     }

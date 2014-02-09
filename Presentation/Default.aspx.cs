@@ -47,7 +47,7 @@ namespace PlannerWeb
 
             foreach (OrderType O in C.F.OrdersType)
             {
-                HtmlOrderType.AppendFormat("<option value='{0}'>{1}</option>", O.OrderTypeId, O.Name);
+                HtmlOrderType.AppendFormat("<option {2} value='{0}'>{1}</option>", O.OrderTypeId, O.Name, O.isAll ? "isall='True'" : string.Empty);
             }
 
             foreach (Status S in C.F.Situations)
@@ -85,7 +85,7 @@ namespace PlannerWeb
 
             SearchingUrl.AppendFormat("?Svc={0}&Acc={1}", Request["SlcService"], Request["SlcAccess"]);
 
-            if (!Request["SlcOrder"].Equals("0")) SearchingUrl.AppendFormat("&Ord={0}", Request["SlcOrder"]);
+            if (!Request["SlcOrder"].Equals("0")) SearchingUrl.AppendFormat("&Ord={0}{1}", Request["SlcOrder"], Convert.ToBoolean(Request["IsAll"]) ? "&IsAll=True" : string.Empty);
             else if (!Request["SlcStatus"].Equals("0")) SearchingUrl.AppendFormat("&Sts={0}", HttpContext.Current.Server.UrlEncode(Request["SlcStatus"]));
             else if (!Request["SlcAsesors"].Equals("0")) SearchingUrl.AppendFormat("&Asr={0}", Request["SlcAsesors"]);
             else if (Request["TxtOrder_Client_Plates"] != String.Empty) SearchingUrl.AppendFormat("&Ocp={0}", Request["TxtOrder_Client_Plates"]);

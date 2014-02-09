@@ -23,6 +23,7 @@ namespace PlannerWeb
         private string ThirdParameter;
         private static bool IsFirstSummary;
         public int Pagination;
+        private bool IsAll;
 
         protected void Page_Init(object seder, EventArgs e)
         {            
@@ -30,10 +31,11 @@ namespace PlannerWeb
                Response.Redirect("Default.aspx");
 
             Pagination = Int32.Parse(ConfigurationManager.AppSettings["Pagination"]);
+            IsAll = Convert.ToBoolean(Request["IsAll"]);
             F = new Filters();
             SelectFilters();
             CurrentPage = 0;
-            IsFirstSummary = true;
+            IsFirstSummary = true;            
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -314,7 +316,13 @@ namespace PlannerWeb
                 switch (ThirdParameter)
                 { 
                     case "Ord":
-                        F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
+                        if (IsAll) 
+                        { 
+                            F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals("Todo")).IsSelected = true;
+                            F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals("Todo")).OrderTypeId = Request[ThirdParameter];
+                        }
+                        else F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
+
                         break;
 
                     case "Sts":

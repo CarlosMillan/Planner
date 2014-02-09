@@ -14,6 +14,7 @@
     <%} %>
 </asp:Content>
 <asp:Content ID="DefaultContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+    <input type="hidden" name="IsAll" id="IsAll" value="false" />
     <div id="DvMessages"></div>
 
     <div id="DvLoginContainer">

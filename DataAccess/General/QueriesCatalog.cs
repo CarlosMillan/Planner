@@ -11,8 +11,8 @@ namespace DataAccess.General
             get
             {
                 return @"SELECT COUNT(*) FROM VENTA V, ART AR, CTE C
-                             WHERE MOV = 'SERVICIO'
-                             AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR')
+                             WHERE {1}
+                             AND V.ESTATUS = 'PENDIENTE'
                              AND V.SERVICIOARTICULO = AR.ARTICULO
                              AND C.CLIENTE = V.CLIENTE
                              {0}";

@@ -136,12 +136,6 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Previas",
-                Name = "Previas"
-            });
-
-            OrdersType.Add(new OrderType()
-            {
                 OrderTypeId = "Internas",
                 Name = "Internas"
             });
@@ -162,6 +156,13 @@ namespace General.DTOs.Classes
             {
                 OrderTypeId = "Publico_Flotilla",
                 Name = "Público y Flotilla"
+            });
+
+            OrdersType.Add(new OrderType()
+            {               
+                OrderTypeId  = "Todo",
+                Name = "Todo",
+                isAll = true
             });
             #endregion
 
@@ -289,15 +290,22 @@ namespace General.DTOs.Classes
     public class Access
     {
         public int AccessId { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; }        
         public bool IsSelected { get; set; }
     }
 
     public class OrderType
     {
         public string OrderTypeId {get; set;}
-        public string Name {get; set;}
+        public string Name {get; set;}        
         public bool IsSelected { get; set; }
+        public bool isAll { get; set; }
+
+        public OrderType()
+        {
+            isAll = false;
+        }
+            
     }
 
     public class Status

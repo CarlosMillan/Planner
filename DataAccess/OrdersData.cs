@@ -16,7 +16,7 @@ namespace DataAccess
             {
                 StringBuilder FullQuery = new StringBuilder();
                 FullQuery.AppendFormat(QueriesCatalog.GetOrders, GetFilterQuery(filters));
-                Orders Current = base.GetOrders(FullQuery.ToString(), string.Empty);
+                Orders Current = base.GetOrders(FullQuery.ToString(), string.Empty, string.Empty);
                 return Current;
             }
             catch { throw; }

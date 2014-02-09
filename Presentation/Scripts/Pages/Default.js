@@ -1,17 +1,26 @@
 ﻿Default = {
     Delay: 500,
     AssesorsMatrix: null,
+    OrderTypeOptions: null,
     Initialize: function () {
         Default.HideServiceElements();
         $('#DvMessages').hide();
         Default.AssesorsMatrix = $('#SlcAsesors option[value!="0"]');
         $('#SlcAsesors option[value!="0"]').remove();
+        Default.OrderTypeOptions = $('#SlcOrder option[value!="0"]');
+        $('#SlcOrder option[value!="0"]').remove();
 
         $('#BtnSearch').click(function () {
             Master.PreparePage('Default');        // Page name e.g. Login.aspx -> Login
             Master.SetAction('Search');          // Method in Login.aspx
 
-            if (Default.Validations()) Master.Submit();
+            if (Default.Validations()) {
+
+                if ($('#SlcOrder option:selected').attr('isall') == 'True') $('#IsAll').val(true);
+                else $('#IsAll').val(false);                
+
+                Master.Submit();
+            }
             else $('#DvMessages').show(500).append('Debes seleccionar todos los filtros y/o llenar los campos.');
         });
 
@@ -24,6 +33,22 @@
         $('#SlcAccess').change(function () {
             switch (parseInt(this.value)) {
                 case 1:
+                    $('#SlcOrder option[value!="0"]').remove();
+                    $('#SlcOrder').append(Default.OrderTypeOptions);
+
+                    if ($('#SlcService').val() == 1) {
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Garantia_Flotila_Interno');
+                        $('#SlcOrder').find('option[value="Seguros"], option[value="Publico_Seguros"]').remove();
+                    }
+                    else if ($('#SlcService').val() == 2) {
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Flotila_Interno');
+                        $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Seguros"], option[value="Publico_Seguros"]').remove();
+                    }
+                    else if ($('#SlcService').val() == 5) {
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Seguros_Interno');
+                        $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Publico_Flotilla"], option[value="Flotilla"]').remove();
+                    }
+
                     $('#SlcOrder').closest('div.row').show(Default.Delay);
                     Default.HideAccessElements('SlcOrder');
                     break;
