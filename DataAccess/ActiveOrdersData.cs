@@ -164,6 +164,10 @@ namespace DataAccess
                     if (!SplitFromOrder.Contains("Garantia"))
                     {
                         OrderFilter.Append("MOV = 'Servicio'");
+                    }                    
+                    else if (SplitFromOrder.Contains("Seguro"))
+                    {
+                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia' OR MOV = 'Servicio HYP')");
                     }
                     else
                     {
@@ -173,6 +177,10 @@ namespace DataAccess
                 else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Garantia"))
                 {
                     OrderFilter.Append("MOV = 'Servicio Garantia'");
+                }
+                else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Seguro"))
+                {
+                    OrderFilter.Append("MOV = 'Servicio HYP'");
                 }
                 else OrderFilter.Append("MOV = 'Servicio'");
             }

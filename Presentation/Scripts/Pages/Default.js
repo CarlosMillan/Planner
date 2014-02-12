@@ -38,14 +38,14 @@
 
                     if ($('#SlcService').val() == 1) {
                         $('#SlcOrder').find('option[isall="True"]').val('Publico_Garantia_Flotila_Interno');
-                        $('#SlcOrder').find('option[value="Seguros"], option[value="Publico_Seguros"]').remove();
+                        $('#SlcOrder').find('option[value="Seguro"], option[value="Publico_Seguro"]').remove();
                     }
                     else if ($('#SlcService').val() == 2) {
                         $('#SlcOrder').find('option[isall="True"]').val('Publico_Flotila_Interno');
-                        $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Seguros"], option[value="Publico_Seguros"]').remove();
+                        $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Seguro"], option[value="Publico_Seguro"]').remove();
                     }
                     else if ($('#SlcService').val() == 5) {
-                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Seguros_Interno');
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Seguro_Interno');
                         $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Publico_Flotilla"], option[value="Flotilla"]').remove();
                     }
 

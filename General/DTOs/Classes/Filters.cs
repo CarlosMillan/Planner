@@ -124,8 +124,8 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Seguros",
-                Name = "Seguros"
+                OrderTypeId = "Seguro",
+                Name = "Seguro"
             });
 
             OrdersType.Add(new OrderType()
@@ -136,8 +136,8 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Internas",
-                Name = "Internas"
+                OrderTypeId = "Interno",
+                Name = "Interno"
             });
 
             OrdersType.Add(new OrderType()
@@ -148,8 +148,8 @@ namespace General.DTOs.Classes
 
             OrdersType.Add(new OrderType()
             {
-                OrderTypeId = "Publico_Seguros",
-                Name = "Público y Seguros"
+                OrderTypeId = "Publico_Seguro",
+                Name = "Público y Seguro"
             });
 
             OrdersType.Add(new OrderType()
