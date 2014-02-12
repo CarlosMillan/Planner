@@ -111,6 +111,8 @@ namespace DataAccess
         {
             StringBuilder Query = new StringBuilder();
             Query.AppendFormat(QueriesCatalog.GetActiveOrdersPage, pagenumber, pagination, GetFilterQuery(tobuild), GetServiceTypeQuery(tobuild));
+            /*DEJAR TEMPORALEMNTE*/
+            //Query.Append(QueriesCatalog.GetActiveOrdersPage);
             return Query.ToString();
         }
 

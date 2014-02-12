@@ -16,6 +16,9 @@ namespace DataAccess.General
                              AND V.SERVICIOARTICULO = AR.ARTICULO
                              AND C.CLIENTE = V.CLIENTE
                              {0}";
+
+                /*DEJAR TEMPORALEMNTE*/
+                //return @"select count(*) from orders";
             }
         }
 
@@ -43,6 +46,19 @@ namespace DataAccess.General
 	                         AND C.CLIENTE = V.CLIENTE
                              {2}) ORDERPAGE
                         WHERE ORDERPAGE.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})";
+
+/*DEJAR TEMPORALEMNTE*/
+                //return @"select [OrderType] ORDERTYPE
+//                        ,[OrderNumber] ORDERNUMBER
+//                        ,[OrderDate] ORDERDATE
+//                        ,[Client] CLIENT
+//                        ,[Vehicle] VEHICLE
+//                        ,[Plates] PLATES
+//                        ,[PromiseDate] PROMISEDATE
+//                        ,[Status] SITUATION
+//                        ,[CellPhone] CELLPHONE
+//                        ,[Asessor] ASESSOR
+//                        from orders";
             }
         }
 
@@ -63,7 +79,7 @@ namespace DataAccess.General
                                 ,v.[ServicioTipoOrden] ORDERTYPE
                                 ,v.[ServicioTipoOperacion] 
                              FROM VENTA V, ART AR, CTE C
-	                         WHERE MOV = 'SERVICIO' 
+	                         WHERE {1}
 	                         AND (V.ESTATUS = 'PENDIENTE' OR V.ESTATUS = 'SINAFECTAR') 
 	                         AND V.SERVICIOARTICULO = AR.ARTICULO
 	                         AND C.CLIENTE = V.CLIENTE

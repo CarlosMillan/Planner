@@ -24,18 +24,23 @@ namespace PlannerWeb
         private static bool IsFirstSummary;
         public int Pagination;
         private bool IsAll;
+        private static string Svc;
+        public StringBuilder AsessorsHtml;
 
         protected void Page_Init(object seder, EventArgs e)
-        {            
-            if(Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
+        {
+            if (Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
                Response.Redirect("Default.aspx");
 
             Pagination = Int32.Parse(ConfigurationManager.AppSettings["Pagination"]);
             IsAll = Convert.ToBoolean(Request["IsAll"]);
+            Svc = Request["Svc"];
+            AsessorsHtml = new StringBuilder();
             F = new Filters();
             SelectFilters();
             CurrentPage = 0;
-            IsFirstSummary = true;            
+            IsFirstSummary = true;
+            GetHtmlAssesors();
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -74,9 +79,9 @@ namespace PlannerWeb
                 string HtmlSummary1;
                 string HtmlSummary2;
                 GetValidPage(stop);
-                SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
-                GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
-                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
+                //SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
+                //GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
+                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, null, IsNextPageSummary(stop));
                 IsFirstSummary = !IsFirstSummary;
             }
             else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, null, IsNextPageSummary(stop)); 
@@ -102,11 +107,7 @@ namespace PlannerWeb
                                         <td class='highlight'>{7}</td>
                                         <td>{8}</td>
                                         <td class='{9}'>{10}</td>
-                                        <td class='selected'></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class='selected'></td>
-                                        <td></td>
+                                        {11}
                                      </tr>",
                                      from.Orders.IndexOf(O) % 2 == 0 ? "pair" : "odd",
                                      O.OrderType,
@@ -118,7 +119,8 @@ namespace PlannerWeb
                                      O.StayDays,
                                      O.Status,
                                      O.DeliveryDays < 0 ? "badhighlight" : "highlight",
-                                     O.DeliveryDays);
+                                     O.DeliveryDays,
+                                     MatchColumn(O.Asessor));
             }
 
             return Table.ToString();
@@ -342,6 +344,41 @@ namespace PlannerWeb
             {
                 Response.Redirect("Default.aspx");
             }
+        }
+
+        private void GetHtmlAssesors()
+        {
+            switch (Svc)
+            { 
+                case "1":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 1))
+                    {
+                        AsessorsHtml.AppendFormat("<th style='padding-left:0;padding-right:0;width:65px;'>{0}</th>", A.AsesorId);                        
+                    }
+                    break;
+
+                // Poner los CASE para los demas talleres
+            }
+        }
+
+        private static string MatchColumn(string assesorid)
+        { 
+            StringBuilder Match = new StringBuilder();
+
+            switch (Svc)
+            {
+                case "1":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 1))
+                    {
+                        if (A.AsesorId.Equals(assesorid.Trim())) Match.Append("<td class='selected'></td>");
+                        else Match.Append("<td></td>");
+                    }
+                    break;
+
+                // Poner los CASE para los demas talleres
+            }
+
+            return Match.ToString();
         }
         #endregion
     }

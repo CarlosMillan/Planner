@@ -44,11 +44,7 @@
                 <table class="nested">
                     <thead>
                         <tr>
-                            <th style="padding-left:0;padding-right:0;width:65px;">GALJU0</th>
-                            <th style="padding-left:0;padding-right:0;width:65px;">GARCMA</th>
-                            <th style="padding-left:0;padding-right:0;width:65px;">HERNAJ</th>
-                            <th style="padding-left:0;padding-right:0;width:65px;">LORG9</th>
-                            <th style="padding-left:0;padding-right:0;width:65px;">REYAL8</th>
+                           <%=AsessorsHtml%>
                         </tr>  
                     </thead>                  
                 </table>
