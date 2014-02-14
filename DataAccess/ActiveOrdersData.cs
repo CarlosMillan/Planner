@@ -24,7 +24,7 @@ namespace DataAccess
             catch { throw; }
         }
 
-        public SummaryOrders GetSummaryPage(bool first)
+        public SummaryOrders GetSummaryPage(bool first, Filters filters)
         {
             StringBuilder FullQuery1 = new StringBuilder();
             StringBuilder FullQuery2 = new StringBuilder();
@@ -33,8 +33,8 @@ namespace DataAccess
 
             if (first)
             {
-                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryStatusDays);
-                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryAssesorDay);
+                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryStatusDays);//, GetFilterQuery(filters), GetServiceTypeQuery(filters));
+                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryAssesorDay);//, GetFilterQuery(filters), GetServiceTypeQuery(filters));
                 SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());                
 
                 foreach(DataRow S in SummaryTable.Rows)
@@ -49,9 +49,24 @@ namespace DataAccess
                         Range6 = Int32.Parse(S["Mayor4_8"].ToString()),
                         Range7 = Int32.Parse(S["Mayor9_20"].ToString()),
                         Range8 = Int32.Parse(S["Mayor21_30"].ToString()),
-                        Range9 = Int32.Parse(S["Mayor31"].ToString()),                        
+                        Range9 = Int32.Parse(S["Mayor31"].ToString())                        
                     });
                 }
+
+                //Totales
+                Summary.Sd.Add(new Status_Days() {
+                    Status = "TOTAL",
+                    Range1 = Summary.Sd.Sum(x => x.Range1),
+                    Range2 = Summary.Sd.Sum(x => x.Range2),
+                    Range3 = Summary.Sd.Sum(x => x.Range3),
+                    Range4 = Summary.Sd.Sum(x => x.Range4),
+                    Range5 = Summary.Sd.Sum(x => x.Range5),
+                    Range6 = Summary.Sd.Sum(x => x.Range6),
+                    Range7 = Summary.Sd.Sum(x => x.Range7),
+                    Range8 = Summary.Sd.Sum(x => x.Range8),
+                    Range9 = Summary.Sd.Sum(x => x.Range9),
+                    Total = Summary.Sd.Sum(x => x.Total)
+                });
 
                 SummaryTable = DataBaseManager.GetTable(FullQuery2.ToString());
 
@@ -59,48 +74,89 @@ namespace DataAccess
                 {
                     Summary.Ad.Add(new Assesor_Days()
                     {
-                        Assesor = S["ASSESOR"].ToString(),
-                        Range1 = Int32.Parse(S["RANGE1"].ToString()),
-                        Range2 = Int32.Parse(S["RANGE2"].ToString()),
-                        Range3 = Int32.Parse(S["RANGE3"].ToString()),
-                        Range4 = Int32.Parse(S["RANGE4"].ToString()),
-                        Range5 = Int32.Parse(S["RANGE5"].ToString()),
-                        Range6 = Int32.Parse(S["RANGE6"].ToString()),                        
-                        Range8 = Int32.Parse(S["RANGE8"].ToString()),
-                        Range9 = Int32.Parse(S["RANGE9"].ToString()),
-                        Total = Int32.Parse(S["TOTAL"].ToString())
+                        Assesor = S["ASESSOR"].ToString(),
+                        Range1 = Int32.Parse(S["Menor6"].ToString()),
+                        Range2 = Int32.Parse(S["Menor3_5"].ToString()),
+                        Range3 = Int32.Parse(S["Menor2_1"].ToString()),
+                        Range4 = Int32.Parse(S["Hoy"].ToString()),
+                        Range5 = Int32.Parse(S["Mayor1_3"].ToString()),
+                        Range6 = Int32.Parse(S["Mayor4_8"].ToString()),
+                        Range7 = Int32.Parse(S["Mayor9_20"].ToString()),
+                        Range8 = Int32.Parse(S["Mayor21_30"].ToString()),
+                        Range9 = Int32.Parse(S["Mayor31"].ToString())
                     });
                 }
+
+                //Totales
+                Summary.Ad.Add(new Assesor_Days()
+                {
+                    Assesor = "TOTAL",
+                    Range1 = Summary.Ad.Sum(x => x.Range1),
+                    Range2 = Summary.Ad.Sum(x => x.Range2),
+                    Range3 = Summary.Ad.Sum(x => x.Range3),
+                    Range4 = Summary.Ad.Sum(x => x.Range4),
+                    Range5 = Summary.Ad.Sum(x => x.Range5),
+                    Range6 = Summary.Ad.Sum(x => x.Range6),
+                    Range7 = Summary.Ad.Sum(x => x.Range7),
+                    Range8 = Summary.Ad.Sum(x => x.Range8),
+                    Range9 = Summary.Ad.Sum(x => x.Range9)                    
+                });
             }
             else 
             {
-                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryAssesorStatus);
-                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryStatusOrder);
-                SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());
+                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryAssesorStatus, GetCounterAsesorQuery(filters), GetCaseAsesorQuery(filters), GetServiceTypeQuery(filters), GetFilterQuery(filters));
+                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryStatusOrder, GetCounterOrderQuery(filters), GetCaseOrderQuery(filters), GetServiceTypeQuery(filters), GetFilterQuery(filters));
+                SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());                
 
                 foreach (DataRow S in SummaryTable.Rows)
                 {
-                    Summary.As.Add(new Assesor_Status()
+                    Assesor_Status Asesr = new Assesor_Status();
+                    Asesr.Status = S["Situacion"].ToString();
+
+                    foreach (var Asr in filters.Assesors.FindAll(A => A.WorkShop == filters.SeletedWorkShop.WorkShopId))
                     {
-                        Status = S["STATUS"].ToString(),
-                        AssesorName1 = S["AssesorName1"].ToString(),
-                        AssesorName2 = S["AssesorName2"].ToString(),
-                        AssesorName3 = S["AssesorName3"].ToString(),
-                        AssesorName4 = S["AssesorName4"].ToString(),
-                        AssesorName5 = S["AssesorName5"].ToString()                        
-                    });
+                        Asesr.Values.Add(Convert.ToInt32(S[Asr.AsesorId]));
+                    }
+
+                    Summary.As.Add(Asesr);
                 }
+
+                //Totales
+                Assesor_Status as1 = new Assesor_Status();
+                as1.Status = "TOTAL";
+
+                for (int index = 0; index < filters.Assesors.FindAll(A => A.WorkShop == filters.SeletedWorkShop.WorkShopId).Count; index++ )
+                {
+                    as1.Values.Add(Summary.As.Sum(v => v.Values[index]));
+                }
+
+                Summary.As.Add(as1);
 
                 SummaryTable = DataBaseManager.GetTable(FullQuery2.ToString());
 
                 foreach (DataRow S in SummaryTable.Rows)
                 {
-                    Summary.So.Add(new Status_Order()
+                    Status_Order Ords = new Status_Order();
+                    Ords.Status = S["Situacion"].ToString();
+
+                    foreach (var O in filters.OrdersType.FindAll(O => !O.OrderTypeId.Contains("_")))
                     {
-                        Status = S["STATUS"].ToString(),
-                        OrderName1 = S["ORDERNAME"].ToString()
-                    });
+                        Ords.Values.Add(Convert.ToInt32(S[O.OrderTypeId]));
+                    }
+
+                    Summary.So.Add(Ords);
                 }
+
+                //Totales
+                Status_Order or1 = new Status_Order();
+                or1.Status = "TOTAL";
+
+                for (int index = 0; index < filters.OrdersType.FindAll(O => !O.OrderTypeId.Contains("_")).Count; index++)
+                {
+                    or1.Values.Add(Summary.So.Sum(v => v.Values[index]));
+                }
+
+                Summary.So.Add(or1);
             }
 
             return Summary;
@@ -188,6 +244,66 @@ namespace DataAccess
             else OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
 
             return OrderFilter.ToString();
+        }
+
+        private string GetCounterAsesorQuery(Filters tobuild) 
+        {
+            StringBuilder Counts = new StringBuilder();
+            int index = 1;
+
+            foreach (var As in tobuild.Assesors.FindAll(A => A.WorkShop == tobuild.SeletedWorkShop.WorkShopId))
+            {                
+                Counts.AppendFormat("COUNT(case A{0} when 1 then A{0} else null end) {1},", index, As.AsesorId);
+                index++;
+            }
+
+            Counts.Remove(Counts.Length - 1, 1);
+            return Counts.ToString();
+        }
+
+        private string GetCaseAsesorQuery(Filters tobuild)
+        {            
+            StringBuilder Cases = new StringBuilder();            
+            int index = 1;
+
+            foreach (var As in tobuild.Assesors.FindAll(A => A.WorkShop == tobuild.SeletedWorkShop.WorkShopId))
+            {
+                Cases.AppendFormat("case v.Agente when '{1}' then 1 else 0 end A{0},", index, As.AsesorId);
+                index++;
+            }
+
+            Cases.Remove(Cases.Length - 1, 1);
+            return Cases.ToString();
+        }
+
+        private string GetCounterOrderQuery(Filters tobuild)
+        {
+            StringBuilder Counts = new StringBuilder();
+            int index = 1;
+
+            foreach (var Or in tobuild.OrdersType.FindAll(O => !O.OrderTypeId.Contains("_")))
+            {
+                Counts.AppendFormat("COUNT(case A{0} when 1 then A{0} else null end) {1},", index, Or.OrderTypeId);
+                index++;
+            }
+
+            Counts.Remove(Counts.Length - 1, 1);
+            return Counts.ToString();
+        }
+
+        private string GetCaseOrderQuery(Filters tobuild)
+        {
+            StringBuilder Cases = new StringBuilder();
+            int index = 1;
+
+            foreach (var Or in tobuild.OrdersType.FindAll(O => !O.OrderTypeId.Contains("_")))
+            {
+                Cases.AppendFormat("case v.[ServicioTipoOrden] when '{1}' then 1 else 0 end A{0},", index, Or.OrderTypeId);
+                index++;
+            }
+
+            Cases.Remove(Cases.Length - 1, 1);
+            return Cases.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace General.DTOs.Classes
 {
@@ -41,7 +42,16 @@ namespace General.DTOs.Classes
         public int Range7 { get; set; }
         public int Range8 { get; set; }
         public int Range9 { get; set; }
-        public int Total { get; set; }
+        private int _total;
+
+        public int Total
+        {
+            get {
+                _total =  Range1 + Range2 + Range3 + Range4 + Range5 + Range6 + Range7 + Range8 + Range9;
+                return _total;
+            }
+            set { _total = value; }
+        }
     }
 
     public class Assesor_Days
@@ -56,22 +66,46 @@ namespace General.DTOs.Classes
         public int Range7 { get; set; }
         public int Range8 { get; set; }
         public int Range9 { get; set; }
-        public int Total { get; set; }
+        private int _total;
+
+        public int Total
+        {
+            get
+            {
+                _total = Range1 + Range2 + Range3 + Range4 + Range5 + Range6 + Range7 + Range8 + Range9;
+                return _total;
+            }
+            set { _total = value; }
+        }
     }
 
     public class Assesor_Status
     {
         public string Status { get; set; }
-        public string AssesorName1 { get; set; }
-        public string AssesorName2 { get; set; }
-        public string AssesorName3 { get; set; }
-        public string AssesorName4 { get; set; }
-        public string AssesorName5 { get; set; }
+        public List<int> Values { get; set; }
+        public int Total 
+        {
+            get { return Values.Sum(); }
+        }
+
+        public Assesor_Status()
+        {
+            Values = new List<int>();
+        }
     }
 
     public class Status_Order
     {
         public string Status { get; set; }
-        public string OrderName1 { get; set; }
+        public List<int> Values { get; set; }
+        public int Total 
+        {
+            get { return Values.Sum(); }
+        }
+
+        public Status_Order()
+        {
+            Values = new List<int>();
+        }
     }
 }

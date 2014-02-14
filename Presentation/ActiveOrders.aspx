@@ -65,16 +65,16 @@
             <thead>
                 <tr>
                     <th class="odd">ESTATUS</th>
-                    <th class="odd underline">MENOR A -6 DÍAS</th>
-                    <th class="odd underline">DE -5 A -3 DÍAS</th>
-                    <th class="odd underline">DE -2 A -1 DÍAS</th>
-                    <th class="odd">por st c5</th>
-                    <th class="odd">por st c6</th>
-                    <th class="odd">por st c7</th>
-                    <th class="odd">por st c8</th>
-                    <th class="odd">por st c9</th>
-                    <th class="odd">por st c10</th>
-                    <th class="odd">TOTAL</th>            
+                    <th class="odd underline data">MENOR A -6 DÍAS</th>
+                    <th class="odd underline data">DE -5 A -3 DÍAS</th>
+                    <th class="odd underline data">DE -2 A -1 DÍAS</th>
+                    <th class="odd data">0 Días</th>
+                    <th class="odd data">DE 1 A 3 DÍAS</th>
+                    <th class="odd data">DE 4 A 8 DÍAS</th>
+                    <th class="odd data">DE 9 A 20 DÍAS</th>
+                    <th class="odd data">DE 21 A 30 DÍAS</th>
+                    <th class="odd data">MÁS DE 31 DÍAS</th>
+                    <th class="odd data">TOTAL</th>            
                 </tr>
             </thead>
 
@@ -90,16 +90,16 @@
             <thead>
                 <tr>
                     <th class="odd">ASESOR</th>
-                    <th class="odd underline">Por asc c2</th>
-                    <th class="odd underline">Por asc c3</th>
-                    <th class="odd underline">Por asc c4</th>
-                    <th class="odd">Por asc c5</th>
-                    <th class="odd">Por asc c6</th>
-                    <th class="odd">Por asc c7</th>
-                    <th class="odd">Por asc c8</th>
-                    <th class="odd">Por asc c9</th>
-                    <th class="odd">Por asc c10</th>
-                    <th class="odd">TOTAL</th>
+                    <th class="odd underline data">MENOR A -6 DÍAS</th>
+                    <th class="odd underline data">DE -5 A -3 DÍAS</th>
+                    <th class="odd underline data">DE -2 A -1 DÍAS</th>
+                    <th class="odd data">0 Días</th>
+                    <th class="odd data">DE 1 A 3 DÍAS</th>
+                    <th class="odd data">DE 4 A 8 DÍAS</th>
+                    <th class="odd data">DE 9 A 20 DÍAS</th>
+                    <th class="odd data">DE 21 A 30 DÍAS</th>
+                    <th class="odd data">MÁS DE 31 DÍAS</th>
+                    <th class="odd data">TOTAL</th>         
                 </tr>
             </thead>
 
@@ -116,12 +116,7 @@
             <thead>
                 <tr>
                     <th class="odd">ESTATUS</th>
-                    <th class="odd">ASDF</th>
-                    <th class="odd">FHFH</th>
-                    <th class="odd">FGDFG</th>
-                    <th class="odd">DGDFGH</th>
-                    <th class="odd">FGSFG</th>
-                    <th class="odd">TOTAL</th>
+                    <%=AsesorsHeadersHtml%>
                 </tr>
             </thead>
 
@@ -139,7 +134,7 @@
             <thead>
                 <tr>
                     <th class="odd">ESTATUS</th>
-                    <th class="odd">ASDF</th>
+                    <%=OrderTypeHeadersHtml%>
                 </tr>
             </thead>
 

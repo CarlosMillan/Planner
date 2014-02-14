@@ -26,6 +26,8 @@ namespace PlannerWeb
         private bool IsAll;
         private static string Svc;
         public StringBuilder AsessorsHtml;
+        public StringBuilder AsesorsHeadersHtml;
+        public StringBuilder OrderTypeHeadersHtml;
 
         protected void Page_Init(object seder, EventArgs e)
         {
@@ -36,11 +38,15 @@ namespace PlannerWeb
             IsAll = Convert.ToBoolean(Request["IsAll"]);
             Svc = Request["Svc"];
             AsessorsHtml = new StringBuilder();
+            AsesorsHeadersHtml = new StringBuilder();
+            OrderTypeHeadersHtml = new StringBuilder();
             F = new Filters();
             SelectFilters();
             CurrentPage = 0;
             IsFirstSummary = true;
             GetHtmlAssesors();
+            GetAsesorsHeaders();
+            GetOrdersHeaders();
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -79,7 +85,7 @@ namespace PlannerWeb
                 string HtmlSummary1;
                 string HtmlSummary2;
                 GetValidPage(stop);
-                SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
+                SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary, F);
                 GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
                 Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
                 IsFirstSummary = !IsFirstSummary;
@@ -212,22 +218,14 @@ namespace PlannerWeb
                     foreach (var S in from.As)
                     {
                         Table.AppendFormat(@"<tr class='{0}'>
-                                                <td class'rowtitle'>{1}</td>
-                                                <td>{2}</td>
+                                                <td class='rowtitle'>{1}</td>
+                                                {2}
                                                 <td>{3}</td>
-                                                <td>{4}</td>
-                                                <td>{5}</td>
-                                                <td>{6}</td>
-                                                <td>{7}</td>
                                             </tr>",
                                             from.As.IndexOf(S) % 2 == 0 ? "pair" : "odd",
                                             S.Status,
-                                            S.AssesorName1,
-                                            S.AssesorName2,
-                                            S.AssesorName3,
-                                            S.AssesorName4,
-                                            S.AssesorName5,
-                                            "34");
+                                            GetValuesFromAsesor(S),
+                                            S.Total);
                     }
 
                     s1 = Table.ToString();
@@ -241,11 +239,13 @@ namespace PlannerWeb
                     {
                         Table.AppendFormat(@"<tr class='{0}'>
                                                 <td class='rowtitle'>{1}</td>
-                                                <td>{2}</td>
+                                                {2}
+                                                <td>{3}</td>
                                             </tr>",
                                             from.So.IndexOf(S) % 2 == 0 ? "pair" : "odd",
                                             S.Status,
-                                            S.OrderName1);
+                                            GetValuesFromOrder(S),
+                                            S.Total);
                     }
 
                     s2 = Table.ToString();
@@ -379,6 +379,50 @@ namespace PlannerWeb
             }
 
             return Match.ToString();
+        }
+
+        private static string GetValuesFromAsesor(Assesor_Status asr)
+        {
+            StringBuilder tds = new StringBuilder();
+
+            foreach (var a in asr.Values)
+            {
+                tds.AppendFormat("<td>{0}</td>", a);
+            }
+
+            return tds.ToString();
+        }
+
+        private static string GetValuesFromOrder(Status_Order ord)
+        {
+            StringBuilder tds = new StringBuilder();
+
+            foreach (var a in ord.Values)
+            {
+                tds.AppendFormat("<td>{0}</td>", a);
+            }
+
+            return tds.ToString();
+        }
+
+        private void GetAsesorsHeaders()
+        {             
+            foreach (var a in F.Assesors.FindAll(As => As.WorkShop == F.SeletedWorkShop.WorkShopId))
+            {
+                AsesorsHeadersHtml.AppendFormat("<th class='odd'>{0}</th>", a.AsesorId);
+            }
+
+            AsesorsHeadersHtml.Append("<th class='odd'>TOTAL</th>");
+        }
+
+        private void GetOrdersHeaders()
+        {
+            foreach (var o in F.OrdersType.FindAll(Or => !Or.OrderTypeId.Contains("_")))
+            {
+                OrderTypeHeadersHtml.AppendFormat("<th class='odd'>{0}</th>", o.OrderTypeId);
+            }
+
+            OrderTypeHeadersHtml.Append("<th class='odd'>TOTAL</th>");
         }
         #endregion
     }

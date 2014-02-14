@@ -14,9 +14,9 @@ namespace Business.Controllers
             return new ActiveOrdersData().GetOrdersPage(pagenumber, pagination, filters);
         }
 
-        public static SummaryOrders GetSummaryOrders(bool first)
+        public static SummaryOrders GetSummaryOrders(bool first, Filters filters)
         {
-            return new ActiveOrdersData().GetSummaryPage(first);
+            return new ActiveOrdersData().GetSummaryPage(first, filters);
         }
     }
 }

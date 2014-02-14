@@ -25,3 +25,8 @@ div#DvTable
 {
    height:135pX; 
 }
+
+th.data
+{
+    width: 70px;
+}

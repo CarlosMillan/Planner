@@ -21,8 +21,7 @@ namespace DataAccess.Bases
             OrdersType Result = new OrdersType();
 
             try
-            {
-                string hh = new StringBuilder().AppendFormat(QueriesCatalog.GetTotalOrdres, filters, service).ToString();
+            {                
                 DataTable Orders = DataBaseManager.GetTable(query);
                 Result.TotalOrders = (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalOrdres, filters, service).ToString());
                 /*DEJAR TEMPORALEMNTE*/
