@@ -18,6 +18,8 @@ namespace PlannerWeb
         public string HtmlTable;
         private static Filters F;
         private string ThirdParameter;
+        private bool IsAll;
+        private static string Svc;
 
         protected void Page_Init(object sender, EventArgs e) 
         {
@@ -26,6 +28,8 @@ namespace PlannerWeb
                 if (Request["Acc"] == null || Request["Svc"] == null || !ThirdParameterIsValid())
                     Response.Redirect("Default.aspx");
 
+                IsAll = Convert.ToBoolean(Request["IsAll"]);                
+                Svc = Request["Svc"];
                 F = new Filters();
                 SelectFilters();
             }
@@ -133,7 +137,13 @@ namespace PlannerWeb
                 switch (ThirdParameter)
                 {
                     case "Ord":
-                        F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
+                        if (IsAll)
+                        {
+                            F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals("Todo")).IsSelected = true;
+                            F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals("Todo")).OrderTypeId = Request[ThirdParameter];
+                        }
+                        else F.OrdersType.Find(Ord => Ord.OrderTypeId.Equals(Request[ThirdParameter])).IsSelected = true;
+
                         break;
 
                     case "Sts":

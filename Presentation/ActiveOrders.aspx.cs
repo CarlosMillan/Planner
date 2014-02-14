@@ -79,9 +79,9 @@ namespace PlannerWeb
                 string HtmlSummary1;
                 string HtmlSummary2;
                 GetValidPage(stop);
-                //SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
-                //GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
-                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, null, IsNextPageSummary(stop));
+                SummaryOrders Summary = ActiveOrdersController.GetSummaryOrders(IsFirstSummary);
+                GetHtmlTable(Summary, out HtmlSummary1, out HtmlSummary2, IsFirstSummary);
+                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, HtmlSummary1, HtmlSummary2, IsNextPageSummary(stop));
                 IsFirstSummary = !IsFirstSummary;
             }
             else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, null, IsNextPageSummary(stop)); 

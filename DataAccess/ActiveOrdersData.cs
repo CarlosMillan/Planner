@@ -35,22 +35,21 @@ namespace DataAccess
             {
                 FullQuery1.AppendFormat(QueriesCatalog.GetSummaryStatusDays);
                 FullQuery2.AppendFormat(QueriesCatalog.GetSummaryAssesorDay);
-                SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());
+                SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());                
 
                 foreach(DataRow S in SummaryTable.Rows)
                 {
                     Summary.Sd.Add(new Status_Days() { 
                         Status = S["STATUS"].ToString(),
-                        Range1 = Int32.Parse(S["RANGE1"].ToString()),
-                        Range2 = Int32.Parse(S["RANGE2"].ToString()),
-                        Range3 = Int32.Parse(S["RANGE3"].ToString()),
-                        Range4 = Int32.Parse(S["RANGE4"].ToString()),
-                        Range5 = Int32.Parse(S["RANGE5"].ToString()),
-                        Range6 = Int32.Parse(S["RANGE6"].ToString()),
-                        Range7 = Int32.Parse(S["RANGE7"].ToString()),
-                        Range8 = Int32.Parse(S["RANGE8"].ToString()),
-                        Range9 = Int32.Parse(S["RANGE9"].ToString()),
-                        Total = Int32.Parse(S["TOTAL"].ToString())
+                        Range1 = Int32.Parse(S["Menor6"].ToString()),
+                        Range2 = Int32.Parse(S["Menor3_5"].ToString()),
+                        Range3 = Int32.Parse(S["Menor2_1"].ToString()),
+                        Range4 = Int32.Parse(S["Hoy"].ToString()),
+                        Range5 = Int32.Parse(S["Mayor1_3"].ToString()),
+                        Range6 = Int32.Parse(S["Mayor4_8"].ToString()),
+                        Range7 = Int32.Parse(S["Mayor9_20"].ToString()),
+                        Range8 = Int32.Parse(S["Mayor21_30"].ToString()),
+                        Range9 = Int32.Parse(S["Mayor31"].ToString()),                        
                     });
                 }
 
