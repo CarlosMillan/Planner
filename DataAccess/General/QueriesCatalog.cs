@@ -18,7 +18,7 @@ namespace DataAccess.General
                              {0}";
 
                 /*DEJAR TEMPORALEMNTE*/
-                //return @"select count(*) from orders";
+                //return @"select count(*) from orders v";
             }
         }
 
@@ -48,17 +48,17 @@ namespace DataAccess.General
                         WHERE ORDERPAGE.ROWNUM BETWEEN (({0}*{1})-{1}) + 1 AND ({0}*{1})";
 
 /*DEJAR TEMPORALEMNTE*/
-//                return @"select [OrderType] ORDERTYPE
+//                return @"select [SERVICIOTIPOORDEN] ORDERTYPE
 //                        ,[OrderNumber] ORDERNUMBER
 //                        ,[OrderDate] ORDERDATE
 //                        ,[Client] CLIENT
 //                        ,[Vehicle] VEHICLE
 //                        ,[Plates] PLATES
 //                        ,[PromiseDate] PROMISEDATE
-//                        ,[Status] SITUATION
+//                        ,[Situacion] SITUATION
 //                        ,[CellPhone] CELLPHONE
-//                        ,[Asessor] ASESSOR
-//                        from orders";
+//                        ,[Agente] ASESSOR
+//                        from orders v";
             }
         }
 
@@ -116,7 +116,7 @@ namespace DataAccess.General
                         group by [Situacion]";
 
 //TEMPORAL
-//                return @"select [Status],
+//                return @"select [Situacion],
 //	                        COUNT(case Menor6 when 1 then Menor6 else null end) Menor6,
 //	                        COUNT(case Menor3_5 when 1 then Menor3_5 else null end) Menor3_5,
 //	                        COUNT(case Menor2_1 when 1 then Menor2_1 else null end) Menor2_1,
@@ -126,18 +126,18 @@ namespace DataAccess.General
 //	                        COUNT(case Mayor9_20 when 1 then Mayor9_20 else null end) Mayor9_20,
 //	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
 //	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31	
-//                        from (select [Status],
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -6 then 1 else 0 end Menor6,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -3 and datediff(DD, getDate(), [PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -1 and datediff(DD, getDate(), [PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
-//	                        case when datediff(DD, getdate(), Promisedate) = 0 then 1 else 0 end Hoy,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 1 and datediff(DD, getDate(), [PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 4 and datediff(DD, getDate(), [PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 9 and datediff(DD, getDate(), [PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 21 and datediff(DD, getDate(), [PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 31 then 1 else 0 end Mayor31	
-//                        from orders) summary
-//                        group by [Status]";
+//                        from (select [Situacion],
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -6 then 1 else 0 end Menor6,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -3 and datediff(DD, getDate(), v.[PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -1 and datediff(DD, getDate(), v.[PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
+//	                        case when datediff(DD, getdate(), v.Promisedate) = 0 then 1 else 0 end Hoy,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 1 and datediff(DD, getDate(), v.[PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 4 and datediff(DD, getDate(), v.[PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 9 and datediff(DD, getDate(), v.[PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 21 and datediff(DD, getDate(), v.[PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
+//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 31 then 1 else 0 end Mayor31	
+//                        from orders v) summary
+//                        group by [Situacion]";
             }
         }
 
@@ -170,72 +170,76 @@ namespace DataAccess.General
                             group by Agente";
 
 //TEMPORAL
-//                return @"select Asessor,
-//	                        COUNT(case Menor6 when 1 then Menor6 else null end) Menor6,
-//	                        COUNT(case Menor3_5 when 1 then Menor3_5 else null end) Menor3_5,
-//	                        COUNT(case Menor2_1 when 1 then Menor2_1 else null end) Menor2_1,
-//	                        COUNT(case Hoy when 1 then Hoy else null end) Hoy,
-//	                        COUNT(case Mayor1_3 when 1 then Mayor1_3 else null end) Mayor1_3,
-//	                        COUNT(case Mayor4_8 when 1 then Mayor4_8 else null end) Mayor4_8,
-//	                        COUNT(case Mayor9_20 when 1 then Mayor9_20 else null end) Mayor9_20,
-//	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
-//	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31
-//                        from (select Asessor,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -6 then 1 else 0 end Menor6,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -3 and datediff(DD, getDate(), [PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) <= -1 and datediff(DD, getDate(), [PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
-//	                        case when datediff(DD, getdate(), Promisedate) = 0 then 1 else 0 end Hoy,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 1 and datediff(DD, getDate(), [PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 4 and datediff(DD, getDate(), [PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 9 and datediff(DD, getDate(), [PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 21 and datediff(DD, getDate(), [PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
-//	                        case when datediff(DD, getDate(), [PromiseDate]) >= 31 then 1 else 0 end Mayor31	
-//                        from orders) summary
-//                        group by Asessor";
+//                return @"select Agente,
+//                	                        COUNT(case Menor6 when 1 then Menor6 else null end) Menor6,
+//                	                        COUNT(case Menor3_5 when 1 then Menor3_5 else null end) Menor3_5,
+//                	                        COUNT(case Menor2_1 when 1 then Menor2_1 else null end) Menor2_1,
+//                	                        COUNT(case Hoy when 1 then Hoy else null end) Hoy,
+//                	                        COUNT(case Mayor1_3 when 1 then Mayor1_3 else null end) Mayor1_3,
+//                	                        COUNT(case Mayor4_8 when 1 then Mayor4_8 else null end) Mayor4_8,
+//                	                        COUNT(case Mayor9_20 when 1 then Mayor9_20 else null end) Mayor9_20,
+//                	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
+//                	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31
+//                                        from (select Agente,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -6 then 1 else 0 end Menor6,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -3 and datediff(DD, getDate(), v.[PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -1 and datediff(DD, getDate(), v.[PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
+//                	                        case when datediff(DD, getdate(), v.Promisedate) = 0 then 1 else 0 end Hoy,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 1 and datediff(DD, getDate(), v.[PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 4 and datediff(DD, getDate(), v.[PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 9 and datediff(DD, getDate(), v.[PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 21 and datediff(DD, getDate(), v.[PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
+//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 31 then 1 else 0 end Mayor31	
+//                                        from orders v) summary
+//                                        group by Agente";
             }
         }
 
         public static string GetSummaryAssesorStatus
         {
             get {
-                return @"select [Situacion],
+                return @"SELECT [SITUACION],
                 	        {0}
-                        from (select v.[Situacion],
+                        FROM (SELECT V.[SITUACION],
                 	        {1}
-                        from venta v
+                        FROM VENTA V
+                        WHERE
                         {2}
-                        {3}) summary
-                        group by [Situacion]"; 
+                        {3}
+                        AND SITUACION IS NOT NULL) SUMMARY
+                        GROUP BY [SITUACION]"; 
 
 //TEMPORAL
-//                return @"select [Status],
+//                return @"select [Situacion],
 //	                               {0}
-//                                from (select [Status],
+//                                from (select v.[Situacion],
 //	                               {1}
-//                                from orders) summary
-//                                group by [Status]"; 
+//                                from orders v) summary
+//                                group by [Situacion]"; 
             }
         }
 
         public static string GetSummaryStatusOrder
         {
             get {
-                return @"select [Situacion],
-	                               {0}
-                                from (select v.[Situacion],
-	                               {1}
-                                from venta v
-                                {2}
-                                {3}) summary
-                                group by [Situacion]";  
+                return @"SELECT [SITUACION],
+                	        {0}
+                        FROM (SELECT V.[SITUACION],
+                	        {1}
+                        FROM VENTA V    
+                        WHERE                     
+                        {2}
+                        {3}
+                        AND SITUACION IS NOT NULL) SUMMARY
+                        GROUP BY [SITUACION]";  
 
 //TEMPORAL
-//                return @"select [Status],
+//                return @"select [Situacion],
 //	                               {0}
-//                                from (select [Status],
+//                                from (select v.[Situacion],
 //	                               {1}
-//                                from orders) summary
-//                                group by [Status]";  
+//                                from orders v) summary
+//                                group by [Situacion]";  
             }
         }
         #endregion

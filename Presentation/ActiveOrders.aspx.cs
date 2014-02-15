@@ -67,7 +67,7 @@ namespace PlannerWeb
                 ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
                 TotalPages = CurrentPageData.TotalPages + 2; // Por las dos páginas de resumen
                 TotalOrders = CurrentPageData.TotalOrders;
-                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));
+                Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));                
             }
             else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, IsNextPageSummary(stop)); 
             return Json.Serialize(Info);

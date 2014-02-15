@@ -29,18 +29,18 @@ namespace DataAccess
             StringBuilder FullQuery1 = new StringBuilder();
             StringBuilder FullQuery2 = new StringBuilder();
             SummaryOrders Summary = new SummaryOrders(first);
-            DataTable SummaryTable = new DataTable();            
+            DataTable SummaryTable = new DataTable();
 
-            if (first)
+            if (first)            
             {
-                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryStatusDays);//, GetFilterQuery(filters), GetServiceTypeQuery(filters));
-                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryAssesorDay);//, GetFilterQuery(filters), GetServiceTypeQuery(filters));
+                FullQuery1.AppendFormat(QueriesCatalog.GetSummaryStatusDays, GetFilterQuery(filters), GetServiceTypeQuery(filters));
+                FullQuery2.AppendFormat(QueriesCatalog.GetSummaryAssesorDay, GetFilterQuery(filters), GetServiceTypeQuery(filters));
                 SummaryTable = DataBaseManager.GetTable(FullQuery1.ToString());                
 
                 foreach(DataRow S in SummaryTable.Rows)
                 {
                     Summary.Sd.Add(new Status_Days() { 
-                        Status = S["STATUS"].ToString(),
+                        Status = S["Situacion"].ToString(),
                         Range1 = Int32.Parse(S["Menor6"].ToString()),
                         Range2 = Int32.Parse(S["Menor3_5"].ToString()),
                         Range3 = Int32.Parse(S["Menor2_1"].ToString()),
@@ -74,7 +74,7 @@ namespace DataAccess
                 {
                     Summary.Ad.Add(new Assesor_Days()
                     {
-                        Assesor = S["ASESSOR"].ToString(),
+                        Assesor = S["AGENTE"].ToString(),
                         Range1 = Int32.Parse(S["Menor6"].ToString()),
                         Range2 = Int32.Parse(S["Menor3_5"].ToString()),
                         Range3 = Int32.Parse(S["Menor2_1"].ToString()),
