@@ -57,7 +57,7 @@ namespace PlannerWeb
 
             foreach (Asesor Asr in C.F.Assesors)
             {                
-                HtmlAsesors.AppendFormat("<option value='{0}'>{1}</option>", Asr.AsesorId, Asr.Name);
+                HtmlAsesors.AppendFormat("<option value='{0}' ws='{2}'>{1}</option>", Asr.AsesorId, Asr.Name, Asr.WorkShop);
             }
 
             ExecuteAction(this);

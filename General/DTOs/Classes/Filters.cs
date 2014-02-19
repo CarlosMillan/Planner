@@ -243,6 +243,8 @@ namespace General.DTOs.Classes
             #endregion
 
             #region Asesors
+
+            #region Matriz
             Assesors.Add(new Asesor() { 
                 AsesorId = "AMH",
                 Name = "ARTURO MARTINEZ HERRERA",
@@ -276,6 +278,74 @@ namespace General.DTOs.Classes
                 Name = "SHARAI MENDEZ CARREÑO",
                 WorkShop = 1
             });
+            #endregion
+
+            #region Cholula
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "EJAR",
+                Name = "EMMANUEL DE JESUS AVENDAÑO REY",
+                WorkShop = 2
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "NAB",
+                Name = "NESTOR RAFAEL ALTARMIRANO BOLAÑOS",
+                WorkShop = 2
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "FMLM",
+                Name = "FRANCISCO MAURICIO LOPEZ MENDOZA",
+                WorkShop = 2
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "SMC",
+                Name = "SHARAI MENDEZ CARREÑO",
+                WorkShop = 2
+            });
+            #endregion
+
+            #region Body Shop
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "GMG",
+                Name = "GUSTAVO MORGAN GARCIA",
+                WorkShop = 5
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "LHV",
+                Name = "LEONOR HERNANDEZ VILLARCE",
+                WorkShop = 5
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "RRL",
+                Name = "ROSARIO RIVERA LOPEZ",
+                WorkShop = 5
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "MSB",
+                Name = "MARYLIN SANCHEZ BENITEZ",
+                WorkShop = 5
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "SMC",
+                Name = "SHARAI MENDEZ CARREÑO",
+                WorkShop = 5
+            });
+            #endregion
             #endregion
         }
     }

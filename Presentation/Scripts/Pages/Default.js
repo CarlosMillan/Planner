@@ -1,11 +1,11 @@
 ﻿Default = {
     Delay: 500,
-    AssesorsMatrix: null,
+    AssesorsAll: null,
     OrderTypeOptions: null,
     Initialize: function () {
         Default.HideServiceElements();
         $('#DvMessages').hide();
-        Default.AssesorsMatrix = $('#SlcAsesors option[value!="0"]');
+        Default.AssesorsAll = $('#SlcAsesors').clone();
         $('#SlcAsesors option[value!="0"]').remove();
         Default.OrderTypeOptions = $('#SlcOrder option[value!="0"]');
         $('#SlcOrder option[value!="0"]').remove();
@@ -37,11 +37,11 @@
                     $('#SlcOrder').append(Default.OrderTypeOptions);
 
                     if ($('#SlcService').val() == 1) {
-                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Garantia_Flotila_Interno');
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Garantia_Flotilla_Interno');
                         $('#SlcOrder').find('option[value="Seguro"], option[value="Publico_Seguro"]').remove();
                     }
                     else if ($('#SlcService').val() == 2) {
-                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Flotila_Interno');
+                        $('#SlcOrder').find('option[isall="True"]').val('Publico_Flotilla_Interno');
                         $('#SlcOrder').find('option[value="Garantia"], option[value="Publico_Garantia"], option[value="Seguro"], option[value="Publico_Seguro"]').remove();
                     }
                     else if ($('#SlcService').val() == 5) {
@@ -54,7 +54,11 @@
                     break;
 
                 case 2:
-                    if ($('#SlcService').val() == 1) $('#SlcAsesors').append(Default.AssesorsMatrix);
+                    $('#SlcAsesors option[value!="0"]').remove();
+
+                    if ($('#SlcService').val() == 1) $('#SlcAsesors').append(Default.AssesorsAll.find('option[ws="1"]').clone());
+                    else if ($('#SlcService').val() == 2) $('#SlcAsesors').append(Default.AssesorsAll.find('option[ws="2"]').clone());
+                    else if ($('#SlcService').val() == 5) $('#SlcAsesors').append(Default.AssesorsAll.find('option[ws="5"]').clone());
 
                     $('#SlcAsesors').closest('div.row').show(Default.Delay);
                     Default.HideAccessElements('SlcAsesors');
