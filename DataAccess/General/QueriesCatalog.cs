@@ -110,34 +110,13 @@ namespace DataAccess.General
 	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 9 and datediff(DD, getDate(), v.[FechaRequerida]) <= 20 then 1 else 0 end Mayor9_20,
 	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 21 and datediff(DD, getDate(), v.[FechaRequerida]) <= 30 then 1 else 0 end Mayor21_30,
 	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 31 then 1 else 0 end Mayor31	
-                        from Venta V
+                        from Venta V, ART AR, CTE C
                         where {1} {0}
+                        AND V.ESTATUS = 'PENDIENTE'
+                        AND V.SERVICIOARTICULO = AR.ARTICULO
+                        AND C.CLIENTE = V.CLIENTE
                         AND v.[Situacion] IS NOT NULL) summary
                         group by [Situacion]";
-
-//TEMPORAL
-//                return @"select [Situacion],
-//	                        COUNT(case Menor6 when 1 then Menor6 else null end) Menor6,
-//	                        COUNT(case Menor3_5 when 1 then Menor3_5 else null end) Menor3_5,
-//	                        COUNT(case Menor2_1 when 1 then Menor2_1 else null end) Menor2_1,
-//	                        COUNT(case Hoy when 1 then Hoy else null end) Hoy,
-//	                        COUNT(case Mayor1_3 when 1 then Mayor1_3 else null end) Mayor1_3,
-//	                        COUNT(case Mayor4_8 when 1 then Mayor4_8 else null end) Mayor4_8,
-//	                        COUNT(case Mayor9_20 when 1 then Mayor9_20 else null end) Mayor9_20,
-//	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
-//	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31	
-//                        from (select [Situacion],
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -6 then 1 else 0 end Menor6,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -3 and datediff(DD, getDate(), v.[PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -1 and datediff(DD, getDate(), v.[PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
-//	                        case when datediff(DD, getdate(), v.Promisedate) = 0 then 1 else 0 end Hoy,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 1 and datediff(DD, getDate(), v.[PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 4 and datediff(DD, getDate(), v.[PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 9 and datediff(DD, getDate(), v.[PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 21 and datediff(DD, getDate(), v.[PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
-//	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 31 then 1 else 0 end Mayor31	
-//                        from orders v) summary
-//                        group by [Situacion]";
             }
         }
 
@@ -165,33 +144,12 @@ namespace DataAccess.General
 	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 9 and datediff(DD, getDate(), v.[FechaRequerida]) <= 20 then 1 else 0 end Mayor9_20,
 	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 21 and datediff(DD, getDate(), v.[FechaRequerida]) <= 30 then 1 else 0 end Mayor21_30,
 	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 31 then 1 else 0 end Mayor31	
-                            from Venta V
-                            where {1} {0}) summary
+                            from Venta V, ART AR, CTE C
+                            where {1} {0}
+                            AND V.ESTATUS = 'PENDIENTE'
+                            AND V.SERVICIOARTICULO = AR.ARTICULO
+                            AND C.CLIENTE = V.CLIENTE) summary
                             group by Agente";
-
-//TEMPORAL
-//                return @"select Agente,
-//                	                        COUNT(case Menor6 when 1 then Menor6 else null end) Menor6,
-//                	                        COUNT(case Menor3_5 when 1 then Menor3_5 else null end) Menor3_5,
-//                	                        COUNT(case Menor2_1 when 1 then Menor2_1 else null end) Menor2_1,
-//                	                        COUNT(case Hoy when 1 then Hoy else null end) Hoy,
-//                	                        COUNT(case Mayor1_3 when 1 then Mayor1_3 else null end) Mayor1_3,
-//                	                        COUNT(case Mayor4_8 when 1 then Mayor4_8 else null end) Mayor4_8,
-//                	                        COUNT(case Mayor9_20 when 1 then Mayor9_20 else null end) Mayor9_20,
-//                	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
-//                	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31
-//                                        from (select Agente,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -6 then 1 else 0 end Menor6,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -3 and datediff(DD, getDate(), v.[PromiseDate]) >= -5 then 1 else 0 end Menor3_5,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) <= -1 and datediff(DD, getDate(), v.[PromiseDate]) >= -2 then 1 else 0 end Menor2_1,
-//                	                        case when datediff(DD, getdate(), v.Promisedate) = 0 then 1 else 0 end Hoy,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 1 and datediff(DD, getDate(), v.[PromiseDate]) <= 3 then 1 else 0 end Mayor1_3,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 4 and datediff(DD, getDate(), v.[PromiseDate]) <= 8 then 1 else 0 end Mayor4_8,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 9 and datediff(DD, getDate(), v.[PromiseDate]) <= 20 then 1 else 0 end Mayor9_20,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 21 and datediff(DD, getDate(), v.[PromiseDate]) <= 30 then 1 else 0 end Mayor21_30,
-//                	                        case when datediff(DD, getDate(), v.[PromiseDate]) >= 31 then 1 else 0 end Mayor31	
-//                                        from orders v) summary
-//                                        group by Agente";
             }
         }
 
@@ -202,20 +160,15 @@ namespace DataAccess.General
                 	        {0}
                         FROM (SELECT V.[SITUACION],
                 	        {1}
-                        FROM VENTA V
+                        FROM VENTA V, ART AR, CTE C
                         WHERE
                         {2}
                         {3}
-                        AND SITUACION IS NOT NULL) SUMMARY
+                        AND SITUACION IS NOT NULL
+                        AND V.ESTATUS = 'PENDIENTE'
+                        AND V.SERVICIOARTICULO = AR.ARTICULO
+                        AND C.CLIENTE = V.CLIENTE) SUMMARY
                         GROUP BY [SITUACION]"; 
-
-//TEMPORAL
-//                return @"select [Situacion],
-//	                               {0}
-//                                from (select v.[Situacion],
-//	                               {1}
-//                                from orders v) summary
-//                                group by [Situacion]"; 
             }
         }
 
@@ -226,20 +179,15 @@ namespace DataAccess.General
                 	        {0}
                         FROM (SELECT V.[SITUACION],
                 	        {1}
-                        FROM VENTA V    
+                        FROM VENTA V, ART AR, CTE C
                         WHERE                     
                         {2}
                         {3}
-                        AND SITUACION IS NOT NULL) SUMMARY
-                        GROUP BY [SITUACION]";  
-
-//TEMPORAL
-//                return @"select [Situacion],
-//	                               {0}
-//                                from (select v.[Situacion],
-//	                               {1}
-//                                from orders v) summary
-//                                group by [Situacion]";  
+                        AND SITUACION IS NOT NULL
+                        AND V.ESTATUS = 'PENDIENTE'
+                        AND V.SERVICIOARTICULO = AR.ARTICULO
+                        AND C.CLIENTE = V.CLIENTE) SUMMARY
+                        GROUP BY [SITUACION]"; 
             }
         }
         #endregion

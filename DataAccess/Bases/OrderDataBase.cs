@@ -24,8 +24,6 @@ namespace DataAccess.Bases
             {                
                 DataTable Orders = DataBaseManager.GetTable(query);
                 Result.TotalOrders = (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalOrdres, filters, service).ToString());
-                /*DEJAR TEMPORALEMNTE*/
-                //Result.TotalOrders = (int)DataBaseManager.GetValue(new StringBuilder().Append(QueriesCatalog.GetTotalOrdres).ToString());
 
                 foreach (DataRow O in Orders.Rows)
                 {
