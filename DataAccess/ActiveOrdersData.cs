@@ -24,6 +24,15 @@ namespace DataAccess
             catch { throw; }
         }
 
+        public int GetTotalOrders(int pagenumber, int pagination, Filters filters, bool onlytotal)
+        {
+            try
+            {
+                return base.GetTotalOrders(BuildQuery(pagenumber, pagination, filters), GetFilterQuery(filters), GetServiceTypeQuery(filters), onlytotal);                                
+            }
+            catch { throw; }
+        }
+
         public SummaryOrders GetSummaryPage(bool first, Filters filters)
         {
             StringBuilder FullQuery1 = new StringBuilder();

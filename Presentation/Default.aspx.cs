@@ -19,11 +19,15 @@ namespace PlannerWeb
         public StringBuilder HtmlAccessAs;
         public StringBuilder HtmlOrderType;
         public StringBuilder HtmlSituations;
-        public StringBuilder HtmlAsesors;        
+        public StringBuilder HtmlAsesors;
+        public string Message;
 
         protected void Page_Init(object sender, EventArgs e)
         {
             if(Session["Name"] != null) BtnLogOut.Text = Session["Name"] + ", Salir";
+
+            if (Request["NoDataFound"] == "True") Message = "No se encontraron  datos";
+            else Message = String.Empty;
         }
 
         protected void Page_Load(object sender, EventArgs e)

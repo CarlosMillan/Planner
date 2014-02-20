@@ -47,6 +47,11 @@ namespace PlannerWeb
             GetHtmlAssesors();
             GetAsesorsHeaders();
             GetOrdersHeaders();
+
+            if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
+            {
+                Response.Redirect("Default.aspx?NoDataFound=True");
+            }
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -66,7 +71,7 @@ namespace PlannerWeb
                 GetValidPage(stop);
                 ActiveOrders CurrentPageData = ActiveOrdersController.GetActiveOrdersPage(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F);
                 TotalPages = CurrentPageData.TotalPages + 2; // Por las dos páginas de resumen
-                TotalOrders = CurrentPageData.TotalOrders;
+                TotalOrders = CurrentPageData.TotalOrders;                
                 Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, GetHtmlTable(CurrentPageData), IsNextPageSummary(stop));                
             }
             else Info = new PageInfo(TotalPages, CurrentPage, TotalOrders, null, IsNextPageSummary(stop)); 

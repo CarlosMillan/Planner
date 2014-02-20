@@ -10,6 +10,8 @@
         Default.OrderTypeOptions = $('#SlcOrder option[value!="0"]');
         $('#SlcOrder option[value!="0"]').remove();
 
+        if($('#DvMessages').text() != '') $('#DvMessages').show(500);
+
         $('#BtnSearch').click(function () {
             Master.PreparePage('Default');        // Page name e.g. Login.aspx -> Login
             Master.SetAction('Search');          // Method in Login.aspx
@@ -21,7 +23,8 @@
 
                 Master.Submit();
             }
-            else $('#DvMessages').show(500).append('Debes seleccionar todos los filtros y/o llenar los campos.');
+            else  $('#DvMessages').show(500).append('Debes seleccionar todos los filtros y/o llenar los campos.');
+            
         });
 
         $('#SlcService').change(function () {

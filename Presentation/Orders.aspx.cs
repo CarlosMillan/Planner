@@ -20,6 +20,7 @@ namespace PlannerWeb
         private string ThirdParameter;
         private bool IsAll;
         private static string Svc;
+        Orders Ords;
 
         protected void Page_Init(object sender, EventArgs e) 
         {
@@ -32,15 +33,21 @@ namespace PlannerWeb
                 Svc = Request["Svc"];
                 F = new Filters();
                 SelectFilters();
+                C = new OrdersController();
+                Ords = C.GetOrders(F);
+
+                if (Ords.TotalOrders == 0)
+                {
+                    Response.Redirect("Default.aspx?NoDataFound=True");
+                }
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             HtmlTable = string.Empty;
-            ExecuteAction<OrdersWeb>(this);
-            C = new OrdersController();
-            HtmlTable = GetHtmlTable(C.GetOrders(F));
+            ExecuteAction<OrdersWeb>(this);            
+            HtmlTable = GetHtmlTable(Ords);
         }
         
         private static string GetHtmlTable(General.DTOs.Classes.Orders from)

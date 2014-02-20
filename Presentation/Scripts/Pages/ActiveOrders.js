@@ -22,7 +22,7 @@
         });
 
         $(document).ajaxComplete(function (event, request, settings) {
-            if (ActiveOrders.TotalOrders == 0) window.location('Default.aspx');
+            if (ActiveOrders.TotalOrders == 0) window.location = 'Default.aspx?NoDataFound=True';
             else if (ActiveOrders.ShowSummary) {
                 setTimeout(ActiveOrders.GetSummary, Master.TimePagination);
             }

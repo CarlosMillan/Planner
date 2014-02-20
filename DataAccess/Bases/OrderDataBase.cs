@@ -51,5 +51,18 @@ namespace DataAccess.Bases
 
             return Result;
         }
+
+        public int GetTotalOrders(string query, string filters, string service, bool onlytotal)
+        {
+            int Result = 0;
+
+            try
+            {                
+                Result = (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalOrdres, filters, service).ToString());
+            }
+            catch { throw; }
+
+            return Result;
+        }
     }
 }
