@@ -30,7 +30,7 @@
     <input type="hidden" name="Plates" id="Plates" />
     <input type="hidden" name="StayDays" id="StayDays" />
     <input type="hidden" name="Status" id="Status" />
-    <input type="hidden" name="DeliveryDate" id="DeliveryDate" />
+    <input type="hidden" name="DeliveryDays" id="DeliveryDays" />
     <input type="hidden" name="Asessor" id="Asessor" />
     <input type="hidden" name="Cellphone" id="Cellphone" />
 

@@ -164,7 +164,7 @@ namespace DataAccess.General
                         WHERE
                         {2}
                         {3}
-                        AND SITUACION IS NOT NULL
+                        AND v.SITUACION IS NOT NULL
                         AND V.ESTATUS = 'PENDIENTE'
                         AND V.SERVICIOARTICULO = AR.ARTICULO
                         AND C.CLIENTE = V.CLIENTE) SUMMARY
@@ -183,7 +183,7 @@ namespace DataAccess.General
                         WHERE                     
                         {2}
                         {3}
-                        AND SITUACION IS NOT NULL
+                        AND v.SITUACION IS NOT NULL
                         AND V.ESTATUS = 'PENDIENTE'
                         AND V.SERVICIOARTICULO = AR.ARTICULO
                         AND C.CLIENTE = V.CLIENTE) SUMMARY

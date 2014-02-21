@@ -1,13 +1,20 @@
-﻿EditOrder = {    
+﻿EditOrder = {
+    MessageSMS: '',
     Initialize: function () {
-        $('#BtnSaveOrder').click(function () {
+        $('#BtnSendMessage').click(function () {
             Master.PreparePage('EditOrder');
+            Master.SetAction('SendMessage');
             Master.Submit();
         });
 
         $('#BtnCancel').click(function () {
             window.location = $('#ReturnUrl').val();
         });
+
+        if (EditOrder.MessageSMS != '') {
+            alert(EditOrder.MessageSMS);
+            $('#BtnCancel').click();
+        }
     }
 }
 

@@ -4,6 +4,10 @@
     <script src="Scripts/Pages/EditOrder.js" type="text/javascript"></script>
     <!-- Css -->
     <link href="Css/Pages/EditOrders.css" rel="stylesheet" type="text/css" />
+
+    <script language="javascript" type="text/javascript">
+        EditOrder.MessageSMS = '<%=SuccessMessage %>';
+    </script>
 </asp:Content>
 <asp:Content ID="ContentEditTitle" ContentPlaceHolderID="ContentPlaceHolderEditTitle" runat="server">
  <div>Editar Ordenes</div>
@@ -46,6 +50,7 @@
         </div>
     </div>
 
+    <!--
     <div class="row">
         <div class="inputdescription">
             <label>Fecha promesa 2:</label>
@@ -53,7 +58,7 @@
         <div class="input">
             <input type="text" id="TxtPromiseDate2" name="PromiseDate2" value="<%=C.OrderToSave.PromiseDate2.ToShortDateString() %>" disabled="disabled"/>
         </div>
-    </div>
+    </div>-->
 
     <div class="row">
         <div class="inputdescription">
@@ -96,11 +101,7 @@
             <label>Estatus:</label>
         </div>
         <div class="input">
-            <select id="SlcStatus" disabled="disabled">
-                <option value="1">Calidad</option>
-                <option value="2">Otros</option>
-                <option value="3">Simón</option>
-            </select>            
+          <input type="text" id="Text1" value="<%=C.OrderToSave.Status %>" disabled="disabled" />         
         </div>
     </div>
 

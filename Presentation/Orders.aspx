@@ -14,7 +14,7 @@
             <th>No. de Orden</th>
             <th>Fecha de ingreso</th>
             <th>Fecha de promesa</th>
-            <th>Fecha de promesa 2</th>
+            <!--<th>Fecha de promesa 2</th>-->
             <th>Vehículo</th>
             <th>Cliente</th>            
             <th>Placas</th>

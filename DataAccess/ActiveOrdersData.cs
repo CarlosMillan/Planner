@@ -220,25 +220,22 @@ namespace DataAccess
         private string GetServiceTypeQuery(Filters tobuild)
         {
             StringBuilder OrderFilter = new StringBuilder();
+            string Garantia = string.Empty;
+            string Seguro = string.Empty;
 
             if (tobuild.SelectedOrdersType != null)
             {
                 string[] SplitFromOrder = tobuild.SelectedOrdersType.OrderTypeId.Split('_');
 
                 if (SplitFromOrder.Length > 1)
-                {
-                    if (!SplitFromOrder.Contains("Garantia"))
-                    {
-                        OrderFilter.Append("MOV = 'Servicio'");
-                    }                    
-                    else if (SplitFromOrder.Contains("Seguro"))
-                    {
-                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia' OR MOV = 'Servicio HYP')");
-                    }
-                    else
-                    {
-                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
-                    }
+                {                    
+                    if (SplitFromOrder.Contains("Garantia")) Garantia = "MOV = 'Servicio Garantia'";                   
+                    
+                    if (SplitFromOrder.Contains("Seguro")) Seguro = "MOV = 'Servicio HYP'";
+
+                    OrderFilter.AppendFormat("(MOV = 'Servicio' {0} {1})",
+                                              String.IsNullOrEmpty(Garantia) ? Garantia : string.Concat("OR ", Garantia),
+                                              String.IsNullOrEmpty(Seguro) ? Seguro : string.Concat("OR ", Seguro));
                 }
                 else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Garantia"))
                 {

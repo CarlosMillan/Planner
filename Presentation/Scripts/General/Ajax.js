@@ -11,10 +11,10 @@
         $.ajax({
             url: Master.Host + page + '.aspx/' + method,
             data: parameters == null ? '{}' : parameters,
-            success: onsuccess,
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert('¡Algo falló! - ' + xhr.responseText + ' e ' + thrownError);
-            }
+            success: onsuccess
+//            ,error: function (xhr, ajaxOptions, thrownError) {
+//                alert('¡Algo falló! - ' + xhr.responseText + ' e ' + thrownError);
+//            }
         });
     }
 }

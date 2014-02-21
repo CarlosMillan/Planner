@@ -54,41 +54,42 @@ namespace PlannerWeb
         {
             StringBuilder Table = new StringBuilder();
 
-            foreach (Order O in from.Orders)
+            if (from != null)
             {
-                Table.AppendFormat(@"<tr class={0}>
+                foreach (Order O in from.Orders)
+                {
+                    Table.AppendFormat(@"<tr class={0}>
                                         <td>{1}</td>
                                         <td>{2}</td>
                                         <td>{3}</td>
-                                        <td>{4}</td>
+                                        <td>{4}</td>                                        
                                         <td>{5}</td>
                                         <td>{6}</td>
                                         <td>{7}</td>
-                                        <td>{8}</td>
-                                        <td class='highlight'>{9}</td>
-                                        <td>{10}</td>
-                                        <td class='{11}'>{12}</td>
-                                        <td>{13}</td>
-                                        <td>{14}</td>            
+                                        <td class='highlight'>{8}</td>
+                                        <td>{9}</td>
+                                        <td class='{10}'>{11}</td>
+                                        <td>{12}</td>
+                                        <td>{13}</td>            
                                         <td><input type='button' value='SMS' /></td>
                                     </tr>",
-                                     from.Orders.IndexOf(O) % 2 == 0 ? "pair" : "odd",
-                                     O.OrderType,
-                                     O.OrderNumber,
-                                     O.EntryDate.ToShortDateString(),
-                                     O.PromiseDate.ToShortDateString(),
-                                     O.PromiseDate2.ToShortDateString(),                                     
-                                     O.Vehicle,
-                                     O.Client,
-                                     O.Plates,
-                                     O.StayDays,
-                                     O.Status,
-                                     O.DeliveryDays < 0 ? "badhighlight" : "highlight",
-                                     O.DeliveryDays,
-                                     O.Asessor,
-                                     O.CellPhone);
-            }
+                                         from.Orders.IndexOf(O) % 2 == 0 ? "pair" : "odd",
+                                         O.OrderType,
+                                         O.OrderNumber,
+                                         O.EntryDate.ToShortDateString(),
+                                         O.PromiseDate.ToShortDateString(),                                         
+                                         O.Vehicle,
+                                         O.Client,
+                                         O.Plates,
+                                         O.StayDays,
+                                         O.Status,
+                                         O.DeliveryDays < 0 ? "badhighlight" : "highlight",
+                                         O.DeliveryDays,
+                                         O.Asessor,
+                                         O.CellPhone);
+                }
 
+            }
             return Table.ToString();
         }
 

@@ -48,10 +48,10 @@ namespace PlannerWeb
             GetAsesorsHeaders();
             GetOrdersHeaders();
 
-            if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
-            {
-                Response.Redirect("Default.aspx?NoDataFound=True");
-            }
+            //if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
+            //{
+            //    Response.Redirect("Default.aspx?NoDataFound=True");
+            //}
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -362,6 +362,19 @@ namespace PlannerWeb
                     }
                     break;
 
+                case "2":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 2))
+                    {
+                        AsessorsHtml.AppendFormat("<th style='padding-left:0;padding-right:0;width:65px;'>{0}</th>", A.AsesorId);
+                    }
+                    break;
+
+                case "5":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 5))
+                    {
+                        AsessorsHtml.AppendFormat("<th style='padding-left:0;padding-right:0;width:65px;'>{0}</th>", A.AsesorId);
+                    }
+                    break;
                 // Poner los CASE para los demas talleres
             }
         }
@@ -380,7 +393,21 @@ namespace PlannerWeb
                     }
                     break;
 
-                // Poner los CASE para los demas talleres
+                case "2":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 2))
+                    {
+                        if (A.AsesorId.Equals(assesorid.Trim())) Match.Append("<td class='selected'></td>");
+                        else Match.Append("<td></td>");
+                    }
+                    break;
+
+                case "5":
+                    foreach (Asesor A in F.Assesors.FindAll(Asr => Asr.WorkShop == 5))
+                    {
+                        if (A.AsesorId.Equals(assesorid.Trim())) Match.Append("<td class='selected'></td>");
+                        else Match.Append("<td></td>");
+                    }
+                    break;
             }
 
             return Match.ToString();
