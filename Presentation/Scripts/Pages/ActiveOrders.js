@@ -5,8 +5,11 @@
     ShowSummary: false,
     Pagination: 0,
     FirstSummary: true,
+    TableHeight: 0,
     Initialize: function () {
-        $('#DvTable').height(((ActiveOrders.Pagination * 26) + 51) + 'px');
+        ActiveOrders.TableHeight = ($('table#TbData tr').height() * $('table#TbData tr').length);
+        $('#DvTable').height(ActiveOrders.TableHeight + 'px');
+
 
         $('#BtnStop').click(function () {
             if (!ActiveOrders.StopAnimation) {
@@ -34,6 +37,8 @@
         ActiveOrders.GetPage();
     },
     GetPage: function () {
+        $('#DvTable').height(ActiveOrders.TableHeight + 'px');
+
         Ajax.Call('ActiveOrders', 'GetPage', '{stop:' + ActiveOrders.StopAnimation + '}', function (response) {
             var Result = jQuery.parseJSON(response.d);
 
@@ -61,6 +66,8 @@
         });
     },
     GetSummary: function () {
+        $('#DvTable').height($('div.summarypanel').height() + 'px');
+
         Ajax.Call('ActiveOrders', 'GetSummary', '{stop:' + ActiveOrders.StopAnimation + '}', function (response) {
             var Result = jQuery.parseJSON(response.d);
 

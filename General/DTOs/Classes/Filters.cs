@@ -12,7 +12,7 @@ namespace General.DTOs.Classes
         public List<Asesor> Assesors;
         public string OrderClientPlates;
 
-        public WorkShop SeletedWorkShop
+        public WorkShop SelectedWorkShop
         {
             get
             {
@@ -247,35 +247,42 @@ namespace General.DTOs.Classes
             #region Matriz
             Assesors.Add(new Asesor() { 
                 AsesorId = "AMH",
-                Name = "ARTURO MARTINEZ HERRERA",
+                Name = "AMH",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "EJAR",
-                Name = "EMMANUEL DE JESUS AVENDAÑO REY",
+                Name = "EJAR",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "NAB",
-                Name = "NESTOR RAFAEL ALTARMIRANO BOLAÑOS",
+                Name = "NAB",
+                WorkShop = 1
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "FMG",
+                Name = "FMG",
+                WorkShop = 1
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "MISH",
+                Name = "MISH",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "FMLM",
-                Name = "FRANCISCO MAURICIO LOPEZ MENDOZA",
-                WorkShop = 1
-            });
-
-            Assesors.Add(new Asesor()
-            {
-                AsesorId = "SMC",
-                Name = "SHARAI MENDEZ CARREÑO",
+                Name = "FMLM",
                 WorkShop = 1
             });
             #endregion
@@ -284,21 +291,21 @@ namespace General.DTOs.Classes
             Assesors.Add(new Asesor()
             {
                 AsesorId = "EJAR",
-                Name = "EMMANUEL DE JESUS AVENDAÑO REY",
+                Name = "EJAR",
                 WorkShop = 2
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "NAB",
-                Name = "NESTOR RAFAEL ALTARMIRANO BOLAÑOS",
+                Name = "NAB",
                 WorkShop = 2
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "FMLM",
-                Name = "FRANCISCO MAURICIO LOPEZ MENDOZA",
+                Name = "FMLM",
                 WorkShop = 2
             });
 
@@ -314,28 +321,28 @@ namespace General.DTOs.Classes
             Assesors.Add(new Asesor()
             {
                 AsesorId = "GMG",
-                Name = "GUSTAVO MORGAN GARCIA",
+                Name = "GMG",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "LHV",
-                Name = "LEONOR HERNANDEZ VILLARCE",
+                Name = "LHV",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "RRL",
-                Name = "ROSARIO RIVERA LOPEZ",
+                Name = "RRL",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
                 AsesorId = "MSB",
-                Name = "MARYLIN SANCHEZ BENITEZ",
+                Name = "MSB",
                 WorkShop = 5
             });
 

@@ -48,10 +48,10 @@ namespace PlannerWeb
             GetAsesorsHeaders();
             GetOrdersHeaders();
 
-            //if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
-            //{
-            //    Response.Redirect("Default.aspx?NoDataFound=True");
-            //}
+            if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
+            {
+                Response.Redirect("Default.aspx?NoDataFound=True");
+            }
         }
             
         protected void Page_Load(object sender, EventArgs e)
@@ -439,7 +439,7 @@ namespace PlannerWeb
 
         private void GetAsesorsHeaders()
         {             
-            foreach (var a in F.Assesors.FindAll(As => As.WorkShop == F.SeletedWorkShop.WorkShopId))
+            foreach (var a in F.Assesors.FindAll(As => As.WorkShop == F.SelectedWorkShop.WorkShopId))
             {
                 AsesorsHeadersHtml.AppendFormat("<th class='odd'>{0}</th>", a.AsesorId);
             }

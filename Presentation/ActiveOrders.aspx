@@ -147,5 +147,7 @@
         </table>
     </div>
 </div>
-<div class="button active cancel" id="BtnStop"><div>DETENER</div></div>
+<div style="width:100%;height:82px;clear:both;">
+    <div class="button active cancel" id="BtnStop"><div>DETENER</div></div>
+</div>
 </asp:Content>

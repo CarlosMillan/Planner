@@ -27,7 +27,7 @@ namespace DataAccess
         {
             StringBuilder FiltersString = new StringBuilder();
             FiltersString.AppendFormat(@"AND SUCURSAL = '{0}' {1} {2} {3} {4}",
-                                         tobuild.SeletedWorkShop.WorkShopId,
+                                         tobuild.SelectedWorkShop.WorkShopId,
                 /*Taller*/tobuild.SelectedAccess.AccessId == 1 ? GetOrderType(tobuild.SelectedOrdersType.OrderTypeId) : string.Empty,
                 /*Asesor*/tobuild.SelectedAccess.AccessId == 2 ? String.Concat("AND V.AGENTE = '", tobuild.SelectedAssesor.AsesorId, "'") : string.Empty,
                 /*Situación*/tobuild.SelectedAccess.AccessId == 3 ? String.Concat("AND V.SITUACION = '", tobuild.SelectedSituation.Name, "'") : string.Empty,
@@ -63,37 +63,14 @@ namespace DataAccess
         private string GetServiceTypeQuery(Filters tobuild)
         {
             StringBuilder OrderFilter = new StringBuilder();
+            string Garantia = string.Empty;
+            string Deparment = string.Empty;
 
-            if (tobuild.SelectedOrdersType != null)
-            {
-                string[] SplitFromOrder = tobuild.SelectedOrdersType.OrderTypeId.Split('_');
+            if (tobuild.SelectedWorkShop.WorkShopId == 5) Deparment = "MOV = 'Servicio HYP'";
 
-                if (SplitFromOrder.Length > 1)
-                {
-                    if (!SplitFromOrder.Contains("Garantia"))
-                    {
-                        OrderFilter.Append("MOV = 'Servicio'");
-                    }
-                    else if (SplitFromOrder.Contains("Seguro"))
-                    {
-                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia' OR MOV = 'Servicio HYP')");
-                    }
-                    else
-                    {
-                        OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
-                    }
-                }
-                else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Garantia"))
-                {
-                    OrderFilter.Append("MOV = 'Servicio Garantia'");
-                }
-                else if (tobuild.SelectedOrdersType.OrderTypeId.Equals("Seguro"))
-                {
-                    OrderFilter.Append("MOV = 'Servicio HYP'");
-                }
-                else OrderFilter.Append("MOV = 'Servicio'");
-            }
-            else OrderFilter.Append("(MOV = 'Servicio' OR MOV = 'Servicio Garantia')");
+            if (tobuild.SelectedWorkShop.WorkShopId == 1 || tobuild.SelectedWorkShop.WorkShopId == 2) Deparment = "MOV = 'Servicio' OR MOV = 'Servicio Garantia'";
+
+            OrderFilter.AppendFormat("({0})", Deparment);
 
             return OrderFilter.ToString();
         }
