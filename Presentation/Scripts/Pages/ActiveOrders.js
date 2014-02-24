@@ -6,11 +6,7 @@
     Pagination: 0,
     FirstSummary: true,
     TableHeight: 0,
-    Initialize: function () {
-        ActiveOrders.TableHeight = ($('table#TbData tr').height() * $('table#TbData tr').length);
-        $('#DvTable').height(ActiveOrders.TableHeight + 'px');
-
-
+    Initialize: function () {                
         $('#BtnStop').click(function () {
             if (!ActiveOrders.StopAnimation) {
                 ActiveOrders.StopAnimation = true;
@@ -49,7 +45,8 @@
                             $('div#DvTable table tbody').html(Result.PageData);
                             $('div.pages').text(Result.CurrentPage + '/' + Result.TotalPages);
                             $('div.subtitle span').text(Result.TotalOrders);
-                            $('#TbData').fadeIn(1000);
+                            $('#TbData').fadeIn(1000);                            
+                            $('#DvTable').height(ActiveOrders.TableHeight + 'px');
                         });
                     });
                 }
@@ -58,6 +55,8 @@
                     $('div#DvTable table tbody').html(Result.PageData);
                     $('div.pages').text(Result.CurrentPage + '/' + Result.TotalPages);
                     $('div.subtitle span').text(Result.TotalOrders);
+                    ActiveOrders.TableHeight = ($('table#TbData tr').height() * $('table#TbData tr').length);
+                    $('#DvTable').height(ActiveOrders.TableHeight + 'px');
                 }
 
                 ActiveOrders.TotalOrders = Result.TotalOrders;

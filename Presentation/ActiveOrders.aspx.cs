@@ -27,7 +27,7 @@ namespace PlannerWeb
         private static string Svc;
         public StringBuilder AsessorsHtml;
         public StringBuilder AsesorsHeadersHtml;
-        public StringBuilder OrderTypeHeadersHtml;
+        public StringBuilder OrderTypeHeadersHtml;        
 
         protected void Page_Init(object seder, EventArgs e)
         {
