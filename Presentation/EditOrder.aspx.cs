@@ -52,19 +52,19 @@ namespace PlannerWeb
         {
             try
             {
-                SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient(ConfigurationManager.AppSettings["SmsGatewayApi"]);
-                Sender.Open();
+                SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient("SmsGatewayApi");                                                
                 SMS.Credentials Crd = new SMS.Credentials();
                 Crd.domainId = ConfigurationManager.AppSettings["DoaminIDSMS"];
                 Crd.login = ConfigurationManager.AppSettings["LoginSMS"];
-                Crd.passwd = ConfigurationManager.AppSettings["PasswordSMS"];
+                Crd.passwd = ConfigurationManager.AppSettings["PasswordSMS"];                
+                Sender.Open();
 
                 SMS.TextMessageRequest SMSRequest = new SMS.TextMessageRequest();
                 SMS.TextMessageResponse ResponseSMS = new SMS.TextMessageResponse();
                 SMS.TextMessage Msg = new SMS.TextMessage();
-                Msg.msg = C.OrderToSave.Sms;
+                Msg.msg = Request["Sms"].ToString();
                 SMSRequest.credentials = Crd;
-                SMSRequest.destination = new string[] { C.OrderToSave.CellPhone };
+                SMSRequest.destination = new string[] { Request["Phone"].ToString() };
                 SMSRequest.message = Msg;
                 ResponseSMS = Sender.sendSms(SMSRequest);
                 Sender.Close();
