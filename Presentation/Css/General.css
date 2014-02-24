@@ -212,7 +212,7 @@ div.headerTitle.subtitle
 div.summarypanel
 {    
     width:70%;
-    height:300px;
+    height:auto;
     float:left;    
     margin-left:15%;
     display:none;
