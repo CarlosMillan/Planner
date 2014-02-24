@@ -64,9 +64,7 @@
             }
         });
     },
-    GetSummary: function () {
-        $('#DvTable').height($('div.summarypanel').height() + 'px');
-
+    GetSummary: function () {        
         Ajax.Call('ActiveOrders', 'GetSummary', '{stop:' + ActiveOrders.StopAnimation + '}', function (response) {
             var Result = jQuery.parseJSON(response.d);
 
@@ -103,6 +101,7 @@
 
                         ActiveOrders.FirstSummary = !ActiveOrders.FirstSummary;
                         $('div.summarypanel').fadeIn(1000);
+                        $('#DvTable').height($('div.summarypanel').height() + 'px');
                     });
                 });
 

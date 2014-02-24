@@ -39,7 +39,7 @@
             <th>Días de Estancia</th>
             <th>Estatus</th>
             <th>Días para Entrega</th>            
-            <th colspan="5">
+            <th colspan="<%=AmountAsssors %>">
              ASESOR DE SERVICIO
                 <table class="nested">
                     <thead>

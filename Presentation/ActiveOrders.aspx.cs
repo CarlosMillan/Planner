@@ -27,7 +27,8 @@ namespace PlannerWeb
         private static string Svc;
         public StringBuilder AsessorsHtml;
         public StringBuilder AsesorsHeadersHtml;
-        public StringBuilder OrderTypeHeadersHtml;        
+        public StringBuilder OrderTypeHeadersHtml;
+        public int AmountAsssors;
 
         protected void Page_Init(object seder, EventArgs e)
         {
@@ -47,6 +48,7 @@ namespace PlannerWeb
             GetHtmlAssesors();
             GetAsesorsHeaders();
             GetOrdersHeaders();
+            AmountAsssors =  F.Assesors.FindAll(Asr => Asr.WorkShop == 1).Count;
 
             if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
             {
@@ -374,8 +376,7 @@ namespace PlannerWeb
                     {
                         AsessorsHtml.AppendFormat("<th style='padding-left:0;padding-right:0;width:65px;'>{0}</th>", A.AsesorId);
                     }
-                    break;
-                // Poner los CASE para los demas talleres
+                    break;                
             }
         }
 
