@@ -312,7 +312,7 @@ namespace General.DTOs.Classes
             Assesors.Add(new Asesor()
             {
                 AsesorId = "SMC",
-                Name = "SHARAI MENDEZ CARREÑO",
+                Name = "SMC",
                 WorkShop = 2
             });
             #endregion
@@ -349,7 +349,7 @@ namespace General.DTOs.Classes
             Assesors.Add(new Asesor()
             {
                 AsesorId = "SMC",
-                Name = "SHARAI MENDEZ CARREÑO",
+                Name = "SMC",
                 WorkShop = 5
             });
             #endregion

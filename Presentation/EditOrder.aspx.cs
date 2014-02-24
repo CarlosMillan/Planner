@@ -52,7 +52,8 @@ namespace PlannerWeb
         {
             try
             {
-                SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient();
+                SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient(ConfigurationManager.AppSettings["SmsGatewayApi"]);
+                Sender.Open();
                 SMS.Credentials Crd = new SMS.Credentials();
                 Crd.domainId = ConfigurationManager.AppSettings["DoaminIDSMS"];
                 Crd.login = ConfigurationManager.AppSettings["LoginSMS"];
@@ -66,6 +67,7 @@ namespace PlannerWeb
                 SMSRequest.destination = new string[] { C.OrderToSave.CellPhone };
                 SMSRequest.message = Msg;
                 ResponseSMS = Sender.sendSms(SMSRequest);
+                Sender.Close();
 
                 if (ResponseSMS.status.Equals("000")) SuccessMessage = "Mensaje Enviado correctamente.";
                 else SuccessMessage = "El mensaje no fue enviado";
