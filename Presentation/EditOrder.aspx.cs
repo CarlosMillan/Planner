@@ -8,6 +8,7 @@ using Business.Controllers;
 using General.Enums;
 using System.Configuration;
 using PlannerWeb.App_Code.Base;
+using System.Text.RegularExpressions;
 
 namespace PlannerWeb
 {
@@ -52,25 +53,45 @@ namespace PlannerWeb
         {
             try
             {
-                SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient("SmsGatewayApi");                                                
-                SMS.Credentials Crd = new SMS.Credentials();
-                Crd.domainId = ConfigurationManager.AppSettings["DoaminIDSMS"];
-                Crd.login = ConfigurationManager.AppSettings["LoginSMS"];
-                Crd.passwd = ConfigurationManager.AppSettings["PasswordSMS"];                
-                Sender.Open();
+                string ClearPhone = string.Empty;
+                string FinalPhone = string.Empty;
 
-                SMS.TextMessageRequest SMSRequest = new SMS.TextMessageRequest();
-                SMS.TextMessageResponse ResponseSMS = new SMS.TextMessageResponse();
-                SMS.TextMessage Msg = new SMS.TextMessage();
-                Msg.msg = Request["Sms"].ToString();
-                SMSRequest.credentials = Crd;
-                SMSRequest.destination = new string[] { Request["Phone"].ToString() };
-                SMSRequest.message = Msg;
-                ResponseSMS = Sender.sendSms(SMSRequest);
-                Sender.Close();
+                if (Regex.IsMatch(Request["Phone"].ToString(), @"(?!\-|\s|\d|\(|\))."))
+                {
+                    SuccessMessage = "El télefono solo puede contener digitos, espacios, guiones y paréntesis.";
+                }
+                else
+                {
+                    ClearPhone = Regex.Replace(Request["Phone"].ToString(), @"(?!\d).", string.Empty);
+                    FinalPhone = Regex.Match(ClearPhone, @"\d{10}$").Value;
 
-                if (ResponseSMS.status.Equals("000")) SuccessMessage = "Mensaje Enviado correctamente.";
-                else SuccessMessage = "El mensaje no fue enviado";
+                    if (FinalPhone.Length < 10)
+                    {
+                        SuccessMessage = "El número debe contener 10 digitos";
+                    }
+                    else
+                    {
+                        SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient("SmsGatewayApi");
+                        SMS.Credentials Crd = new SMS.Credentials();
+                        Crd.domainId = ConfigurationManager.AppSettings["DoaminIDSMS"];
+                        Crd.login = ConfigurationManager.AppSettings["LoginSMS"];
+                        Crd.passwd = ConfigurationManager.AppSettings["PasswordSMS"];
+                        Sender.Open();
+
+                        SMS.TextMessageRequest SMSRequest = new SMS.TextMessageRequest();
+                        SMS.TextMessageResponse ResponseSMS = new SMS.TextMessageResponse();
+                        SMS.TextMessage Msg = new SMS.TextMessage();
+                        Msg.msg = Request["Sms"].ToString();
+                        SMSRequest.credentials = Crd;
+                        SMSRequest.destination = new string[] { String.Concat(ConfigurationManager.AppSettings["CountryCode"], FinalPhone) };
+                        SMSRequest.message = Msg;
+                        ResponseSMS = Sender.sendSms(SMSRequest);
+                        Sender.Close();
+
+                        if (ResponseSMS.status.Equals("000")) SuccessMessage = "Mensaje Enviado correctamente.";
+                        else SuccessMessage = "El mensaje no fue enviado";
+                    }
+                }
             }
             catch (Exception E)
             {
