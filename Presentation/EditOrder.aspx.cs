@@ -9,6 +9,7 @@ using General.Enums;
 using System.Configuration;
 using PlannerWeb.App_Code.Base;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace PlannerWeb
 {
@@ -89,13 +90,15 @@ namespace PlannerWeb
                         Sender.Close();
 
                         if (ResponseSMS.status.Equals("000")) SuccessMessage = "Mensaje Enviado correctamente.";
-                        else SuccessMessage = "El mensaje no fue enviado";
+                        else SuccessMessage = new StringBuilder().AppendFormat(@"Mensaje no enviado:\n\tError: {0}\n\tDescripción: {1}", 
+                                                                                ResponseSMS.status,
+                                                                                String.Join(@"\n\t-", (object)ResponseSMS.details)).ToString();
                     }
                 }
             }
             catch (Exception E)
             {
-                SuccessMessage = "Hubó un problema al enviar el mensaje.";
+                SuccessMessage = new StringBuilder().AppendFormat(@"Hubó un problema al enviar el mensaje.\n\rError: {0}", E.Message).ToString();
             }
         }
     }
