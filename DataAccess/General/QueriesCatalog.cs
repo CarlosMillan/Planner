@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using General.Enums;
 
 namespace DataAccess.General
@@ -33,7 +33,7 @@ namespace DataAccess.General
 																								,c.PersonalTelefonoMovil CELLPHONE
                                                                                                 ,v.[FechaEmision] ORDERDATE
                                                                                                 ,v.[Situacion] SITUATION
-                                                                                                ,v.[FechaRequerida] PROMISEDATE
+                                                                                                ,v.[FechaOriginal] PROMISEDATE
                                                                                                 ,v.[ServicioSerie]
                                                                                                 ,v.[ServicioIdentificador]
                                                                                                 ,v.[ServicioPlacas] PLATES
@@ -72,7 +72,7 @@ namespace DataAccess.General
 								,c.PersonalTelefonoMovil CELLPHONE
                                 ,v.[FechaEmision] ORDERDATE
                                 ,v.[Situacion] SITUATION
-                                ,v.[FechaRequerida] PROMISEDATE
+                                ,v.[FechaOriginal] PROMISEDATE
                                 ,v.[ServicioSerie]
                                 ,v.[ServicioIdentificador]
                                 ,v.[ServicioPlacas] PLATES
@@ -101,15 +101,15 @@ namespace DataAccess.General
 	                        COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
 	                        COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31	
                         from (select v.[Situacion],
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) <= -6 then 1 else 0 end Menor6,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) <= -3 and datediff(DD, getDate(), v.[FechaRequerida]) >= -5 then 1 else 0 end Menor3_5,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) <= -1 and datediff(DD, getDate(), v.[FechaRequerida]) >= -2 then 1 else 0 end Menor2_1,
-	                        case when datediff(DD, getdate(), v.FechaRequerida) = 0 then 1 else 0 end Hoy,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 1 and datediff(DD, getDate(), v.[FechaRequerida]) <= 3 then 1 else 0 end Mayor1_3,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 4 and datediff(DD, getDate(), v.[FechaRequerida]) <= 8 then 1 else 0 end Mayor4_8,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 9 and datediff(DD, getDate(), v.[FechaRequerida]) <= 20 then 1 else 0 end Mayor9_20,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 21 and datediff(DD, getDate(), v.[FechaRequerida]) <= 30 then 1 else 0 end Mayor21_30,
-	                        case when datediff(DD, getDate(), v.[FechaRequerida]) >= 31 then 1 else 0 end Mayor31	
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) <= -6 then 1 else 0 end Menor6,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) <= -3 and datediff(DD, getDate(), v.[FechaOriginal]) >= -5 then 1 else 0 end Menor3_5,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) <= -1 and datediff(DD, getDate(), v.[FechaOriginal]) >= -2 then 1 else 0 end Menor2_1,
+	                        case when datediff(DD, getdate(), v.FechaOriginal) = 0 then 1 else 0 end Hoy,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) >= 1 and datediff(DD, getDate(), v.[FechaOriginal]) <= 3 then 1 else 0 end Mayor1_3,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) >= 4 and datediff(DD, getDate(), v.[FechaOriginal]) <= 8 then 1 else 0 end Mayor4_8,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) >= 9 and datediff(DD, getDate(), v.[FechaOriginal]) <= 20 then 1 else 0 end Mayor9_20,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) >= 21 and datediff(DD, getDate(), v.[FechaOriginal]) <= 30 then 1 else 0 end Mayor21_30,
+	                        case when datediff(DD, getDate(), v.[FechaOriginal]) >= 31 then 1 else 0 end Mayor31	
                         from Venta V, ART AR, CTE C
                         where {1} {0}
                         AND V.ESTATUS = 'PENDIENTE'
@@ -135,15 +135,15 @@ namespace DataAccess.General
 	                            COUNT(case Mayor21_30 when 1 then Mayor21_30 else null end) Mayor21_30,
 	                            COUNT(case Mayor31 when 1 then Mayor31 else null end) Mayor31	
                             from (select v.Agente,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) <= -6 then 1 else 0 end Menor6,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) <= -3 and datediff(DD, getDate(), v.[FechaRequerida]) >= -5 then 1 else 0 end Menor3_5,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) <= -1 and datediff(DD, getDate(), v.[FechaRequerida]) >= -2 then 1 else 0 end Menor2_1,
-	                            case when datediff(DD, getdate(), v.FechaRequerida) = 0 then 1 else 0 end Hoy,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 1 and datediff(DD, getDate(), v.[FechaRequerida]) <= 3 then 1 else 0 end Mayor1_3,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 4 and datediff(DD, getDate(), v.[FechaRequerida]) <= 8 then 1 else 0 end Mayor4_8,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 9 and datediff(DD, getDate(), v.[FechaRequerida]) <= 20 then 1 else 0 end Mayor9_20,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 21 and datediff(DD, getDate(), v.[FechaRequerida]) <= 30 then 1 else 0 end Mayor21_30,
-	                            case when datediff(DD, getDate(), v.[FechaRequerida]) >= 31 then 1 else 0 end Mayor31	
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) <= -6 then 1 else 0 end Menor6,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) <= -3 and datediff(DD, getDate(), v.[FechaOriginal]) >= -5 then 1 else 0 end Menor3_5,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) <= -1 and datediff(DD, getDate(), v.[FechaOriginal]) >= -2 then 1 else 0 end Menor2_1,
+	                            case when datediff(DD, getdate(), v.FechaOriginal) = 0 then 1 else 0 end Hoy,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) >= 1 and datediff(DD, getDate(), v.[FechaOriginal]) <= 3 then 1 else 0 end Mayor1_3,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) >= 4 and datediff(DD, getDate(), v.[FechaOriginal]) <= 8 then 1 else 0 end Mayor4_8,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) >= 9 and datediff(DD, getDate(), v.[FechaOriginal]) <= 20 then 1 else 0 end Mayor9_20,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) >= 21 and datediff(DD, getDate(), v.[FechaOriginal]) <= 30 then 1 else 0 end Mayor21_30,
+	                            case when datediff(DD, getDate(), v.[FechaOriginal]) >= 31 then 1 else 0 end Mayor31	
                             from Venta V, ART AR, CTE C
                             where {1} {0}
                             AND V.ESTATUS = 'PENDIENTE'
