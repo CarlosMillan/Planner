@@ -30,3 +30,21 @@ th.data
 {
     width: 70px;
 }
+
+#DvMainTitle.headerpanel
+{        
+    width:22%;
+    text-align:center;    
+}
+
+#DvLogo.headerpanel
+{    
+    width:39%;
+    font-size:medium;
+}
+
+#DvSubTitle.headerpanel
+{    
+    width:39%;
+    text-align: right;
+}

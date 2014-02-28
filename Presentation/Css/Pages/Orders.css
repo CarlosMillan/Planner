@@ -27,7 +27,12 @@ div#DvTitle
 {    
     height:100%;    
     float:left;
-    width:auto;
+    width:80%;
+}
+
+div#DvTitle div
+{
+    float:left;
 }
 
 div#DvMenu div, div#DvTitle div

@@ -21,6 +21,7 @@ namespace PlannerWeb
         private bool IsAll;
         private static string Svc;
         Orders Ords;
+        public StringBuilder Path;
 
         protected void Page_Init(object sender, EventArgs e) 
         {
@@ -33,8 +34,10 @@ namespace PlannerWeb
                 Svc = Request["Svc"];
                 F = new Filters();
                 SelectFilters();
+                Path = new StringBuilder();
                 C = new OrdersController();
                 Ords = C.GetOrders(F);
+                Path.AppendFormat("{0} > {1} > {2}", F.SelectedWorkShop.Name, F.SelectedAccess.Name, GetSelectedAccessOption());
 
                 if (Ords.TotalOrders == 0)
                 {
@@ -171,6 +174,14 @@ namespace PlannerWeb
             {
                 Response.Redirect("Default.aspx");
             }
+        }
+
+        private string GetSelectedAccessOption()
+        {
+            if (F.SelectedAssesor != null) return F.SelectedAssesor.Name;
+            else if (F.SelectedSituation != null) return F.SelectedSituation.Name;
+            else if (F.SelectedOrdersType != null) return F.SelectedOrdersType.Name;
+            else return F.SelectedOrderClientPlates;
         }
         #endregion
     }

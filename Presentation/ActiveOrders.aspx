@@ -11,6 +11,10 @@
     </script>
 </asp:Content>
 
+<asp:Content ID="ContentPath" ContentPlaceHolderID="Path" runat="server">
+    <div class="headerTitle subtitle"><%=Path %></div>
+</asp:Content>
+
 <asp:Content ID="ContenTitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
     <div class="headerTitle">PLANEADOR DE SERVICIO</div>
 </asp:Content>

@@ -29,6 +29,7 @@ namespace PlannerWeb
         public StringBuilder AsesorsHeadersHtml;
         public StringBuilder OrderTypeHeadersHtml;
         public int AmountAsssors;
+        public StringBuilder Path;
 
         protected void Page_Init(object seder, EventArgs e)
         {
@@ -41,6 +42,7 @@ namespace PlannerWeb
             AsessorsHtml = new StringBuilder();
             AsesorsHeadersHtml = new StringBuilder();
             OrderTypeHeadersHtml = new StringBuilder();
+            Path = new StringBuilder();
             F = new Filters();
             SelectFilters();
             CurrentPage = 0;
@@ -49,6 +51,7 @@ namespace PlannerWeb
             GetAsesorsHeaders();
             GetOrdersHeaders();
             AmountAsssors =  F.Assesors.FindAll(Asr => Asr.WorkShop == 1).Count;
+            Path.AppendFormat("{0} > {1} > {2}", F.SelectedWorkShop.Name, F.SelectedAccess.Name, GetSelectedAccessOption());
 
             if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
             {
@@ -456,6 +459,14 @@ namespace PlannerWeb
             }
 
             OrderTypeHeadersHtml.Append("<th class='odd'>TOTAL</th>");
+        }
+
+        private string GetSelectedAccessOption()
+        {
+            if (F.SelectedAssesor != null) return F.SelectedAssesor.Name;
+            else if (F.SelectedSituation != null) return F.SelectedSituation.Name;
+            else if (F.SelectedOrdersType != null) return F.SelectedOrdersType.Name;
+            else return F.SelectedOrderClientPlates;
         }
         #endregion
     }

@@ -3,7 +3,7 @@
     <script src="Scripts/Pages/Orders.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="ContentEditTitle" ContentPlaceHolderID="ContentPlaceHolderEditTitle" runat="server">
-<div>Órdenes</div>
+<div>Órdenes</div> <div>(<%=Path %>)</div>
 </asp:Content>
 <asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
 <input type="hidden" name="ReturnUrl" id="ReturnUrl" />

@@ -27,6 +27,7 @@
             <div id="DvHeader">
                 <div id="DvLogo" class="headerpanel">
                     <%--<img class="logo" src="Css/Images/Logo.png" alt="Logo" width="100" height="80" />--%>
+                    <asp:ContentPlaceHolder ID="Path" runat="server"></asp:ContentPlaceHolder>
                 </div>
                 <div id="DvMainTitle" class="headerpanel">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderTitle" runat="server"></asp:ContentPlaceHolder>
