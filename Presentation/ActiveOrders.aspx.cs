@@ -45,7 +45,7 @@ namespace PlannerWeb
             Path = new StringBuilder();
             F = new Filters();
             SelectFilters();
-            CurrentPage = 0;
+            CurrentPage = 1;
             IsFirstSummary = true;
             GetHtmlAssesors();
             GetAsesorsHeaders();
