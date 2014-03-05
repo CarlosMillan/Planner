@@ -45,7 +45,7 @@ namespace PlannerWeb
             Path = new StringBuilder();
             F = new Filters();
             SelectFilters();
-            CurrentPage = 1;
+            CurrentPage = 0;
             IsFirstSummary = true;
             GetHtmlAssesors();
             GetAsesorsHeaders();
@@ -53,7 +53,7 @@ namespace PlannerWeb
             AmountAsssors =  F.Assesors.FindAll(Asr => Asr.WorkShop == 1).Count;
             Path.AppendFormat("{0} > {1} > {2}", F.SelectedWorkShop.Name, F.SelectedAccess.Name, GetSelectedAccessOption());
 
-            if (ActiveOrdersController.GetTotalOrders(CurrentPage, Int32.Parse(ConfigurationManager.AppSettings["Pagination"]), F, true) == 0)
+            if (ActiveOrdersController.GetTotalOrders(F) == 0)
             {
                 Response.Redirect("Default.aspx?NoDataFound=True");
             }

@@ -24,11 +24,11 @@ namespace DataAccess
             catch { throw; }
         }
 
-        public int GetTotalOrders(int pagenumber, int pagination, Filters filters, bool onlytotal)
+        public int GetTotalOrders(Filters filters)
         {
             try
             {
-                return base.GetTotalOrders(BuildQuery(pagenumber, pagination, filters), GetFilterQuery(filters), GetServiceTypeQuery(filters), onlytotal);                                
+                return base.GetTotalOrders(GetFilterQuery(filters), GetServiceTypeQuery(filters));                                
             }
             catch { throw; }
         }

@@ -50,7 +50,7 @@ namespace DataAccess.Bases
             return Result;
         }
 
-        public int GetTotalOrders(string query, string filters, string service, bool onlytotal)
+        public int GetTotalOrders(string filters, string service)
         {
             int Result = 0;
 
