@@ -9,22 +9,6 @@ namespace General.Utils
     {
         public DataBaseManager(){ }
         
-        //public DataTable GetTable(string tablename)
-        //{
-        //    try
-        //    {
-        //        DataTable Result = new DataTable();
-        //        SqlConnection Connection = null;
-        //        OpenConnection(out Connection);
-        //        SqlCommand Command = new SqlCommand("SELECT * FROM USERS", Connection);                
-        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
-        //        Adapter.Fill(Result);
-        //        CloseConnection(Connection);
-        //        return Result;
-        //    }
-        //    catch { throw; }
-        //}
-
         #region Public Static Methods
         public static DataTable GetTable(string query)
         {
