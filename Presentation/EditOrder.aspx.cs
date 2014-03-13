@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace PlannerWeb
 {
@@ -59,7 +60,8 @@ namespace PlannerWeb
                 string ClearPhone = string.Empty;
                 string FinalPhone = string.Empty;
                 string Message = Request["Sms"].ToString();
-
+                JavaScriptSerializer json;
+                
                 if (Regex.IsMatch(Request["Phone"].ToString(), @"(?!\-|\s|\d|\(|\))."))
                 {
                     SuccessMessage = "El télefono solo puede contener digitos, espacios, guiones y paréntesis.";
@@ -100,6 +102,9 @@ namespace PlannerWeb
                             string responseData = responseReader.ReadToEnd();
                             responseReader.Close();
                             webRequest.GetResponse().Close();
+                            string[] rs1 = responseData.Split(',');
+                            string[] rs2 = rs1[1].Split(':');
+                            SuccessMessage = rs2[1].Substring(1, rs2[1].Length - 2);
                         }
                         else SuccessMessage = "El mensaje solo puede tener letras (sin acento), números, puntos y comas.";
                     }
