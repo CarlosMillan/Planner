@@ -10,6 +10,8 @@ using System.Configuration;
 using PlannerWeb.App_Code.Base;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Net;
+using System.IO;
 
 namespace PlannerWeb
 {
@@ -56,6 +58,7 @@ namespace PlannerWeb
             {
                 string ClearPhone = string.Empty;
                 string FinalPhone = string.Empty;
+                string Message = Request["Sms"].ToString();
 
                 if (Regex.IsMatch(Request["Phone"].ToString(), @"(?!\-|\s|\d|\(|\))."))
                 {
@@ -72,27 +75,33 @@ namespace PlannerWeb
                     }
                     else
                     {
-                        SMS.SmsGatewayPortClient Sender = new SMS.SmsGatewayPortClient("SmsGatewayApi");
-                        SMS.Credentials Crd = new SMS.Credentials();
-                        Crd.domainId = ConfigurationManager.AppSettings["DoaminIDSMS"];
-                        Crd.login = ConfigurationManager.AppSettings["LoginSMS"];
-                        Crd.passwd = ConfigurationManager.AppSettings["PasswordSMS"];
-                        Sender.Open();
+                        if (Regex.IsMatch(Message, @"^[A-Za-z,.0-9\s]+$"))
+                        {
+                            string urlcredito = "http://69.65.45.180/api.credito.new.php?";
+                            string urlenviomensaje = "http://69.65.45.180/api.envio.new.php?";
+                            Message = HttpContext.Current.Server.UrlEncode(Message);
+                            string apikey = "72f0bf2f9876a56eaffac4bbcb8f05f1a065e844";
+                            string postString = "apikey=" + apikey + "&mensaje=" + Message + "&numcelular=" + FinalPhone + "&numregion=" + ConfigurationManager.AppSettings["CountryCode"] + "";
+                            const string contentType = "application/x-www-form-urlencoded";
+                            System.Net.ServicePointManager.Expect100Continue = false;
 
-                        SMS.TextMessageRequest SMSRequest = new SMS.TextMessageRequest();
-                        SMS.TextMessageResponse ResponseSMS = new SMS.TextMessageResponse();
-                        SMS.TextMessage Msg = new SMS.TextMessage();
-                        Msg.msg = Request["Sms"].ToString();
-                        SMSRequest.credentials = Crd;
-                        SMSRequest.destination = new string[] { String.Concat(ConfigurationManager.AppSettings["CountryCode"], FinalPhone) };
-                        SMSRequest.message = Msg;
-                        ResponseSMS = Sender.sendSms(SMSRequest);
-                        Sender.Close();
+                            CookieContainer cookies = new CookieContainer();
+                            HttpWebRequest webRequest = WebRequest.Create(urlenviomensaje) as HttpWebRequest;
+                            webRequest.Method = "POST";
+                            webRequest.ContentType = contentType;
+                            webRequest.CookieContainer = cookies;
+                            webRequest.ContentLength = postString.Length;
 
-                        if (ResponseSMS.status.Equals("000")) SuccessMessage = "Mensaje Enviado correctamente.";
-                        else SuccessMessage = new StringBuilder().AppendFormat(@"Mensaje no enviado:\n\tError: {0}\n\tDescripción: {1}", 
-                                                                                ResponseSMS.status,
-                                                                                String.Join(@"\n\t-", (object)ResponseSMS.details)).ToString();
+                            StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream());
+                            requestWriter.Write(postString);
+                            requestWriter.Close();
+
+                            StreamReader responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
+                            string responseData = responseReader.ReadToEnd();
+                            responseReader.Close();
+                            webRequest.GetResponse().Close();
+                        }
+                        else SuccessMessage = "El mensaje solo puede tener letras (sin acento), números, puntos y comas.";
                     }
                 }
             }
