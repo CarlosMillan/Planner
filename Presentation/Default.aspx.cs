@@ -9,6 +9,7 @@ using System.Web.Security;
 using Business.Controllers;
 using System.Text;
 using General.DTOs.Classes;
+using General.Utils;
 
 namespace PlannerWeb
 {
@@ -41,7 +42,15 @@ namespace PlannerWeb
 
             foreach(WorkShop W in C.F.WorkShops)
             {
-                HtmlWorkShops.AppendFormat("<option value='{0}'>{1}</option>", W.WorkShopId, W.Name);
+                if (Session["Name"] != null)
+                { 
+                    if(new Users().HasAcceess(Session["Name"].ToString(), W.WorkShopId))
+                    {
+                        HtmlWorkShops.AppendFormat("<option value='{0}'>{1}</option>", W.WorkShopId, W.Name);
+                        break;
+                    }
+                }
+                else HtmlWorkShops.AppendFormat("<option value='{0}'>{1}</option>", W.WorkShopId, W.Name);
             }
 
             foreach(Access A in C.F.AccessAs)

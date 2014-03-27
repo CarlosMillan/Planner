@@ -13,6 +13,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using General.Utils;
 
 namespace PlannerWeb
 {
@@ -82,7 +83,7 @@ namespace PlannerWeb
                             string urlcredito = "http://69.65.45.180/api.credito.new.php?";
                             string urlenviomensaje = "http://69.65.45.180/api.envio.new.php?";
                             Message = HttpContext.Current.Server.UrlEncode(Message);
-                            string apikey = "72f0bf2f9876a56eaffac4bbcb8f05f1a065e844";
+                            string apikey = new Users().AssignAPIKey(Session["Name"].ToString());
                             string postString = "apikey=" + apikey + "&mensaje=" + Message + "&numcelular=" + FinalPhone + "&numregion=" + ConfigurationManager.AppSettings["CountryCode"] + "";
                             const string contentType = "application/x-www-form-urlencoded";
                             System.Net.ServicePointManager.Expect100Continue = false;
