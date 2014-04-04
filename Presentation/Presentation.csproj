@@ -57,11 +57,13 @@
     <Content Include="Css\General.css" />
     <Content Include="Css\Images\Logo.png" />
     <Content Include="Css\Pages\ActiveOrders.css" />
+    <Content Include="Css\Pages\Dates.css" />
     <Content Include="Css\Pages\Default.css" />
     <Content Include="Css\Pages\EditOrders.css" />
     <Content Include="Css\Pages\Login.css" />
     <Content Include="Css\Pages\Orders.css" />
     <Content Include="Css\Pages\StoppedOrders.css" />
+    <Content Include="Dates.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditOrder.aspx" />
     <Content Include="Login.aspx" />
@@ -70,6 +72,7 @@
     <Content Include="Scripts\General\Functions.js" />
     <Content Include="Scripts\JQuery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Pages\ActiveOrders.js" />
+    <Content Include="Scripts\Pages\Dates.js" />
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\EditMaster.js" />
     <Content Include="Scripts\Pages\EditOrder.js" />
@@ -98,6 +101,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App_Code\PageInfo.cs" />
+    <Compile Include="Dates.aspx.cs">
+      <DependentUpon>Dates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dates.aspx.designer.cs">
+      <DependentUpon>Dates.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

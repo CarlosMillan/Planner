@@ -1,0 +1,76 @@
+﻿table#TbData
+{
+    width:70%;
+    float:left;
+}
+
+table#Morning
+{
+    float:left;
+    width:30%;
+    margin-right:70px
+}
+
+table#Evening
+{
+    float:left;
+    width:30%;
+}
+
+.schedules
+{
+    clear:both;
+    width:100%;
+    height:auto;
+    padding-top:50px;
+}
+
+.picturecontainer
+{    
+    width: 300px;
+    height : 300px;
+    float:left;
+    margin-left:50px;
+}
+
+.picture
+{
+    background-color:white;
+    width:100%;
+    height:300px;
+}
+
+.pictitle
+{
+    color:rgb(147,205,221);
+    font-weight: bold;
+    font-size: 18px;
+    width:100%;
+    text-align:center;
+}
+
+div.headerTitle
+{
+    text-align:center;
+}
+
+#DvMainTitle.headerpanel
+{
+    width:50%;
+}
+
+#DvLogo.headerpanel
+{
+    width: 25%;
+}
+
+#DvSubTitle.headerpanel
+{
+    width: 25%;
+}
+
+.schedules div.pictitle
+{
+    width: 373px;
+    float: left;
+}

@@ -174,6 +174,22 @@ namespace DataAccess.General
                         GROUP BY [SITUACION]"; 
             }
         }
+
+        public static string GetDates 
+        {
+            get
+            {
+                return @"SELECT * FROM CITAS";
+            }
+        }
+
+        public static string GetTurns
+        {
+            get
+            {
+                return @"SELECT * FROM TURNOS";
+            }
+        }
         #endregion
     }
 }
