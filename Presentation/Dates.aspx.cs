@@ -7,18 +7,25 @@ using System.Web.UI.WebControls;
 using Business.Controllers;
 using DTOs = General.DTOs.Classes;
 using System.Text;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.Web.Script.Serialization;
+using PlannerWeb.App_Code;
 
 namespace PlannerWeb
 {
     public partial class Dates : System.Web.UI.Page
     {
-        public string DatesTableHtml;
-        public string MorningTableHtml;
-        public string EveningTableHtml; 
+        private static string DatesTableHtml;
+        private static string MorningTableHtml;
+        private static string EveningTableHtml;
+        private static int TotalPages;
+        private static int CurrentPage;
 
         protected void Page_Init(object seder, EventArgs e)
         {
-            GetDates();
+            CurrentPage = 0;
+            //GetDates();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -27,13 +34,31 @@ namespace PlannerWeb
 
         public void GetDates()
         {
-            DTOs.Dates D = DatesController.GetDates();
-            DatesTableHtml = GetHtmlDateTable(D);
-            GetHtmlTurnTable(D, out MorningTableHtml, out EveningTableHtml);
+            DTOs.Dates D = DatesController.GetDates(1);
+            GetHtmlDateTable(D);
+            GetHtmlTurnTable(D);
         }
 
+        #region WebMethods
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string GetDatesPage() 
+        {
+            JavaScriptSerializer Json = new JavaScriptSerializer();
+            PageDateInfo Info;
+            GetValidPage();
+            DTOs.Dates D = DatesController.GetDates(CurrentPage);
+            GetHtmlDateTable(D);
+            GetHtmlTurnTable(D);
+            TotalPages = D.TotalPages;
+
+            Info = new PageDateInfo(D.AssessorName, TotalPages, DatesTableHtml, MorningTableHtml, EveningTableHtml);
+            return Json.Serialize(Info);
+        }
+        #endregion
+
         #region Private Methods
-        private string GetHtmlDateTable(DTOs.Dates dates)
+        private static void GetHtmlDateTable(DTOs.Dates dates)
         {
             StringBuilder Table = new StringBuilder();
 
@@ -56,10 +81,10 @@ namespace PlannerWeb
                                      "Empty");
             }
 
-            return Table.ToString();
+            DatesTableHtml = Table.ToString();
         }
 
-        private void GetHtmlTurnTable(DTOs.Dates dates, out string morningtable, out string eveningatable)
+        private static void GetHtmlTurnTable(DTOs.Dates dates)
         {
             StringBuilder MorningTable = new StringBuilder();
             StringBuilder EveningTable = new StringBuilder();
@@ -88,8 +113,15 @@ namespace PlannerWeb
                 }
             }
 
-            morningtable = MorningTable.ToString();
-            eveningatable = EveningTable.ToString();
+            MorningTableHtml = MorningTable.ToString();
+            EveningTableHtml = EveningTable.ToString();
+        }
+
+        private static void GetValidPage()
+        {
+            CurrentPage++;
+
+            if (CurrentPage > TotalPages) CurrentPage = 1;            
         }
         #endregion
     }

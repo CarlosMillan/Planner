@@ -37,8 +37,9 @@
                 <td>sdf</td>
                 <td>sdf</td>
                 <td>sdf</td>                
-            </tr>--%>
+            </tr>
             <%=DatesTableHtml %>
+            --%>
         <tfoot>
         </tfoot>
     </table>
@@ -46,7 +47,7 @@
     
     <div class="picturecontainer">
         <div class="pictitle">SU ASESOR DE SERVICIO</div>
-        <div class="picture"></div>
+        <div class="picture" style="background-image:url(./AssesorsPictures/world.jpg)"></div>
         <div class="pictitle">ASDFF WERWER VDFF 3ERERERE</div>
     </div>
     
@@ -71,8 +72,9 @@
                 <tr class="pair">
                     <td>10:00</td>
                     <td>diponible</td>
-                </tr>--%>
+                </tr>
                 <%=MorningTableHtml %>
+                --%>
             <tfoot>
             </tfoot>
         </table>
@@ -96,12 +98,13 @@
                 <tr class="pair">
                     <td>18:00</td>
                     <td>disponible</td>
-                </tr>--%>
+                </tr>
                 <%=EveningTableHtml %>
+                --%>
             <tfoot>
             </tfoot>
         </table>
     </div>
-    <div class="headerTitle">NUESTRO OBJETIVO ES QUE UESTED ESTE TOTALMENTE SATISFECHO</div>
+    <div class="headerTitle">NUESTRO OBJETIVO ES QUE USTED ESTE TOTALMENTE SATISFECHO</div>
 </div>
 </asp:Content>

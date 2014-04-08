@@ -11,13 +11,20 @@ namespace DataAccess
 {
     public class DatesData
     {
+        private int _totalpages;
+        private string _assessorid;
+        private string _assessorname;
+
         public DatesData() { }
 
-        public DTOs.Dates GetDates()
+        public DTOs.Dates GetDates(int page)
         {
+            _totalpages = (int)DataBaseManager.GetValue(QueriesCatalog.GetTotalDatesPages);
+            GetAssessorData(page);
             string QueryDates = BuildQueryDates();
             string QueryTurns = BuildQueryTurns();
-            DTOs.Dates Result = new DTOs.Dates();
+
+            DTOs.Dates Result = new DTOs.Dates(_assessorname, _totalpages);
             DataTable DatesTable = DataBaseManager.GetTable(QueryDates);
             DataTable TurnsTable = DataBaseManager.GetTable(QueryTurns);
 
@@ -47,14 +54,33 @@ namespace DataAccess
             return Result;
         }
 
-        public string BuildQueryDates()
+
+        #region Private Methods
+        private string BuildQueryDates()
         {
-            return QueriesCatalog.GetDates;
+            return new StringBuilder().AppendFormat(QueriesCatalog.GetDates, _assessorid).ToString();
         }
 
-        public string BuildQueryTurns()
+        private string BuildQueryTurns()
         {
-            return QueriesCatalog.GetTurns;
+            return new StringBuilder().AppendFormat(QueriesCatalog.GetTurns, _assessorid).ToString();
         }
+
+        private void GetAssessorData(int page)
+        {
+            DataTable DatesTable = DataBaseManager.GetTable(QueriesCatalog.GetDatesAssessors);
+
+            if (page > 0 && page <= _totalpages)
+            {
+                _assessorid = DatesTable.Rows[page - 1]["Asesor"].ToString();
+                _assessorname = DatesTable.Rows[page - 1]["Name"].ToString();
+            }
+            else 
+            {
+                _assessorid = "ID";
+                _assessorname = "NONE";
+            }
+        }
+        #endregion
     }
 }

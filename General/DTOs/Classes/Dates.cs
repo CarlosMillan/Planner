@@ -9,6 +9,8 @@ namespace General.DTOs.Classes
     {
         private List<Date> _dts;
         private List<Turn> _trns;
+        private string _assessorname;
+        private int _totalpages;
 
         #region Propierties
         public List<Date> Dts
@@ -20,12 +22,24 @@ namespace General.DTOs.Classes
         {
             get { return _trns; } 
         }
+
+        public string AssessorName
+        {
+            get { return _assessorname; }
+        }
+
+        public int TotalPages
+        {
+            get { return _totalpages; }
+        }
         #endregion
 
-        public Dates() 
+        public Dates(string aname, int totalpages)
         {
             _dts = new List<Date>();
             _trns = new List<Turn>();
+            _assessorname = aname;
+            _totalpages = totalpages;
         }
     }
 

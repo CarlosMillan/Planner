@@ -179,7 +179,17 @@ namespace DataAccess.General
         {
             get
             {
-                return @"SELECT * FROM CITAS";
+                return @"SELECT 
+		                     [HORA]
+		                    ,[CLIENTE]
+		                    ,[VEHICULO]
+		                    ,[PLACAS]
+		                    ,[SERVICIO]
+		                    ,[CITA_EFECTIVA]
+		                    ,[ASESOR]
+	                     FROM [CITAS]
+	                     WHERE ASESOR = '{0}'
+	                     ORDER BY HORA";
             }
         }
 
@@ -187,7 +197,29 @@ namespace DataAccess.General
         {
             get
             {
-                return @"SELECT * FROM TURNOS";
+                return @"SELECT [HORA]
+                               ,[STATUS]
+                               ,[ASESOR]
+                               ,[TURNO]
+                         FROM [TURNOS]
+                         WHERE ASESOR = '{0}'";
+            }
+        }
+
+        public static string GetTotalDatesPages
+        {
+            get { return @"SELECT DISTINCT COUNT(*) OVER() FROM CITAS GROUP BY ASESOR"; }
+        }
+
+        public static string GetDatesAssessors
+        {
+            get
+            {
+                return @"SELECT C.ASESOR, T.NOMBRE NAME
+		                 FROM CITAS C, CTE T
+		                 WHERE C.ASESOR = T.CLIENTE
+		                 GROUP BY C.ASESOR , T.NOMBRE
+		                 ORDER BY C.ASESOR";
             }
         }
         #endregion
