@@ -24,7 +24,7 @@ namespace DataAccess
             string QueryDates = BuildQueryDates();
             string QueryTurns = BuildQueryTurns();
 
-            DTOs.Dates Result = new DTOs.Dates(_assessorname, _totalpages);
+            DTOs.Dates Result = new DTOs.Dates(_assessorid, _assessorname, _totalpages);
             DataTable DatesTable = DataBaseManager.GetTable(QueryDates);
             DataTable TurnsTable = DataBaseManager.GetTable(QueryTurns);
 

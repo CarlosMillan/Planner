@@ -51,8 +51,7 @@ namespace PlannerWeb
             GetHtmlDateTable(D);
             GetHtmlTurnTable(D);
             TotalPages = D.TotalPages;
-
-            Info = new PageDateInfo(D.AssessorName, TotalPages, DatesTableHtml, MorningTableHtml, EveningTableHtml);
+            Info = new PageDateInfo(D.AssessorId, D.AssessorName, TotalPages, DatesTableHtml, MorningTableHtml, EveningTableHtml);
             return Json.Serialize(Info);
         }
         #endregion

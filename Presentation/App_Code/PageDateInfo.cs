@@ -9,6 +9,7 @@ namespace PlannerWeb.App_Code
     {
         #region Fields
         private string _assesorname;
+        private string _assessorid;
         private int _totalpages;
         private string _datestable;
         private string _morningtable;
@@ -16,6 +17,11 @@ namespace PlannerWeb.App_Code
         #endregion
 
         #region Propierties
+        public string AssessorId
+        {
+            get { return _assessorid; }
+        }
+
         public string AssessorName
         {
             get { return _assesorname; }
@@ -36,19 +42,20 @@ namespace PlannerWeb.App_Code
             get { return _morningtable; }
         }
 
-        public string Eveningtable
+        public string EveningTable
         {
             get { return _eveningtable; }
         }
         #endregion
 
-        public PageDateInfo(string aname, int totalpages, string datestable, string morningtable, string eveningtable)
+        public PageDateInfo(string assessorid, string aname, int totalpages, string datestable, string morningtable, string eveningtable)
         {
             _assesorname = aname;
             _totalpages = totalpages;
             _datestable = datestable;
             _morningtable = morningtable;
             _eveningtable = eveningtable;
+            _assessorid = assessorid;
         }
     }
 }

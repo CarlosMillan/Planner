@@ -24,7 +24,15 @@
     },
     GetPage: function () {
         Ajax.Call('Dates', 'GetDatesPage', '{}', function (response) {
-            
+            var Result = jQuery.parseJSON(response.d);
+
+            $('#DvTable #TbData tbody').html(Result.DatesTable);
+            $('.schedules #Morning tbody').html(Result.MorningTable);
+            $('.schedules #Evening tbody').html(Result.EveningTable);
+            $('.picturecontainer .pictitle.name').text(Result.AssessorName);
+            $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
+            Dates.AdjustSchedulesTable();
+            Dates.AdjustClientsTable();
         });
     }
 }

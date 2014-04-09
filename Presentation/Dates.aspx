@@ -47,8 +47,8 @@
     
     <div class="picturecontainer">
         <div class="pictitle">SU ASESOR DE SERVICIO</div>
-        <div class="picture" style="background-image:url(./AssesorsPictures/world.jpg)"></div>
-        <div class="pictitle">ASDFF WERWER VDFF 3ERERERE</div>
+        <div class="picture"></div>
+        <div class="pictitle name"></div>
     </div>
     
 
