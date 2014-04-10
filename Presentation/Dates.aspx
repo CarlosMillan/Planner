@@ -30,20 +30,10 @@
 
         <tbody>
         </tbody>
-<%--            <tr class="odd">
-                <td>sdf</td>
-                <td>sdf</td>
-                <td>sdf</td>
-                <td>sdf</td>
-                <td>sdf</td>
-                <td>sdf</td>                
-            </tr>
-            <%=DatesTableHtml %>
-            --%>
+
         <tfoot>
         </tfoot>
     </table>
-
     
     <div class="picturecontainer">
         <div class="pictitle">SU ASESOR DE SERVICIO</div>
@@ -51,7 +41,6 @@
         <div class="pictitle name"></div>
     </div>
     
-
     <div class="schedules">        
         <table cellspacing="0" id="Morning">         
         <caption class="pictitle">TURNO MATUTINO</caption>
@@ -65,16 +54,7 @@
 
             <tbody>
             </tbody>
-          <%--      <tr class="odd">
-                    <td>8:00</td>
-                    <td>diponible</td>
-                </tr>
-                <tr class="pair">
-                    <td>10:00</td>
-                    <td>diponible</td>
-                </tr>
-                <%=MorningTableHtml %>
-                --%>
+
             <tfoot>
             </tfoot>
         </table>
@@ -91,20 +71,11 @@
 
             <tbody>
             </tbody>
-         <%--       <tr class="odd">
-                    <td>13:00</td>
-                    <td>ocupado</td>
-                </tr>
-                <tr class="pair">
-                    <td>18:00</td>
-                    <td>disponible</td>
-                </tr>
-                <%=EveningTableHtml %>
-                --%>
+
             <tfoot>
             </tfoot>
         </table>
-    </div>
-    <div class="headerTitle">NUESTRO OBJETIVO ES QUE USTED ESTE TOTALMENTE SATISFECHO</div>
+    </div>    
 </div>
+<div class="headerTitle">NUESTRO OBJETIVO ES QUE USTED ESTE TOTALMENTE SATISFECHO</div>
 </asp:Content>

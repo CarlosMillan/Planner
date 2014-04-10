@@ -1,11 +1,12 @@
 ﻿Dates = {
     TotalDates: 0,
+    FirsTime: true,
     Initialize: function () {
         Dates.AdjustClientsTable();
         Dates.AdjustSchedulesTable();
 
         $(document).ajaxComplete(function (event, request, settings) {
-            //if (Dates.TotalDates == 0) window.location = 'Default.aspx?NoDataFound=True';
+            //    if (Dates.TotalDates == 0) window.location = 'Default.aspx?NoDataFound=True';
 
             setTimeout(Dates.GetPage, Master.TimePagination);
         });
@@ -26,13 +27,30 @@
         Ajax.Call('Dates', 'GetDatesPage', '{}', function (response) {
             var Result = jQuery.parseJSON(response.d);
 
-            $('#DvTable #TbData tbody').html(Result.DatesTable);
-            $('.schedules #Morning tbody').html(Result.MorningTable);
-            $('.schedules #Evening tbody').html(Result.EveningTable);
-            $('.picturecontainer .pictitle.name').text(Result.AssessorName);
-            $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
-            Dates.AdjustSchedulesTable();
-            Dates.AdjustClientsTable();
+            if (!Dates.FirsTime) {                
+                $('#DvTable').fadeOut(500, function () {
+                    Dates.TotalDates = Result.TotalPages;
+                    $('#DvTable #TbData tbody').html(Result.DatesTable);
+                    $('.schedules #Morning tbody').html(Result.MorningTable);
+                    $('.schedules #Evening tbody').html(Result.EveningTable);
+                    $('.picturecontainer .pictitle.name').text(Result.AssessorName);
+                    $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
+                    Dates.AdjustSchedulesTable();
+                    Dates.AdjustClientsTable();
+                    $('#DvTable').fadeIn(1000);
+                });
+            }
+            else {
+                Dates.FirsTime = false;
+                Dates.TotalDates = Result.TotalPages;
+                $('#DvTable #TbData tbody').html(Result.DatesTable);
+                $('.schedules #Morning tbody').html(Result.MorningTable);
+                $('.schedules #Evening tbody').html(Result.EveningTable);
+                $('.picturecontainer .pictitle.name').text(Result.AssessorName);
+                $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
+                Dates.AdjustSchedulesTable();
+                Dates.AdjustClientsTable();                
+            }
         });
     }
 }
