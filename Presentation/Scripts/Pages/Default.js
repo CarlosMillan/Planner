@@ -10,7 +10,7 @@
         Default.OrderTypeOptions = $('#SlcOrder option[value!="0"]');
         $('#SlcOrder option[value!="0"]').remove();
 
-        if($('#DvMessages').text() != '') $('#DvMessages').show(500);
+        if ($('#DvMessages').text() != '') $('#DvMessages').show(500);
 
         $('#BtnSearch').click(function () {
             Master.PreparePage('Default');        // Page name e.g. Login.aspx -> Login
@@ -19,18 +19,22 @@
             if (Default.Validations()) {
 
                 if ($('#SlcOrder option:selected').attr('isall') == 'True') $('#IsAll').val(true);
-                else $('#IsAll').val(false);                
+                else $('#IsAll').val(false);
 
                 Master.Submit();
             }
-            else  $('#DvMessages').show(500).append('Debes seleccionar todos los filtros y/o llenar los campos.');
-            
+            else $('#DvMessages').show(500).append('Debes seleccionar todos los filtros y/o llenar los campos.');
+
+        });
+
+        $('#SlcModule').change(function () {
+            Default.HideServiceElements();
         });
 
         $('#SlcService').change(function () {
             if ($('#SlcAccess').is(':visible')) Default.HideServiceElements();
 
-            $('#SlcAccess').closest('div.row').show(Default.Delay);
+            if ($('#SlcModule').val() == 0) $('#SlcAccess').closest('div.row').show(Default.Delay);
         });
 
         $('#SlcAccess').change(function () {

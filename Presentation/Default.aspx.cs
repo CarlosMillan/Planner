@@ -91,7 +91,16 @@ namespace PlannerWeb
 
         private string CreateURL() 
         {
-            StringBuilder SearchingUrl = new StringBuilder();            
+            string URL = null;
+            if (Request["SlcModule"].Equals("1")) URL = GenerateDatesURL();
+            else URL = GenerateOrdersURL();
+
+            return URL;
+        }
+
+        private string GenerateOrdersURL()
+        {
+            StringBuilder SearchingUrl = new StringBuilder();
 
             if (Session["Name"] != null) SearchingUrl.Append("Orders.aspx");
             else SearchingUrl.Append("ActiveOrders.aspx");
@@ -104,6 +113,11 @@ namespace PlannerWeb
             else if (Request["TxtOrder_Client_Plates"] != String.Empty) SearchingUrl.AppendFormat("&Ocp={0}", Request["TxtOrder_Client_Plates"]);
 
             return SearchingUrl.ToString();
+        }
+
+        private string GenerateDatesURL()
+        {            
+            return String.Concat("Dates.aspx?Svc=", Request["SlcService"]);
         }
     }
 }

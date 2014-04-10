@@ -5,16 +5,13 @@
     <link href="Css/Pages/Dates.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/Pages/Dates.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Path" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
+<asp:Content ID="Contenttitle" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="server">
     <div class="headerTitle">ESTIMADO CLIENTE BIENVENIDO A SU CITA DE SERVICIO</div>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderPagination" runat="server">
+<asp:Content ID="ContentPageTitle" ContentPlaceHolderID="ContentPlaceHolderPageTitle" runat="server">
+    <a href="Default.aspx" title="Volver">Filtrar</a>
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolderPageTitle" runat="server">
-</asp:Content>
-<asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
+<asp:Content ID="ContentBody" ContentPlaceHolderID="ContentPlaceHolderBody" runat="server">
 <div id="DvTable">
     <table cellspacing="0" id="TbData">
     <thead>
