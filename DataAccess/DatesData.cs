@@ -14,12 +14,15 @@ namespace DataAccess
         private int _totalpages;
         private string _assessorid;
         private string _assessorname;
+        private string _service;
 
         public DatesData() { }
 
-        public DTOs.Dates GetDates(int page)
+        #region Public Methods
+        public DTOs.Dates GetDates(int page, string service)
         {
-            _totalpages = (int)DataBaseManager.GetValue(QueriesCatalog.GetTotalDatesPages);
+            _service = service;
+            _totalpages = GetTotalDates(_service);
             GetAssessorData(page);
             string QueryDates = BuildQueryDates();
             string QueryTurns = BuildQueryTurns();
@@ -54,21 +57,26 @@ namespace DataAccess
             return Result;
         }
 
+        public int GetTotalDates(string service)
+        {
+            return (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalDatesPages, service).ToString());
+        }
+        #endregion
 
         #region Private Methods
         private string BuildQueryDates()
         {
-            return new StringBuilder().AppendFormat(QueriesCatalog.GetDates, _assessorid).ToString();
+            return new StringBuilder().AppendFormat(QueriesCatalog.GetDates, _assessorid, _service).ToString();
         }
 
         private string BuildQueryTurns()
         {
-            return new StringBuilder().AppendFormat(QueriesCatalog.GetTurns, _assessorid).ToString();
+            return new StringBuilder().AppendFormat(QueriesCatalog.GetTurns, _assessorid, _service).ToString();
         }
 
         private void GetAssessorData(int page)
         {
-            DataTable DatesTable = DataBaseManager.GetTable(QueriesCatalog.GetDatesAssessors);
+            DataTable DatesTable = DataBaseManager.GetTable(new StringBuilder().AppendFormat(QueriesCatalog.GetDatesAssessors, _service).ToString());
 
             if (page > 0 && page <= _totalpages)
             {

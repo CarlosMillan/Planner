@@ -189,6 +189,7 @@ namespace DataAccess.General
 		                    ,[ASESOR]
 	                     FROM [CITAS]
 	                     WHERE ASESOR = '{0}'
+                         AND TALLER = '{1}'
 	                     ORDER BY HORA";
             }
         }
@@ -202,13 +203,14 @@ namespace DataAccess.General
                                ,[ASESOR]
                                ,[TURNO]
                          FROM [TURNOS]
-                         WHERE ASESOR = '{0}'";
+                         WHERE ASESOR = '{0}'
+                         AND TALLER = '{1}'";
             }
         }
 
         public static string GetTotalDatesPages
         {
-            get { return @"SELECT DISTINCT COUNT(*) OVER() FROM CITAS GROUP BY ASESOR"; }
+            get { return @"SELECT DISTINCT COUNT(*) OVER() FROM CITAS WHERE TALLER = '{0}' GROUP BY ASESOR"; }
         }
 
         public static string GetDatesAssessors
@@ -218,7 +220,8 @@ namespace DataAccess.General
                 return @"SELECT C.ASESOR, T.NOMBRE NAME
 		                 FROM CITAS C, CTE T
 		                 WHERE C.ASESOR = T.CLIENTE
-		                 GROUP BY C.ASESOR , T.NOMBRE
+                         AND C.TALLER = '{0}'
+		                 GROUP BY C.ASESOR , T.NOMBRE, C.TALLER
 		                 ORDER BY C.ASESOR";
             }
         }

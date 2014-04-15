@@ -21,23 +21,29 @@ namespace PlannerWeb
         private static string EveningTableHtml;
         private static int TotalPages;
         private static int CurrentPage;
+        private static string Service;
 
         protected void Page_Init(object seder, EventArgs e)
         {
             CurrentPage = 0;
-            //GetDates();
+            Service = Request["Svc"];
+
+            if (DatesController.GetTotalDates(Service) == 0)
+            {
+                Response.Redirect("Default.aspx?NoDataFound=True");
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {            
         }
 
-        public void GetDates()
-        {
-            DTOs.Dates D = DatesController.GetDates(1);
-            GetHtmlDateTable(D);
-            GetHtmlTurnTable(D);
-        }
+        //public void GetDates()
+        //{
+        //    DTOs.Dates D = DatesController.GetDates(1);
+        //    GetHtmlDateTable(D);
+        //    GetHtmlTurnTable(D);
+        //}
 
         #region WebMethods
         [WebMethod]
@@ -47,7 +53,7 @@ namespace PlannerWeb
             JavaScriptSerializer Json = new JavaScriptSerializer();
             PageDateInfo Info;
             GetValidPage();
-            DTOs.Dates D = DatesController.GetDates(CurrentPage);
+            DTOs.Dates D = DatesController.GetDates(CurrentPage, Service);
             GetHtmlDateTable(D);
             GetHtmlTurnTable(D);
             TotalPages = D.TotalPages;

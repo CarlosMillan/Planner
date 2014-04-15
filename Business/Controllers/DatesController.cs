@@ -11,10 +11,16 @@ namespace Business.Controllers
     {
         public DatesController() { }
 
-        public static Dates GetDates(int page)
+        public static Dates GetDates(int page, string service)
         {
             DatesData D = new DatesData();
-            return D.GetDates(page);
+            return D.GetDates(page, service);
+        }
+
+        public static int GetTotalDates(string service)
+        {
+            DatesData D = new DatesData();
+            return D.GetTotalDates(service);
         }
     }
 }
