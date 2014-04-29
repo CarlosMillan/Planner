@@ -29,7 +29,7 @@ namespace DataAccess
 
             DTOs.Dates Result = new DTOs.Dates(_assessorid, _assessorname, _totalpages);
             DataTable DatesTable = DataBaseManager.GetTable(QueryDates);
-            DataTable TurnsTable = DataBaseManager.GetTable(QueryTurns);
+            //DataTable TurnsTable = DataBaseManager.GetTable(QueryTurns);
 
             foreach (DataRow R in DatesTable.Rows)
             {
@@ -43,23 +43,30 @@ namespace DataAccess
                 Result.Dts.Add(new DTOs.Date(t,c,v,p,s));
             }
 
-            foreach (DataRow R in TurnsTable.Rows)
-            {
-                DateTime t = Convert.ToDateTime(R["hora"]);
-                string s = R["status"].ToString();
-                string turn = R["turno"].ToString();
-                bool a = s.Equals("ocupado") ? false : true;
-                bool m = turn.Equals("matutino") ? true : false;
+            //foreach (DataRow R in TurnsTable.Rows)
+            //{
+            //    DateTime t = Convert.ToDateTime(R["hora"]);
+            //    string s = R["status"].ToString();
+            //    string turn = R["turno"].ToString();
+            //    bool a = s.Equals("ocupado") ? false : true;
+            //    bool m = turn.Equals("matutino") ? true : false;
 
-                Result.Trns.Add(new DTOs.Turn(t, a, s, m));
-            }
+            //    Result.Trns.Add(new DTOs.Turn(t, a, s, m));
+            //}
 
             return Result;
         }
 
         public int GetTotalDates(string service)
         {
-            return (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalDatesPages, service).ToString());
+            try
+            {
+                return (int)DataBaseManager.GetValue(new StringBuilder().AppendFormat(QueriesCatalog.GetTotalDatesPages, service).ToString());
+
+            }catch(Exception E)
+            {
+                return 0;
+            }
         }
         #endregion
 
@@ -71,7 +78,7 @@ namespace DataAccess
 
         private string BuildQueryTurns()
         {
-            return new StringBuilder().AppendFormat(QueriesCatalog.GetTurns, _assessorid, _service).ToString();
+            return new StringBuilder().AppendFormat(QueriesCatalog.GetTurns, _assessorid, _service).ToString();            
         }
 
         private void GetAssessorData(int page)

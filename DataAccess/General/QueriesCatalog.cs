@@ -179,18 +179,15 @@ namespace DataAccess.General
         {
             get
             {
-                return @"SELECT 
-		                     [HORA]
-		                    ,[CLIENTE]
-		                    ,[VEHICULO]
-		                    ,[PLACAS]
-		                    ,[SERVICIO]
-		                    ,[CITA_EFECTIVA]
-		                    ,[ASESOR]
-	                     FROM [CITAS]
-	                     WHERE ASESOR = '{0}'
-                         AND TALLER = '{1}'
-	                     ORDER BY HORA";
+                return @"SELECT  V.HoraRequerida,C.Nombre, AR.Descripcion1, 
+		                        V.ServicioPlacas, V.Observaciones, V.Agente 
+                         FROM Venta V, Cte C, Art AR  
+                         where V.Cliente = C.Cliente and  Mov = 'Cita Servicio' 
+	                        and FechaRequerida = CONVERT (date, GETDATE()) 
+	                        and V.Estatus= 'CONFIRMAR' and V.SERVICIOARTICULO = AR.ARTICULO  
+                            and v.AGENTE = '{0}'
+	                        and Sucursal = {1}
+                         ORDER by V.HoraRequerida";
             }
         }
 
@@ -210,19 +207,28 @@ namespace DataAccess.General
 
         public static string GetTotalDatesPages
         {
-            get { return @"SELECT DISTINCT COUNT(*) OVER() FROM CITAS WHERE TALLER = '{0}' GROUP BY ASESOR"; }
+            get
+            {
+                return @"SELECT DISTINCT COUNT (*) OVER()
+                         FROM  Venta
+                         WHERE Sucursal = {0}
+		                        AND Mov = 'Cita Servicio'
+		                        AND FechaRequerida = CONVERT (date, GETDATE())";
+            }
         }
 
         public static string GetDatesAssessors
         {
             get
             {
-                return @"SELECT C.ASESOR, T.NOMBRE NAME
-		                 FROM CITAS C, CTE T
-		                 WHERE C.ASESOR = T.CLIENTE
-                         AND C.TALLER = '{0}'
-		                 GROUP BY C.ASESOR , T.NOMBRE, C.TALLER
-		                 ORDER BY C.ASESOR";
+                return @" SELECT V.Agente, A.Nombre  
+                          FROM Venta V, Agente A 
+                          where V.Agente = A.Agente 
+                          and  Mov = 'Cita Servicio' 
+                          and FechaRequerida = CONVERT (date, GETDATE())
+                          and V.Estatus= 'CONFIRMAR'  
+                          and SUCURSAL = {0}
+                          order by FechaRequerida desc";
             }
         }
         #endregion
