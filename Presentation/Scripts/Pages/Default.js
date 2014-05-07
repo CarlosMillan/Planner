@@ -34,7 +34,7 @@
         $('#SlcService').change(function () {
             if ($('#SlcAccess').is(':visible')) Default.HideServiceElements();
 
-            if ($('#SlcModule').val() == 0) $('#SlcAccess').closest('div.row').show(Default.Delay);
+            if ($('#SlcModule').val() == 1) $('#SlcAccess').closest('div.row').show(Default.Delay);
         });
 
         $('#SlcAccess').change(function () {
@@ -119,6 +119,9 @@
         $('#SlcStatus').val('0');
         $('#SlcAsesors').val('0');
         $('#TxtOrder_Client_Plates').val('');
+
+        if ($('#SlcModule').val() == 2) $('#SlcService option[value="5"]').remove();
+        else if ($('#SlcService option[value="5"]').length == 0) $('#SlcService').append('<option value="5">Servicio Body Shop</option>');
     },
     HideAccessElements: function (nothide) {
         switch (nothide) {

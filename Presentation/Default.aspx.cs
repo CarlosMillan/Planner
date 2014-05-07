@@ -92,7 +92,7 @@ namespace PlannerWeb
         private string CreateURL() 
         {
             string URL = null;
-            if (Request["SlcModule"].Equals("1")) URL = GenerateDatesURL();
+            if (Request["SlcModule"].Equals("2")) URL = GenerateDatesURL();
             else URL = GenerateOrdersURL();
 
             return URL;

@@ -6,7 +6,7 @@
         Dates.AdjustSchedulesTable();
 
         $(document).ajaxComplete(function (event, request, settings) {
-            //    if (Dates.TotalDates == 0) window.location = 'Default.aspx?NoDataFound=True';
+            if (Dates.TotalDates == 0) window.location = 'Default.aspx?NoDataFound=True';
 
             setTimeout(Dates.GetPage, Master.TimePagination);
         });
@@ -34,7 +34,7 @@
                     $('.schedules #Morning tbody').html(Result.MorningTable);
                     $('.schedules #Evening tbody').html(Result.EveningTable);
                     $('.picturecontainer .pictitle.name').text(Result.AssessorName);
-                    $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
+                    $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId.trim() + '.png)');
                     Dates.AdjustSchedulesTable();
                     Dates.AdjustClientsTable();
                     $('#DvTable').fadeIn(1000);
@@ -47,7 +47,7 @@
                 $('.schedules #Morning tbody').html(Result.MorningTable);
                 $('.schedules #Evening tbody').html(Result.EveningTable);
                 $('.picturecontainer .pictitle.name').text(Result.AssessorName);
-                $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId + '.png)');
+                $('.picturecontainer .picture').attr('style', 'background-image:url(./AssesorsPictures/' + Result.AssessorId.trim() + '.png)');
                 Dates.AdjustSchedulesTable();
                 Dates.AdjustClientsTable();                
             }

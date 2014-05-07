@@ -55,7 +55,7 @@ namespace PlannerWeb
             GetValidPage();
             DTOs.Dates D = DatesController.GetDates(CurrentPage, Service);
             GetHtmlDateTable(D);
-            GetHtmlTurnTable(D);
+            //GetHtmlTurnTable(D);
             TotalPages = D.TotalPages;
             Info = new PageDateInfo(D.AssessorId, D.AssessorName, TotalPages, DatesTableHtml, MorningTableHtml, EveningTableHtml);
             return Json.Serialize(Info);
@@ -79,48 +79,48 @@ namespace PlannerWeb
                                      </tr>",
                                      dates.Dts.IndexOf(D) % 2 == 0 ? "pair" : "odd",
                                      D.Hour,
+                                     D.DateR,
                                      D.Client,
                                      D.Vehicle,
                                      D.Plates,
-                                     D.ServiceDate,
-                                     "Empty");
+                                     D.ServiceDate);
             }
 
             DatesTableHtml = Table.ToString();
         }
 
-        private static void GetHtmlTurnTable(DTOs.Dates dates)
-        {
-            StringBuilder MorningTable = new StringBuilder();
-            StringBuilder EveningTable = new StringBuilder();
+//        private static void GetHtmlTurnTable(DTOs.Dates dates)
+//        {
+//            StringBuilder MorningTable = new StringBuilder();
+//            StringBuilder EveningTable = new StringBuilder();
 
-            foreach (DTOs.Turn T in dates.Trns)
-            {
-                if (T.MorningTurn)
-                {
-                    MorningTable.AppendFormat(@"<tr class='{0}'>
-                                                <td>{1}</td>
-                                                <td>{2}</td>
-                                             </tr>",
-                                                 dates.Trns.IndexOf(T) % 2 == 0 ? "pair" : "odd",
-                                                 T.Hour,
-                                                 T.StatusDescription);
-                    }
-                else
-                {
-                    EveningTable.AppendFormat(@"<tr class='{0}'>
-                                                <td>{1}</td>
-                                                <td>{2}</td>
-                                             </tr>",
-                             dates.Trns.IndexOf(T) % 2 == 0 ? "pair" : "odd",
-                             T.Hour,
-                             T.StatusDescription);
-                }
-            }
+//            foreach (DTOs.Turn T in dates.Trns)
+//            {
+//                if (T.MorningTurn)
+//                {
+//                    MorningTable.AppendFormat(@"<tr class='{0}'>
+//                                                <td>{1}</td>
+//                                                <td>{2}</td>
+//                                             </tr>",
+//                                                 dates.Trns.IndexOf(T) % 2 == 0 ? "pair" : "odd",
+//                                                 T.Hour,
+//                                                 T.StatusDescription);
+//                    }
+//                else
+//                {
+//                    EveningTable.AppendFormat(@"<tr class='{0}'>
+//                                                <td>{1}</td>
+//                                                <td>{2}</td>
+//                                             </tr>",
+//                             dates.Trns.IndexOf(T) % 2 == 0 ? "pair" : "odd",
+//                             T.Hour,
+//                             T.StatusDescription);
+//                }
+//            }
 
-            MorningTableHtml = MorningTable.ToString();
-            EveningTableHtml = EveningTable.ToString();
-        }
+//            MorningTableHtml = MorningTable.ToString();
+//            EveningTableHtml = EveningTable.ToString();
+//        }
 
         private static void GetValidPage()
         {

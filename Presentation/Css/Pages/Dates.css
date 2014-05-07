@@ -19,10 +19,13 @@ table#Evening
 
 .schedules
 {
+    float:left;
     clear:both;
     width:100%;
-    height:auto;
-    padding-top:50px;
+    height:130px;
+    margin-top:60px;
+    border-color: rgb(70, 106, 126);
+    border-style: solid;
 }
 
 .picturecontainer

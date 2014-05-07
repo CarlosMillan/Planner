@@ -28,8 +28,8 @@
                     <div class="row">
                         <label>Seleccione el módulo que desea ver:</label>
                         <select id="SlcModule" name="SlcModule">                            
-                            <option value="0">Planeador</option>
-                            <option value="1">Citas</option>
+                            <option value="1">Planeador</option>
+                            <option value="2">Citas</option>
                         </select>
                     </div>
 

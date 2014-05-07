@@ -179,41 +179,43 @@ namespace DataAccess.General
         {
             get
             {
-                return @"SELECT  V.HoraRequerida,C.Nombre, AR.Descripcion1, 
-		                        V.ServicioPlacas, V.Observaciones, V.Agente 
-                         FROM Venta V, Cte C, Art AR  
-                         where V.Cliente = C.Cliente and  Mov = 'Cita Servicio' 
-	                        and FechaRequerida = CONVERT (date, GETDATE()) 
-	                        and V.Estatus= 'CONFIRMAR' and V.SERVICIOARTICULO = AR.ARTICULO  
-                            and v.AGENTE = '{0}'
-	                        and Sucursal = {1}
-                         ORDER by V.HoraRequerida";
+                return @"SELECT  V.HoraRequerida Hora, V.FechaRequerida Fecha, C.NOMBRE CLIENTE, AR.DESCRIPCION1 VEHICULO, 
+		                        V.SERVICIOPLACAS PLACAS, V.OBSERVACIONES SERVICIO, V.AGENTE 
+                         FROM VENTA V, CTE C, ART AR  
+                         WHERE V.CLIENTE = C.CLIENTE AND  MOV = 'Cita Servicio' 
+	                        AND FECHAREQUERIDA = CONVERT (DATE, GETDATE()) 
+	                        AND V.ESTATUS= 'CONFIRMAR' AND V.SERVICIOARTICULO = AR.ARTICULO  
+                            AND V.AGENTE = '{0}'
+	                        AND SUCURSAL = {1}
+                         ORDER BY V.HORAREQUERIDA";
             }
         }
 
-        public static string GetTurns
-        {
-            get
-            {
-                return @"SELECT [HORA]
-                               ,[STATUS]
-                               ,[ASESOR]
-                               ,[TURNO]
-                         FROM [TURNOS]
-                         WHERE ASESOR = '{0}'
-                         AND TALLER = '{1}'";
-            }
-        }
+//        public static string GetTurns
+//        {
+//            get
+//            {
+//                return @"SELECT HoraRequerida, V.Agente, 
+//		                        CASE WHEN HoraRequerida <= '13:00' THEN 'M' ELSE 'V' END TURNO
+//                        FROM Venta V
+//                        WHERE v.Mov = 'Cita Servicio' 
+//                        and v.FechaRequerida = CONVERT (date, GETDATE()-1)
+//                        and Sucursal = {0}
+//                        and V.Estatus= 'CONFIRMAR'  
+//                        and v.AGENTE = '{1}'";
+//            }
+//        }
 
         public static string GetTotalDatesPages
         {
             get
             {
-                return @"SELECT DISTINCT COUNT (*) OVER()
+                return @"SELECT DISTINCT COUNT(AGENTE) OVER()
                          FROM  Venta
                          WHERE Sucursal = {0}
 		                        AND Mov = 'Cita Servicio'
-		                        AND FechaRequerida = CONVERT (date, GETDATE())";
+		                        AND FechaRequerida = CONVERT (date, GETDATE())
+                         GROUP BY AGENTE ";
             }
         }
 
@@ -228,7 +230,7 @@ namespace DataAccess.General
                           and FechaRequerida = CONVERT (date, GETDATE())
                           and V.Estatus= 'CONFIRMAR'  
                           and SUCURSAL = {0}
-                          order by FechaRequerida desc";
+                          group by V.Agente, A.Nombre";
             }
         }
         #endregion

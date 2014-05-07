@@ -16,12 +16,12 @@
     <table cellspacing="0" id="TbData">
     <thead>
         <tr>
-            <th>Tipo de Orden</th>
-            <th>No. de Orden</th>
-            <th>Ingreso</th>
+            <th>Hora</th>
+            <th>Fecha</th>
             <th>Cliente</th>
-            <th>Vehículo</th>
-            <th>Placas</th>     
+            <th>Vehiculo</th>
+            <th>Placas</th>                        
+            <th>Observación</th>
         </tr>
     </thead>
 
@@ -38,7 +38,9 @@
         <div class="pictitle name"></div>
     </div>
     
-    <div class="schedules">        
+   <div class="schedules">        
+   ---PUBLICIDAD---
+<%--
         <table cellspacing="0" id="Morning">         
         <caption class="pictitle">TURNO MATUTINO</caption>
             <thead>            
@@ -71,8 +73,8 @@
 
             <tfoot>
             </tfoot>
-        </table>
-    </div>    
+        </table>    --%>
+    </div>
 </div>
 <div class="headerTitle">NUESTRO OBJETIVO ES QUE USTED ESTE TOTALMENTE SATISFECHO</div>
 </asp:Content>
