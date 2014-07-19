@@ -245,16 +245,9 @@ namespace General.DTOs.Classes
             #region Asesors
 
             #region Matriz
-            Assesors.Add(new Asesor() { 
-                AsesorId = "AMH",
-                Name = "AMH",
-                WorkShop = 1
-            });
-
-            Assesors.Add(new Asesor()
-            {
-                AsesorId = "EJAR",
-                Name = "EJAR",
+            Assesors.Add(new Asesor() {
+                AsesorId = "OBA",
+                Name = "OBA",
                 WorkShop = 1
             });
 
