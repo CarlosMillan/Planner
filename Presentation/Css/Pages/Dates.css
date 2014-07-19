@@ -38,10 +38,12 @@ table#Evening
 
 .picture
 {
-    background-color:white;
+    background-color:transparent;
     width:100%;
     height:300px;
-    border: 2px rgb(101, 126, 157) solid;
+    //border: 2px rgb(101, 126, 157) solid;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .pictitle
