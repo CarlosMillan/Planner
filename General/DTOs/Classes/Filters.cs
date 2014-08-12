@@ -355,6 +355,8 @@ namespace General.DTOs.Classes
         public int WorkShopId {get; set;}
         public string Name {get; set;}
         public bool IsSelected { get; set; }
+        public bool LeftBound { get; set; }
+        public bool RightBound { get; set; }
     }
 
     public class Access
