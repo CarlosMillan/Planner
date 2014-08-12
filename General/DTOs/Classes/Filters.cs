@@ -69,19 +69,25 @@ namespace General.DTOs.Classes
             #region Workshops
             WorkShops.Add(new WorkShop() { 
                 WorkShopId = 1,
-                Name = "Matriz"
+                Name = "Matriz",
+                LeftBound = 1,
+                RightBound = 2
             });
 
             WorkShops.Add(new WorkShop()
             {
                 WorkShopId = 2,
                 Name = "Servicio Cholula"
+                LeftBound = 1,
+                RightBound = 2
             });
 
             WorkShops.Add(new WorkShop()
             {
                 WorkShopId = 5,
                 Name = "Servicio Body Shop"
+                LeftBound = 1,
+                RightBound = 2
             });
             #endregion
 
