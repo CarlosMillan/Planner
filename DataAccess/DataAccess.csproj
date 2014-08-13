@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Bases\OrderDataBase.cs" />
     <Compile Include="DatesData.cs" />
+    <Compile Include="General\QueriesCatalogMySQL.cs" />
     <Compile Include="OrdersData.cs" />
     <Compile Include="General\QueriesCatalog.cs" />
     <Compile Include="ActiveOrdersData.cs" />
