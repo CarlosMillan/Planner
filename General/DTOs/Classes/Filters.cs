@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace General.DTOs.Classes
@@ -69,25 +69,25 @@ namespace General.DTOs.Classes
             #region Workshops
             WorkShops.Add(new WorkShop() { 
                 WorkShopId = 1,
-                Name = "Matriz",
-                LeftBound = 1,
-                RightBound = 2
+                Name = "Pedregal",
+                Min = 110000,
+                Max = 179999
             });
 
             WorkShops.Add(new WorkShop()
             {
                 WorkShopId = 2,
-                Name = "Servicio Cholula"
-                LeftBound = 1,
-                RightBound = 2
+                Name = "Tlahuac",
+                Min = 500000,
+                Max = 599000
             });
 
             WorkShops.Add(new WorkShop()
             {
                 WorkShopId = 5,
-                Name = "Servicio Body Shop"
-                LeftBound = 1,
-                RightBound = 2
+                Name = "Body Shop",
+                Min = 180000,
+                Max = 199999
             });
             #endregion
 
@@ -250,68 +250,96 @@ namespace General.DTOs.Classes
 
             #region Asesors
 
-            #region Matriz
-            Assesors.Add(new Asesor() {
-                AsesorId = "OBA",
-                Name = "OBA",
+            #region Pedregal
+            Assesors.Add(new Asesor() { 
+                AsesorId = "GALJU0",
+                Name = "GALJU0",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "NAB",
-                Name = "NAB",
+                AsesorId = "CASCA4",
+                Name = "CASCA4",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "FMG",
-                Name = "FMG",
+                AsesorId = "HERNAJ",
+                Name = "HERNAJ",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "MISH",
-                Name = "MISH",
+                AsesorId = "RODRI1",
+                Name = "RODRI1",
                 WorkShop = 1
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "FMLM",
-                Name = "FMLM",
+                AsesorId = "SANIS9",
+                Name = "SANIS9",
+                WorkShop = 1
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "SIU",
+                Name = "SIU",
+                WorkShop = 1
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "HERJIM",
+                Name = "HERJIM",
+                WorkShop = 1
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "ALDO",
+                Name = "ALDO",
                 WorkShop = 1
             });
             #endregion
 
-            #region Cholula
+            #region Tlahuac
             Assesors.Add(new Asesor()
             {
-                AsesorId = "EJAR",
-                Name = "EJAR",
+                AsesorId = "CANTO6",
+                Name = "CANTO6",
                 WorkShop = 2
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "NAB",
-                Name = "NAB",
+                AsesorId = "BAURO2",
+                Name = "BAURO2",
                 WorkShop = 2
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "FMLM",
-                Name = "FMLM",
+                AsesorId = "JCARLO",
+                Name = "JCARLO",
                 WorkShop = 2
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "SMC",
-                Name = "SMC",
+                AsesorId = "RODRIE",
+                Name = "RODRIE",
+                WorkShop = 2
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "GARHE9",
+                Name = "GARHE9",
                 WorkShop = 2
             });
             #endregion
@@ -319,36 +347,43 @@ namespace General.DTOs.Classes
             #region Body Shop
             Assesors.Add(new Asesor()
             {
-                AsesorId = "GMG",
-                Name = "GMG",
+                AsesorId = "JCARLO",
+                Name = "JCARLO",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "LHV",
-                Name = "LHV",
+                AsesorId = "GARHE9",
+                Name = "GARHE9",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "RRL",
-                Name = "RRL",
+                AsesorId = "RODRIE",
+                Name = "RODRIE",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "MSB",
-                Name = "MSB",
+                AsesorId = "MALDOJ",
+                Name = "MALDOJ",
                 WorkShop = 5
             });
 
             Assesors.Add(new Asesor()
             {
-                AsesorId = "SMC",
-                Name = "SMC",
+                AsesorId = "GALJU0",
+                Name = "GALJU0",
+                WorkShop = 5
+            });
+
+            Assesors.Add(new Asesor()
+            {
+                AsesorId = "BAURO2",
+                Name = "BAURO2",
                 WorkShop = 5
             });
             #endregion
@@ -361,8 +396,8 @@ namespace General.DTOs.Classes
         public int WorkShopId {get; set;}
         public string Name {get; set;}
         public bool IsSelected { get; set; }
-        public bool LeftBound { get; set; }
-        public bool RightBound { get; set; }
+        public int Min { get; set; }
+        public int Max { get; set; }
     }
 
     public class Access
