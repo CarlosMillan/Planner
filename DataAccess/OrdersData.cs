@@ -16,8 +16,8 @@ namespace DataAccess
             try
             {
                 StringBuilder FullQuery = new StringBuilder();
-                FullQuery.AppendFormat(QueriesCatalog.GetOrders, GetFilterQuery(filters), GetServiceTypeQuery(filters));
-                return base.GetOrders(FullQuery.ToString(), GetFilterQuery(filters), GetServiceTypeQuery(filters));                 
+                FullQuery.AppendFormat(QueriesCatalog.GetOrders, GetFilterQuery(filters), GetServiceTypeQuery(filters), filters.SelectedWorkShop.Min, filters.SelectedWorkShop.Max);
+                return base.GetOrders(FullQuery.ToString(), GetFilterQuery(filters), GetServiceTypeQuery(filters));
             }
             catch { throw; }
         }
